@@ -1,5 +1,6 @@
 %{
 #include <string.h>
+#include <math.h>
 #include "io.h"
 #include "lexer.h"
 #include "debug.h"
@@ -66,6 +67,7 @@ CHAR            \'[^\"\']\'
     word_plus();
     // printf("Double: %s\n", yytext);
     set_buffer(yytext);
+    // printf("Double: %llf\n", read_f64());
     add_float(read_f64());
 }
 {STRING}            {

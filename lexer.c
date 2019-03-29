@@ -25,7 +25,7 @@ boolean add_integer(i64 i)
 boolean add_float(f64 f)
 {
     parse_tree[parse_top].t = FLOAT;
-    parse_tree[parse_top--].v.f = f;
+    parse_tree[parse_top++].v.f = f;
     return true;
 }
 
