@@ -4,7 +4,8 @@
 #include "../lexer.h"
 #include "../debug.h"
 #include "../eval.h"
-#include "../custom/table.h"
+#include "../data.h"
+
 
 void builtin_setf();
 void add_global_variable(char *name, struct neta_node value);

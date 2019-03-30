@@ -6,8 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef long long i64;
-typedef double f64;
+#include "data.h"
 
 extern char *buffer;
 

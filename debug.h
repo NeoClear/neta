@@ -3,7 +3,7 @@
 
 #include "lexer.h"
 #include "eval.h"
-#include "custom/table.h"
+#include "data.h"
 
 void print_parse_tree();
 void print_eval_stack();

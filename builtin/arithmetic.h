@@ -6,7 +6,7 @@
 #include "../debug.h"
 #include "../eval.h"
 #include "../util.h"
-#include "../custom/table.h"
+#include "../data.h"
 
 void builtin_plus();
 void builtin_minus();

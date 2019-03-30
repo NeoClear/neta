@@ -3,6 +3,7 @@
 
 #include "eval.h"
 #include "lexer.h"
+#include "data.h"
 
 struct neta_node get_next_parse();
 struct neta_node get_current_eval();

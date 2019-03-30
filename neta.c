@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "eval.h"
 #include "debug.h"
+#include "data.h"
 
 extern FILE *yyin;
 extern int yyleng;
