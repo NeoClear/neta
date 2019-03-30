@@ -116,6 +116,10 @@ void eval()
             return;
         } else if (read_char()) {
             return;
+        } else if (read_identifier()) {
+            
+        } else if (read_preserved_fun()) {
+            printf("You can't give a keyword or built-in function directly\n");
         }
     }
 }

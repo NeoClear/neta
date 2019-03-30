@@ -2,6 +2,7 @@
 #include "eval.h"
 #include "debug.h"
 #include "data.h"
+#include "util.h"
 
 extern FILE *yyin;
 extern int yyleng;
@@ -16,9 +17,11 @@ int main(int argc, char **argv) {
         yyin = stdin;
     yylex();
     // print_parse_tree();
-    eval();
-    
-    print_eval_stack();
+    while (!parse_finished()) {
+        eval();
+        print_eval_stack();
+        eval_top = 0;
+    }
     print_global_variable();
     return 0;
 }
