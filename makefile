@@ -1,5 +1,5 @@
 neta: lex.yy.c
-	gcc -o neta lex.yy.c io.c lexer.c debug.c eval.c neta.c -ll
+	gcc -o neta lex.yy.c io.c lexer.c debug.c eval.c neta.c util.c builtin/arithmetic.c builtin/setf.c -ll
 
 lex.yy.c: neta.l
 	flex neta.l

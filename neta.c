@@ -18,5 +18,6 @@ int main(int argc, char **argv) {
     eval();
     
     print_eval_stack();
+    print_global_variable();
     return 0;
 }
