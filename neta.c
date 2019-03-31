@@ -19,9 +19,10 @@ int main(int argc, char **argv) {
     // print_parse_tree();
     while (!parse_finished()) {
         eval();
-        print_eval_stack();
+        // print_eval_stack();
         eval_top = 0;
     }
-    print_global_variable();
+    print_global_variable_d(glov);
+    // print_global_variable();
     return 0;
 }

@@ -20,4 +20,11 @@ boolean read_float();
 boolean read_string();
 boolean read_char();
 
+i64 max(i64 a, i64 b);
+i64 min(i64 a, i64 b);
+
+boolean greater_s(char *a, char *b);
+boolean eq_s(char *a, char *b);
+boolean less_s(char *a, char *b);
+
 #endif

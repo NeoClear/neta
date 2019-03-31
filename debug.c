@@ -37,40 +37,47 @@ void pf(f64 f)
     printf("%lf\n", f);
 }
 
-void print_value(struct neta_node v)
+char *print_value(struct neta_node v)
 {
+    char *r = (char *)malloc(sizeof(char) * inf16);
     switch (v.t) {
     case INTEGER:
-        printf("%lld", v.v.i);
+        sprintf(r, "%lld", v.v.i);
         break;
     case FLOAT:
-        printf("%lf", v.v.f);
+        sprintf(r, "%lf", v.v.f);
         break;
     case STRING:
-        printf("\"%s\"", v.v.s);
+        sprintf(r, "\"%s\"", v.v.s);
         break;
     case CHAR:
-        printf("\'%c\'", v.v.c);
+        sprintf(r, "\'%c\'", v.v.c);
         break;
     case PRESERVED_FUN:
-        printf("%s", v.v.s);
+        sprintf(r, "%s", v.v.s);
         break;
     case IDENTIFIER:
-        printf("%s", v.v.s);
+        sprintf(r, "%s", v.v.s);
         break;
     default:
-        printf("What The Hell? Couldn't Find Known Value");
+        sprintf(r, "What The Hell? Couldn't Find Known Value");
     }
+    return r;
 }
 
 void print_global_variable()
 {
-    for (i64 i = 0; i < glon; i++) {
-        printf("%s, %d, ", glov[i].name, glov[i].initialized);
-        if (glov[i].initialized)
-            print_value(*glov[i].value);
-        else
-            printf("Variable Not Initialized");
-        printf("\n");
-    }
+    print_gv(glov);
+}
+
+void print_global_variable_d(struct global_variable *t)
+{
+    if (t == nil)
+        return;
+    print_global_variable_d(t->left);
+    if (t->initialized)
+        printf("%s: %s\n", t->name, print_value(*t->value));
+    else
+        printf("%s haven't been initialized\n", t->name);
+    print_global_variable_d(t->right);
 }

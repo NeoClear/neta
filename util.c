@@ -90,3 +90,38 @@ boolean read_char()
     }
     return false;
 }
+
+i64 max(i64 a, i64 b)
+{
+    if (a > b)
+        return a;
+    return b;
+}
+
+i64 min(i64 a, i64 b)
+{
+    if (a < b)
+        return a;
+    return b;
+}
+
+boolean greater_s(char *a, char *b)
+{
+    if (strcmp(a, b) > 0)
+        return true;
+    return false;
+}
+
+boolean eq_s(char *a, char *b)
+{
+    if (strcmp(a, b) == 0)
+        return true;
+    return false;
+}
+
+boolean less_s(char *a, char *b)
+{
+    if (strcmp(a, b) < 0)
+        return true;
+    return false;
+}
