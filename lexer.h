@@ -1,9 +1,15 @@
+/*
+ * lexer.h contains:
+ * functions for exporting metadata in lexical analysis to tokens
+ * used by flex
+ */
 #ifndef _LEXER_H_
 #define _LEXER_H_
 
 #include "io.h"
 #include "data.h"
 
+// Exporting metadata to tokens
 boolean add_lparen();
 boolean add_rparen();
 boolean add_float(f64 f);

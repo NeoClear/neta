@@ -1,3 +1,8 @@
+/*
+ * util.h contains:
+ * useful functions about general solutions
+ * look ahead functions(move to a new module)
+ */
 #ifndef _UTIL_H_
 #define _UTIL_H_
 

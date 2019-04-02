@@ -1,10 +1,14 @@
 #include "data.h"
 
+// Parsing Stack
+// Called parse_tree because of historical issues
 struct neta_node parse_tree[inf];
 i64 parse_top = 0;
 
+// Root for AVL tree
 struct global_variable *glov = nil;
 
+// Measures the height of a AVL tree
 int height(struct global_variable *t)
 {
     if (t == nil)
@@ -12,6 +16,7 @@ int height(struct global_variable *t)
     return t->height;
 }
 
+// Generate a new AVL node
 struct global_variable *new_gvnode(char *name, struct global_variable *l, struct global_variable *r)
 {
     struct global_variable *ret = (struct global_variable *)malloc(sizeof(struct global_variable));
@@ -22,6 +27,7 @@ struct global_variable *new_gvnode(char *name, struct global_variable *l, struct
     return ret;
 }
 
+// Search AVL node
 struct global_variable *search_gvnode(struct global_variable *tree, char *k)
 {
     while (!eq_s(tree->name, k) && tree != nil) {
@@ -34,6 +40,7 @@ struct global_variable *search_gvnode(struct global_variable *tree, char *k)
     return tree;
 }
 
+// Get the smallest node of a AVL tree
 struct global_variable *min_gvnode(struct global_variable *tree)
 {
     if (tree == nil)
@@ -43,6 +50,7 @@ struct global_variable *min_gvnode(struct global_variable *tree)
     return tree;
 }
 
+// Get the biggest node of a AVL tree
 struct global_variable *max_gvnode(struct global_variable *tree)
 {
     if (tree == nil)
@@ -52,6 +60,7 @@ struct global_variable *max_gvnode(struct global_variable *tree)
     return tree;
 }
 
+// left-left rotate of a AVL tree
 struct global_variable *ll_rotate(struct global_variable *tree)
 {
     struct global_variable *lef;
@@ -63,6 +72,7 @@ struct global_variable *ll_rotate(struct global_variable *tree)
     return lef;
 }
 
+// right-right rotate of a AVL tree
 struct global_variable *rr_rotate(struct global_variable *tree)
 {
     struct global_variable *rig;
@@ -74,18 +84,21 @@ struct global_variable *rr_rotate(struct global_variable *tree)
     return rig;
 }
 
+// left-right rotate of a AVL tree
 struct global_variable *lr_rotate(struct global_variable *tree)
 {
     tree->left = rr_rotate(tree->left);
     return ll_rotate(tree);
 }
 
+// right-left rotate of a AVL tree
 struct global_variable *rl_rotate(struct global_variable *tree)
 {
     tree->right = ll_rotate(tree->right);
     return rr_rotate(tree);
 }
 
+// Insert a node to the AVL tree
 struct global_variable *gvinsert(struct global_variable *tree, char *k)
 {
     // If root is nil then initialize root
@@ -116,6 +129,7 @@ struct global_variable *gvinsert(struct global_variable *tree, char *k)
     return tree;
 }
 
+// delete a node in AVL tree
 struct global_variable *delete_node(struct global_variable *tree, char *node)
 {
     if (tree == nil || node == nil)
@@ -160,6 +174,7 @@ struct global_variable *delete_node(struct global_variable *tree, char *node)
     return tree;
 }
 
+// print the tree
 void print_gv(struct global_variable *tree)
 {
     if (tree == nil)

@@ -1,3 +1,8 @@
+/*
+ * neta.c contains:
+ * main function
+ */
+
 #include <stdio.h>
 #include "eval.h"
 #include "debug.h"

@@ -6,7 +6,7 @@
 #include "../eval.h"
 #include "../data.h"
 
-
+// Builtin setf function
 void builtin_setf();
 void add_global_variable(char *name, struct neta_node value);
 
