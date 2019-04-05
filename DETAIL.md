@@ -1,4 +1,4 @@
-# Detailss
+# Details
 
 ## Layout
 
