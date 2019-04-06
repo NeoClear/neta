@@ -7,6 +7,7 @@ void add_global_variable(char *name, struct neta_node value)
     glov = gvinsert(glov, name);
     search_gvnode(glov, name)->initialized = true;
     search_gvnode(glov, name)->value = (struct neta_node *)malloc(sizeof(struct neta_node));
+    search_gvnode(glov, name)->gt = variable;
     memcpy(search_gvnode(glov, name)->value, &value, sizeof(struct neta_node));
 }
 
@@ -14,6 +15,7 @@ void add_global_variable(char *name, struct neta_node value)
 void create_global_variable(char *name)
 {
     glov = gvinsert(glov, name);
+    search_gvnode(glov, name)->gt = variable;
     if (search_gvnode(glov, name) != nil)
         search_gvnode(glov, name)->initialized = false;
     else {
@@ -37,7 +39,6 @@ void builtin_setf()
 {
     i64 milestone = eval_top;
     while (!read_rparen()) {
-        // parse_to_eval();
         if (read_lparen()) {
             initialize_variable();
             // parse_to_eval();
@@ -47,7 +48,7 @@ void builtin_setf()
             create_global_variable(get_current_eval().v.s);
             continue;
         } else {
-            neta_err();
+            pi(get_next_parse().t);
         }
     }
     // parse_to_eval();

@@ -42,20 +42,6 @@ boolean is_undef(char *s)
     return false;
 }
 
-// boolean is_var(char *s)
-// {
-//     if (strcmp(s, "var") == 0)
-//         return true;
-//     return false;
-// }
-
-// boolean is_val(char *s)
-// {
-//     if (strcmp(s, "val") == 0)
-//         return true;
-//     return false;
-// }
-
 boolean is_range(char *s)
 {
     if (strcmp(s, "..") == 0)

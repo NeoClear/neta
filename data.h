@@ -40,6 +40,7 @@ enum neta_type
     FLOAT,
     STRING,
     CHAR,
+    LIST,
 };
 
 // Basic types for a value
@@ -85,6 +86,8 @@ struct neta_node
     enum neta_type t;
     enum global_type gt;
     union neta_value v;
+    boolean bound;
+    struct neta_node *next;
 };
 
 // From eval.h

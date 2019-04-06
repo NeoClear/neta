@@ -1,6 +1,6 @@
 #include "debug.h"
 
-i64 err = 0;
+i64 err_s = 0;
 
 void print_parse_tree()
 {
@@ -21,7 +21,7 @@ void print_eval_stack()
 
 void neta_err()
 {
-    printf("Neta: %lld\n", err++);
+    printf("Neta: %lld\n", err_s++);
 }
 
 void pi(i64 i)
