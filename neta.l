@@ -1,8 +1,8 @@
 %{
 #include <string.h>
 #include <math.h>
-#include "io.h"
 #include "lexer.h"
+#include "util.h"
 #include "debug.h"
 i64 row = 0;
 i64 column = 0;
@@ -24,7 +24,7 @@ void column_plus(i64 n)
 %}
 
 DIGIT           [0-9]
-PRESERVED_FUN   "+"|"-"|"*"|"/"|"def"|"undef"|"var"|"val"|".."|"setf"|"setc"
+PRESERVED_FUN   "+"|"-"|"*"|"/"|"def"|"undef"|"var"|"val"|".."|"setf"|"setc"|"prog"|"!"
 IDENTIFIER      [a-zA-Z][a-zA-Z0-9]*
 LPAREN          "("
 RPAREN          ")"

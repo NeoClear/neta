@@ -8,6 +8,10 @@ i64 parse_top = 0;
 // Root for AVL tree
 struct global_variable *glov = nil;
 
+i64 ptr = 0;
+struct neta_node eval_stack[inf];
+i64 eval_top = 0;
+
 // Measures the height of a AVL tree
 int height(struct global_variable *t)
 {

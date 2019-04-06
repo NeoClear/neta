@@ -1,6 +1,6 @@
 # TODO List
 
-+ Remove table.*
++ ~~Remove table.*~~
 
 + Add notation of global variable while creating
 

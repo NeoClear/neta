@@ -1,7 +1,7 @@
 #include "arithmetic.h"
-#include "../lexer.h"
 #include "../debug.h"
-#include "../eval.h"
+#include "../util.h"
+#include "../data.h"
 
 void builtin_plus()
 {

@@ -1,9 +1,6 @@
 #ifndef _SETF_H_
 #define _SETF_H_
 
-#include "../lexer.h"
-#include "../debug.h"
-#include "../eval.h"
 #include "../data.h"
 
 // Builtin setf function

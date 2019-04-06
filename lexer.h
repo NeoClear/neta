@@ -6,7 +6,6 @@
 #ifndef _LEXER_H_
 #define _LEXER_H_
 
-#include "io.h"
 #include "data.h"
 
 // Exporting metadata to tokens

@@ -9,37 +9,24 @@
 
 #include <stdio.h>
 #include <string.h>
-// #include "util.h"
-// #include "io.h"
+#include "def.h"
 
 // Defining basic data types
-typedef unsigned char boolean;
-#define true 1
-#define false 0
-#define inf 0xffffff
-#define inf8 0xf
-#define inf16 0xff
-#define inf24 0xfff
-#define inf32 0xffff
-#define nil NULL
 
-// Typedef of Integer and Float
-typedef long long i64;
-typedef double f64;
 
 // From io.h
-char *clone(char *s);
+// char *clone(char *s);
 // End here
 
 // From util.h
-i64 max(i64 a, i64 b);
-i64 min(i64 a, i64 b);
+// i64 max(i64 a, i64 b);
+// i64 min(i64 a, i64 b);
 
 // Comparison function for two strings
 // Should move to util.h
-boolean greater_s(char *a, char *b);
-boolean eq_s(char *a, char *b);
-boolean less_s(char *a, char *b);
+// boolean greater_s(char *a, char *b);
+// boolean eq_s(char *a, char *b);
+// boolean less_s(char *a, char *b);
 // End here
 
 // Basic types for a token
@@ -120,5 +107,14 @@ struct global_variable *delete_node(struct global_variable *tree, char *node);
 void print_gv(struct global_variable *tree);
 // Should move to debug.h?
 void print_global_variable_d(struct global_variable *t);
+
+
+// Evaluation stack
+extern struct neta_node eval_stack[inf];
+// Top of evaluation stack
+extern i64 eval_top;
+// The pointer to parse stack while evaluating
+extern i64 ptr;
+
 
 #endif // !_DATA_H_

@@ -1,4 +1,5 @@
 #include "setf.h"
+#include "../debug.h"
 
 // Create a global variable and initialize it
 void add_global_variable(char *name, struct neta_node value)
@@ -35,7 +36,7 @@ void initialize_variable()
 void builtin_setf()
 {
     i64 milestone = eval_top;
-    while (get_next_parse().t != RPAREN) {
+    while (!read_rparen()) {
         // parse_to_eval();
         if (read_lparen()) {
             initialize_variable();
@@ -49,6 +50,6 @@ void builtin_setf()
             neta_err();
         }
     }
-    parse_to_eval();
-    eval_top = milestone - 2;
+    // parse_to_eval();
+    eval_top = milestone - 1;
 }

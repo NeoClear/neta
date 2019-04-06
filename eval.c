@@ -1,89 +1,8 @@
 #include "eval.h"
 #include "builtin/arithmetic.h"
 #include "builtin/setf.h"
-
-i64 ptr = 0;
-struct neta_node eval_stack[inf];
-i64 eval_top = 0;
-
-void eval();
-
-boolean is_plus(char *s)
-{
-    if (strcmp(s, "+") == 0)
-        return true;
-    return false;
-}
-
-boolean is_minus(char *s)
-{
-    if (strcmp(s, "-") == 0)
-        return true;
-    return false;
-}
-
-boolean is_mul(char *s)
-{
-    if (strcmp(s, "*") == 0)
-        return true;
-    return false;
-}
-
-boolean is_div(char *s)
-{
-    if (strcmp(s, "/") == 0)
-        return true;
-    return false;
-}
-
-boolean is_def(char *s)
-{
-    if (strcmp(s, "def") == 0)
-        return true;
-    return false;
-}
-
-boolean is_undef(char *s)
-{
-    if (strcmp(s, "undef") == 0)
-        return true;
-    return false;
-}
-
-boolean is_var(char *s)
-{
-    if (strcmp(s, "var") == 0)
-        return true;
-    return false;
-}
-
-boolean is_val(char *s)
-{
-    if (strcmp(s, "val") == 0)
-        return true;
-    return false;
-}
-
-boolean is_range(char *s)
-{
-    if (strcmp(s, "..") == 0)
-        return true;
-    return false;
-}
-
-boolean is_setf(char *s)
-{
-    if (strcmp(s, "setf") == 0)
-        return true;
-    return false;
-}
-
-boolean is_setc(char *s)
-{
-    if (strcmp(s, "setc") == 0)
-        return true;
-    return false;
-}
+#include "nlib.h"
+#include "builtin/prog.h"
 
 void eval()
 {
@@ -106,6 +25,8 @@ void eval()
                 } else if (is_setf(get_current_eval().v.s)) {
                     builtin_setf();
                     return;
+                } else if (is_prog(get_current_eval().v.s)) {
+                    builtin_prog();
                 }
             }
         } else if (read_integer()) {

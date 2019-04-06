@@ -9,15 +9,8 @@
 #include <string.h>
 #include "lexer.h"
 #include "debug.h"
-#include "builtin/arithmetic.h"
 #include "data.h"
-
-// Evaluation stack
-extern struct neta_node eval_stack[inf];
-// Top of evaluation stack
-extern i64 eval_top;
-// The pointer to parse stack while evaluating
-extern i64 ptr;
+#include "nlib.h"
 
 // Main evaluation function
 void eval();
