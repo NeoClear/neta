@@ -11,4 +11,12 @@ void builtin_dminus();
 void builtin_dmul();
 void builtin_ddiv();
 
+// Builtin compare functions
+void builtin_less();
+void builtin_equal();
+void builtin_greater();
+void builtin_less_equal();
+void builtin_not_equal();
+void builtin_greater_equal();
+
 #endif

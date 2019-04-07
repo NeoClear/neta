@@ -141,3 +141,118 @@ void builtin_ddiv()
     eval_stack[offset_m(ms, -2)].v.f = ans;
     eval_top = ms - 1;
 }
+
+void builtin_less()
+{
+    i64 ms = milestone();
+    eval();
+    if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
+        runtime_err("number", neta_type2string(get_current_eval().t));
+    eval();
+    if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
+        runtime_err("number", neta_type2string(get_current_eval().t));
+    if (!read_rparen())
+        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+
+    eval_stack[ms - 2].t = INTEGER;
+    if (num2float(eval_stack[ms]).v.f < num2float(eval_stack[ms + 1]).v.f)
+        eval_stack[ms - 2].v.i = 1;
+    else
+        eval_stack[ms - 2].v.i = 0;
+    eval_top = ms - 1;
+}
+void builtin_equal()
+{
+    i64 ms = milestone();
+    eval();
+    if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
+        runtime_err("number", neta_type2string(get_current_eval().t));
+    eval();
+    if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
+        runtime_err("number", neta_type2string(get_current_eval().t));
+    if (!read_rparen())
+        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+
+    eval_stack[ms - 2].t = INTEGER;
+    if (num2float(eval_stack[ms]).v.f == num2float(eval_stack[ms + 1]).v.f)
+        eval_stack[ms - 2].v.i = 1;
+    else
+        eval_stack[ms - 2].v.i = 0;
+    eval_top = ms - 1;
+}
+void builtin_greater()
+{
+    i64 ms = milestone();
+    eval();
+    if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
+        runtime_err("number", neta_type2string(get_current_eval().t));
+    eval();
+    if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
+        runtime_err("number", neta_type2string(get_current_eval().t));
+    if (!read_rparen())
+        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+
+    eval_stack[ms - 2].t = INTEGER;
+    if (num2float(eval_stack[ms]).v.f > num2float(eval_stack[ms + 1]).v.f)
+        eval_stack[ms - 2].v.i = 1;
+    else
+        eval_stack[ms - 2].v.i = 0;
+    eval_top = ms - 1;
+}
+void builtin_less_equal()
+{
+    i64 ms = milestone();
+    eval();
+    if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
+        runtime_err("number", neta_type2string(get_current_eval().t));
+    eval();
+    if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
+        runtime_err("number", neta_type2string(get_current_eval().t));
+    if (!read_rparen())
+        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+
+    eval_stack[ms - 2].t = INTEGER;
+    if (num2float(eval_stack[ms]).v.f <= num2float(eval_stack[ms + 1]).v.f)
+        eval_stack[ms - 2].v.i = 1;
+    else
+        eval_stack[ms - 2].v.i = 0;
+    eval_top = ms - 1;
+}
+void builtin_not_equal()
+{
+    i64 ms = milestone();
+    eval();
+    if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
+        runtime_err("number", neta_type2string(get_current_eval().t));
+    eval();
+    if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
+        runtime_err("number", neta_type2string(get_current_eval().t));
+    if (!read_rparen())
+        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+
+    eval_stack[ms - 2].t = INTEGER;
+    if (num2float(eval_stack[ms]).v.f != num2float(eval_stack[ms + 1]).v.f)
+        eval_stack[ms - 2].v.i = 1;
+    else
+        eval_stack[ms - 2].v.i = 0;
+    eval_top = ms - 1;
+}
+void builtin_greater_equal()
+{
+    i64 ms = milestone();
+    eval();
+    if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
+        runtime_err("number", neta_type2string(get_current_eval().t));
+    eval();
+    if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
+        runtime_err("number", neta_type2string(get_current_eval().t));
+    if (!read_rparen())
+        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+
+    eval_stack[ms - 2].t = INTEGER;
+    if (num2float(eval_stack[ms]).v.f >= num2float(eval_stack[ms + 1]).v.f)
+        eval_stack[ms - 2].v.i = 1;
+    else
+        eval_stack[ms - 2].v.i = 0;
+    eval_top = ms - 1;
+}

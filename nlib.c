@@ -54,6 +54,44 @@ boolean is_ddiv(char *s)
     return false;
 }
 
+boolean is_less(char *s)
+{
+    if (strcmp(s, "<") == 0)
+        return true;
+    return false;
+}
+
+boolean is_equal(char *s)
+{
+    if (strcmp(s, "=") == 0)
+        return true;
+    return false;
+}
+boolean is_greater(char *s)
+{
+    if (strcmp(s, ">") == 0)
+        return true;
+    return false;
+}
+boolean is_less_equal(char *s)
+{
+    if (strcmp(s, "<=") == 0)
+        return true;
+    return false;
+}
+boolean is_not_equal(char *s)
+{
+    if (strcmp(s, "!=") == 0)
+        return true;
+    return false;
+}
+boolean is_greater_equal(char *s)
+{
+    if (strcmp(s, ">=") == 0)
+        return true;
+    return false;
+}
+
 boolean is_def(char *s)
 {
     if (strcmp(s, "def") == 0)
@@ -113,6 +151,19 @@ boolean is_print(char *s)
 boolean is_println(char *s)
 {
     if (strcmp(s, "println") == 0 || strcmp(s, "!") == 0)
+        return true;
+    return false;
+}
+
+boolean is_strlen(char *s)
+{
+    if (strcmp(s, "strlen") == 0)
+        return true;
+    return false;
+}
+boolean is_strcmp(char *s)
+{
+    if (strcmp(s, "strcmp") == 0)
         return true;
     return false;
 }
@@ -232,6 +283,11 @@ void copy_reset(i64 dest, i64 src)
 {
     eval_copy(dest, src);
     eval_top = dest + 1;
+}
+
+void reset(i64 start)
+{
+    eval_top = start + 1;
 }
 
 char *neta_type2string(enum neta_type t)

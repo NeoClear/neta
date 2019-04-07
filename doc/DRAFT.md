@@ -21,6 +21,9 @@ we must add some offset functions for the backtrace of eval stack
 
 
 
-improve arithmetic calculation
-finish the update of offset and milestone functions
+improve arithmetic calculation (OK)
+finish the update of offset and milestone functions (OK, although it didn't used frequently)
 modify the symbol function
+
+add basic compare functions
+add string operation functions

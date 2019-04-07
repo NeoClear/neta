@@ -29,6 +29,14 @@ boolean is_dminus(char *s);
 boolean is_dmul(char *s);
 boolean is_ddiv(char *s);
 
+// Preserved conpare functions???
+boolean is_less(char *s);
+boolean is_equal(char *s);
+boolean is_greater(char *s);
+boolean is_less_equal(char *s);
+boolean is_not_equal(char *s);
+boolean is_greater_equal(char *s);
+
 // Keywords???
 boolean is_def(char *s);
 boolean is_undef(char *s);
@@ -42,11 +50,16 @@ boolean is_if(char *s);
 boolean is_print(char *s);
 boolean is_println(char *s);
 
+// Preserved string functions???
+boolean is_strlen(char *s);
+boolean is_strcmp(char *s);
+
 i64 milestone();
 i64 offset(i64 off);
 i64 offset_m(i64 milestone, i64 off);
 void eval_copy(i64 dest, i64 src);
 void copy_reset(i64 dest, i64 src);
+void reset(i64 start);
 
 char *neta_type2string(enum neta_type t);
 char *neta_node2string(struct neta_node n);

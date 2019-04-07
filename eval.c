@@ -6,13 +6,14 @@
 #include "builtin/symbol.h"
 #include "builtin/print.h"
 #include "builtin/if.h"
+#include "builtin/string.h"
 
 void eval()
 {
     while (ptr < parse_top) {
         if (read_lparen()) {
-            parse_to_eval();
-            if (get_current_eval().t == PRESERVED_FUN) {
+            // parse_to_eval();
+            if (read_preserved_fun()/* get_current_eval().t == PRESERVED_FUN */) {
                 if (is_plus(get_current_eval().v.s)) {
                     builtin_plus();
                     return;
@@ -37,6 +38,24 @@ void eval()
                 } else if (is_ddiv(get_current_eval().v.s)) {
                     builtin_ddiv();
                     return;
+                } else if (is_less(get_current_eval().v.s)) {
+                    builtin_less();
+                    return;
+                } else if (is_equal(get_current_eval().v.s)) {
+                    builtin_equal();
+                    return;
+                } else if (is_greater(get_current_eval().v.s)) {
+                    builtin_greater();
+                    return;
+                } else if (is_less_equal(get_current_eval().v.s)) {
+                    builtin_less_equal();
+                    return;
+                } else if (is_not_equal(get_current_eval().v.s)) {
+                    builtin_not_equal();
+                    return;
+                } else if (is_greater_equal(get_current_eval().v.s)) {
+                    builtin_greater_equal();
+                    return;
                 } else if (is_setf(get_current_eval().v.s)) {
                     builtin_setf();
                     return;
@@ -51,6 +70,12 @@ void eval()
                     return;
                 } else if (is_println(get_current_eval().v.s)) {
                     builtin_println();
+                    return;
+                } else if (is_strlen(get_current_eval().v.s)) {
+                    builtin_strlen();
+                    return;
+                } else if (is_strcmp(get_current_eval().v.s)) {
+                    builtin_strcmp();
                     return;
                 } else {
                     eval();
