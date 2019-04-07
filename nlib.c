@@ -96,6 +96,27 @@ boolean is_prog(char *s)
     return false;
 }
 
+boolean is_if(char *s)
+{
+    if (strcmp(s, "if") == 0)
+        return true;
+    return false;
+}
+
+boolean is_print(char *s)
+{
+    if (strcmp(s, "print") == 0 || strcmp(s, "!") == 0)
+        return true;
+    return false;
+}
+
+boolean is_println(char *s)
+{
+    if (strcmp(s, "println") == 0 || strcmp(s, "!") == 0)
+        return true;
+    return false;
+}
+
 struct neta_node get_next_parse()
 {
     return parse_tree[ptr];
@@ -239,6 +260,33 @@ char *neta_type2string(enum neta_type t)
     }
 }
 
+char *neta_node2string(struct neta_node n)
+{
+    char *s = (char *)malloc(sizeof(char) * inf8);
+    switch (n.t)
+    {
+    case INTEGER:
+        sprintf(s, "%lld", n.v.i);
+        break;
+    case FLOAT:
+        sprintf(s, "%lf", n.v.f);
+        break;
+    case STRING:
+        sprintf(s, "%s", n.v.s);
+        break;
+    case CHAR:
+        sprintf(s, "%c", n.v.c);
+        break;
+    default:
+        runtime_err("basic value", neta_type2string(n.t));
+        break;
+    }
+    char *ret = (char *)malloc(sizeof(char) * (strlen(s) + 1));
+    strcpy(ret, s);
+    free(s);
+    return ret;
+}
+
 struct neta_node num2float(struct neta_node n)
 {
     switch (n.t)
@@ -268,4 +316,18 @@ struct neta_node num2int(struct neta_node n)
         runtime_err("Number", neta_type2string(n.t));
         return n;
     }
+}
+
+void ignore_exp()
+{
+    i64 level = 0;
+    do {
+        enum neta_type t = parse_tree[ptr++].t;
+        if (t == LPAREN)
+            level++;
+        else if (t == RPAREN)
+            level--;
+    } while (level);
+    if (level < 0)
+        parse_err("expression", neta_type2string(RPAREN));
 }

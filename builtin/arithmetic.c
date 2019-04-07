@@ -75,14 +75,12 @@ void builtin_div()
 
 void builtin_dplus()
 {
-    neta_err();
     i64 ms = milestone();
     f64 ans = 0;
     while (!read_rparen()) {
         eval();
     }
     for (i64 i = ms; i <= offset(-2); i++) {
-        neta_err();
         eval_stack[i] = num2float(eval_stack[i]);
         ans += eval_stack[i].v.f;
     }

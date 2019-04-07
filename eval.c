@@ -4,6 +4,8 @@
 #include "nlib.h"
 #include "builtin/prog.h"
 #include "builtin/symbol.h"
+#include "builtin/print.h"
+#include "builtin/if.h"
 
 void eval()
 {
@@ -40,6 +42,15 @@ void eval()
                     return;
                 } else if (is_prog(get_current_eval().v.s)) {
                     builtin_prog();
+                    return;
+                } else if (is_if(get_current_eval().v.s)) {
+                    builtin_if();
+                    return;
+                } else if (is_print(get_current_eval().v.s)) {
+                    builtin_print();
+                    return;
+                } else if (is_println(get_current_eval().v.s)) {
+                    builtin_println();
                     return;
                 } else {
                     eval();

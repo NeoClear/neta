@@ -24,7 +24,7 @@ void column_plus(i64 n)
 %}
 
 DIGIT           [0-9]
-PRESERVED_FUN   "+"|"-"|"*"|"/"|"d+"|"d-"|"d*"|"d/"|"def"|"undef"|"var"|"val"|".."|"setf"|"setc"|"prog"|"!"
+PRESERVED_FUN   "+"|"-"|"*"|"/"|"d+"|"d-"|"d*"|"d/"|"def"|"undef"|"var"|"val"|".."|"setf"|"setc"|"prog"|"!"|"if"|"println"|"print"
 IDENTIFIER      [a-zA-Z][a-zA-Z0-9]*
 LPAREN          "("
 RPAREN          ")"

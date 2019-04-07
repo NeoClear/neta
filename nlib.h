@@ -19,6 +19,7 @@ boolean read_float();
 boolean read_string();
 boolean read_char();
 
+// Preserved arithmetical functions???
 boolean is_plus(char *s);
 boolean is_minus(char *s);
 boolean is_mul(char *s);
@@ -27,12 +28,19 @@ boolean is_dplus(char *s);
 boolean is_dminus(char *s);
 boolean is_dmul(char *s);
 boolean is_ddiv(char *s);
+
+// Keywords???
 boolean is_def(char *s);
 boolean is_undef(char *s);
 boolean is_range(char *s);
 boolean is_setf(char *s);
 boolean is_setc(char *s);
 boolean is_prog(char *s);
+boolean is_if(char *s);
+
+// Preserved io funcitons???
+boolean is_print(char *s);
+boolean is_println(char *s);
 
 i64 milestone();
 i64 offset(i64 off);
@@ -41,7 +49,10 @@ void eval_copy(i64 dest, i64 src);
 void copy_reset(i64 dest, i64 src);
 
 char *neta_type2string(enum neta_type t);
+char *neta_node2string(struct neta_node n);
 struct neta_node num2float(struct neta_node n);
 struct neta_node num2int(struct neta_node n);
+
+void ignore_exp();
 
 #endif
