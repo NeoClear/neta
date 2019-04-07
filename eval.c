@@ -7,6 +7,7 @@
 #include "builtin/print.h"
 #include "builtin/if.h"
 #include "builtin/string.h"
+#include "builtin/while.h"
 
 void eval()
 {
@@ -64,6 +65,9 @@ void eval()
                     return;
                 } else if (is_if(get_current_eval().v.s)) {
                     builtin_if();
+                    return;
+                } else if (is_while(get_current_eval().v.s)) {
+                    builtin_while();
                     return;
                 } else if (is_print(get_current_eval().v.s)) {
                     builtin_print();

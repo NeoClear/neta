@@ -45,6 +45,7 @@ boolean is_setf(char *s);
 boolean is_setc(char *s);
 boolean is_prog(char *s);
 boolean is_if(char *s);
+boolean is_while(char *s);
 
 // Preserved io funcitons???
 boolean is_print(char *s);

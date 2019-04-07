@@ -141,6 +141,13 @@ boolean is_if(char *s)
     return false;
 }
 
+boolean is_while(char *s)
+{
+    if (strcmp(s, "while") == 0)
+        return true;
+    return false;
+}
+
 boolean is_print(char *s)
 {
     if (strcmp(s, "print") == 0 || strcmp(s, "!") == 0)
