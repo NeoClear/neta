@@ -12,7 +12,7 @@
 
 + Make sure you have installed **flex**, **gcc** and **make** in your system.
 
-+ Clone its source code from **[download here](https://github.com/NeoClear/neta.git)**.
++ Clone its source code from **[download here](https://codeload.github.com/NeoClear/neta/zip/master)**.
 
 + Run **make**.
 
@@ -40,11 +40,11 @@ Notice: The makefile works on Mac. If you uses Linux, you should change **gcc -l
 
 ## Reference
 
-+ Ansi Common Lisp
++ Ansi Common Lisp **[click here](https://acl.readthedocs.io/en/latest/zhCN/)**
 
-+ CS143 Stanford Online Course
++ CS143 Stanford Online Course **[click here](http://web.stanford.edu/class/archive/cs/cs143/cs143.1128/)**
 
-+ Video Materials for CS143
++ Video Materials for CS143 **[click here](https://www.bilibili.com/video/av18939632)**
 
 ## Info
 
