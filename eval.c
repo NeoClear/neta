@@ -1,4 +1,5 @@
 #include "eval.h"
+#include "err.h"
 #include "builtin/arithmetic.h"
 #include "builtin/setf.h"
 #include "nlib.h"
@@ -8,6 +9,7 @@
 #include "builtin/if.h"
 #include "builtin/string.h"
 #include "builtin/while.h"
+#include "builtin/assign.h"
 
 void eval()
 {
@@ -69,6 +71,9 @@ void eval()
                 } else if (is_while(get_current_eval().v.s)) {
                     builtin_while();
                     return;
+                } else if (is_assign(get_current_eval().v.s)) {
+                    builtin_assign();
+                    return;
                 } else if (is_print(get_current_eval().v.s)) {
                     builtin_print();
                     return;
@@ -96,9 +101,12 @@ void eval()
         } else if (read_char()) {
             return;
         } else if (read_identifier()) {
-            struct neta_node *local = find_symbol(get_current_eval().v.s);
-            eval_stack[eval_top - 1] = *local;
-            return;
+            struct neta_node *local = nil;
+            if (find_symbol(&local, get_current_eval().v.s)) {
+                eval_stack[eval_top - 1] = *local;
+                return;
+            } else
+                err("could not find variable");
         } else if (read_preserved_fun()) {
             printf("You can't give a keyword or built-in function directly\n");
         }

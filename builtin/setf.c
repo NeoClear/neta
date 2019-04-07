@@ -5,9 +5,8 @@
 void add_global_variable(char *name, struct neta_node value)
 {
     glov = gvinsert(glov, name);
-    search_gvnode(glov, name)->initialized = true;
     search_gvnode(glov, name)->value = (struct neta_node *)malloc(sizeof(struct neta_node));
-    search_gvnode(glov, name)->gt = variable;
+    search_gvnode(glov, name)->gt = VARIABLE;
     memcpy(search_gvnode(glov, name)->value, &value, sizeof(struct neta_node));
 }
 
@@ -15,12 +14,7 @@ void add_global_variable(char *name, struct neta_node value)
 void create_global_variable(char *name)
 {
     glov = gvinsert(glov, name);
-    search_gvnode(glov, name)->gt = variable;
-    if (search_gvnode(glov, name) != nil)
-        search_gvnode(glov, name)->initialized = false;
-    else {
-
-    }
+    search_gvnode(glov, name)->gt = VARIABLE;
 }
 
 // The integrated function which handles the creation and initialization of a global variable
@@ -43,11 +37,10 @@ void builtin_setf()
             initialize_variable();
             continue;
         } else if (read_identifier()) {
-            // neta_err();
             create_global_variable(get_current_eval().v.s);
             continue;
         } else {
-            pi(get_next_parse().t);
+            ps("At builtin_setf()\n");
         }
     }
     eval_top = milestone - 1;

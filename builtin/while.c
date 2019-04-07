@@ -25,7 +25,6 @@ void builtin_while()
             eval_stack[ms - 2] = get_current_eval();
             ptr = backtrace;
             eval_top -= 2;
-            neta_err();
         }
     }
     ignore_exp();

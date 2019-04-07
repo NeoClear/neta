@@ -75,9 +75,9 @@ void print_global_variable_d(struct global_variable *t)
     if (t == nil)
         return;
     print_global_variable_d(t->left);
-    if (t->initialized)
-        printf("%s: %s\n", t->name, print_value(*t->value));
-    else
-        printf("%s haven't been initialized\n", t->name);
+    // if (t->initialized)
+    printf("%s: %s\n", t->name, print_value(*t->value));
+    // else
+        // printf("%s haven't been initialized\n", t->name);
     print_global_variable_d(t->right);
 }

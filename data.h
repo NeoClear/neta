@@ -28,9 +28,9 @@ enum neta_type
 // Basic types for a value
 enum global_type
 {
-    function,
-    variable,
-    constant,
+    FUNCTION,
+    VARIABLE,
+    CONSTANT,
 };
 
 // Data structure of a global values
@@ -40,7 +40,6 @@ struct global_variable
     char *name;
     enum global_type gt;
     struct neta_node *value;
-    boolean initialized;
 
     struct global_variable *left;
     struct global_variable *right;

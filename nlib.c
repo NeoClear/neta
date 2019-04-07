@@ -148,6 +148,13 @@ boolean is_while(char *s)
     return false;
 }
 
+boolean is_assign(char *s)
+{
+    if (strcmp(s, "->") == 0 || strcmp(s, "assign") == 0)
+        return true;
+    return false;
+}
+
 boolean is_print(char *s)
 {
     if (strcmp(s, "print") == 0 || strcmp(s, "!") == 0)

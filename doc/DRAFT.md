@@ -27,3 +27,5 @@ modify the symbol function
 
 add basic compare functions
 add string operation functions
+finished while functionality
+finished assignment functionality

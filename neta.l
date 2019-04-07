@@ -24,7 +24,13 @@ void column_plus(i64 n)
 %}
 
 DIGIT           [0-9]
-PRESERVED_FUN   "+"|"-"|"*"|"/"|"d+"|"d-"|"d*"|"d/"|"<"|"="|">"|"<="|"!="|">="|"def"|"undef"|"var"|"val"|".."|"setf"|"setc"|"prog"|"!"|"if"|"println"|"print"|"strlen"|"strcmp"|"while"
+PRESERVED_FUN_1 "+"|"-"|"*"|"/"|"d+"|"d-"
+PRESERVED_FUN_2 "d*"|"d/"|"<"|"="|">"|"<="
+PRESERVED_FUN_3 "!="|">="|"def"|"undef"|"var"
+PRESERVED_FUN_4 "val"|".."|"setf"|"setc"|"prog"
+PRESERVED_FUN_5 "!"|"if"|"println"|"print"|"strlen"
+PRESERVED_FUN_6 "strcmp"|"while"|"->"|"assign"
+
 IDENTIFIER      [a-zA-Z][a-zA-Z0-9]*
 LPAREN          "("
 RPAREN          ")"
@@ -44,7 +50,37 @@ CHAR            \'[^\"\']\'
     // printf("RParen\n");
     add_rparen();
 }
-{PRESERVED_FUN}     {
+{PRESERVED_FUN_1}     {
+    word_plus();
+    column_plus(strlen(yytext));
+    // printf("Preserved Function: %s\n", yytext);
+    add_preserved_fun(clone(yytext));
+}
+{PRESERVED_FUN_2}     {
+    word_plus();
+    column_plus(strlen(yytext));
+    // printf("Preserved Function: %s\n", yytext);
+    add_preserved_fun(clone(yytext));
+}
+{PRESERVED_FUN_3}     {
+    word_plus();
+    column_plus(strlen(yytext));
+    // printf("Preserved Function: %s\n", yytext);
+    add_preserved_fun(clone(yytext));
+}
+{PRESERVED_FUN_4}     {
+    word_plus();
+    column_plus(strlen(yytext));
+    // printf("Preserved Function: %s\n", yytext);
+    add_preserved_fun(clone(yytext));
+}
+{PRESERVED_FUN_5}     {
+    word_plus();
+    column_plus(strlen(yytext));
+    // printf("Preserved Function: %s\n", yytext);
+    add_preserved_fun(clone(yytext));
+}
+{PRESERVED_FUN_6}     {
     word_plus();
     column_plus(strlen(yytext));
     // printf("Preserved Function: %s\n", yytext);
