@@ -43,6 +43,7 @@ boolean is_undef(char *s);
 boolean is_range(char *s);
 boolean is_setf(char *s);
 boolean is_setc(char *s);
+boolean is_setl(char *s);
 boolean is_prog(char *s);
 boolean is_if(char *s);
 boolean is_while(char *s);

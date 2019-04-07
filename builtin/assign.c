@@ -12,6 +12,8 @@ void sub_assign()
         parse_err(neta_type2string(IDENTIFIER), neta_type2string(get_next_parse().t));
     struct neta_node *ret = nil;
     if (find_variable(&ret, get_current_eval().v.s)) {
+        if (ret == nil)
+            err("null variables");
         eval();
         *ret = get_current_eval();
     } else

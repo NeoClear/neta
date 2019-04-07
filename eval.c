@@ -10,6 +10,7 @@
 #include "builtin/string.h"
 #include "builtin/while.h"
 #include "builtin/assign.h"
+#include "builtin/setl.h"
 
 void eval()
 {
@@ -62,6 +63,9 @@ void eval()
                 } else if (is_setf(get_current_eval().v.s)) {
                     builtin_setf();
                     return;
+                } else if (is_setl(get_current_eval().v.s)) {
+                    builtin_setl();
+                    return;
                 } else if (is_prog(get_current_eval().v.s)) {
                     builtin_prog();
                     return;
@@ -102,13 +106,13 @@ void eval()
             return;
         } else if (read_identifier()) {
             struct neta_node *local = nil;
-            if (find_symbol(&local, get_current_eval().v.s)) {
+            if (find_variable(&local, get_current_eval().v.s)) {
                 eval_stack[eval_top - 1] = *local;
                 return;
             } else
                 err("could not find variable");
         } else if (read_preserved_fun()) {
-            printf("You can't give a keyword or built-in function directly\n");
+            err("You can't give a keyword or built-in function directly");
         }
     }
 }

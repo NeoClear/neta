@@ -22,7 +22,7 @@ enum neta_type
     FLOAT,
     STRING,
     CHAR,
-    LIST,
+    VALUE,
 };
 
 // Basic types for a value
@@ -30,6 +30,7 @@ enum global_type
 {
     FUNCTION,
     VARIABLE,
+    LIST,
     CONSTANT,
 };
 
@@ -58,7 +59,6 @@ union neta_value
     f64 f;
     char *s;
     char c;
-    struct neta_node *p;
 };
 
 // the node of parsing stack and evaluation stack
@@ -69,6 +69,7 @@ struct neta_node
     union neta_value v;
     boolean bound;
     struct neta_node *next;
+    struct neta_node *p;
 };
 
 // From eval.h

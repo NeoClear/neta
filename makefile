@@ -1,7 +1,8 @@
 SRC = lex.yy.c lexer.c debug.c eval.c neta.c util.c builtin/arithmetic.c \
 		builtin/setf.c data.c nlib.c builtin/prog.c err.c \
 		builtin/symbol.c builtin/print.c builtin/if.c \
-		builtin/string.c builtin/while.c builtin/assign.c
+		builtin/string.c builtin/while.c builtin/assign.c \
+		builtin/setl.c
 neta: lex.yy.c
 	gcc -o neta $(SRC) -ll
 

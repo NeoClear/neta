@@ -30,6 +30,7 @@ PRESERVED_FUN_3 "!="|">="|"def"|"undef"|"var"
 PRESERVED_FUN_4 "val"|".."|"setf"|"setc"|"prog"
 PRESERVED_FUN_5 "!"|"if"|"println"|"print"|"strlen"
 PRESERVED_FUN_6 "strcmp"|"while"|"->"|"assign"
+PRESERVED_FUN_7 "setl"
 
 IDENTIFIER      [a-zA-Z][a-zA-Z0-9]*
 LPAREN          "("
@@ -81,6 +82,12 @@ CHAR            \'[^\"\']\'
     add_preserved_fun(clone(yytext));
 }
 {PRESERVED_FUN_6}     {
+    word_plus();
+    column_plus(strlen(yytext));
+    // printf("Preserved Function: %s\n", yytext);
+    add_preserved_fun(clone(yytext));
+}
+{PRESERVED_FUN_7}     {
     word_plus();
     column_plus(strlen(yytext));
     // printf("Preserved Function: %s\n", yytext);

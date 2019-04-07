@@ -127,6 +127,13 @@ boolean is_setc(char *s)
     return false;
 }
 
+boolean is_setl(char *s)
+{
+    if (strcmp(s, "setl") == 0)
+        return true;
+    return false;
+}
+
 boolean is_prog(char *s)
 {
     if (strcmp(s, "prog") == 0 || strcmp(s, "!") == 0)
@@ -323,8 +330,6 @@ char *neta_type2string(enum neta_type t)
         return "STRING";
     case CHAR:
         return "CHAR";
-    case LIST:
-        return "LIST";
     default:
         runtime_err("neta_type", "integer out of range");
     }

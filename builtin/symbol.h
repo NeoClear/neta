@@ -7,5 +7,6 @@
 boolean find_symbol(struct neta_node **node, char *name);
 boolean find_variable(struct neta_node **node, char *name);
 boolean find_global_variable(struct neta_node **node, char *name);
+boolean find_local_variable(struct neta_node **node, char *name);
 
 #endif
