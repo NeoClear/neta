@@ -11,24 +11,6 @@
 #include <string.h>
 #include "def.h"
 
-// Defining basic data types
-
-
-// From io.h
-// char *clone(char *s);
-// End here
-
-// From util.h
-// i64 max(i64 a, i64 b);
-// i64 min(i64 a, i64 b);
-
-// Comparison function for two strings
-// Should move to util.h
-// boolean greater_s(char *a, char *b);
-// boolean eq_s(char *a, char *b);
-// boolean less_s(char *a, char *b);
-// End here
-
 // Basic types for a token
 enum neta_type
 {

@@ -23,13 +23,25 @@ boolean is_plus(char *s);
 boolean is_minus(char *s);
 boolean is_mul(char *s);
 boolean is_div(char *s);
+boolean is_dplus(char *s);
+boolean is_dminus(char *s);
+boolean is_dmul(char *s);
+boolean is_ddiv(char *s);
 boolean is_def(char *s);
 boolean is_undef(char *s);
-// boolean is_var(char *s);
-// boolean is_val(char *s);
 boolean is_range(char *s);
 boolean is_setf(char *s);
 boolean is_setc(char *s);
 boolean is_prog(char *s);
+
+i64 milestone();
+i64 offset(i64 off);
+i64 offset_m(i64 milestone, i64 off);
+void eval_copy(i64 dest, i64 src);
+void copy_reset(i64 dest, i64 src);
+
+char *neta_type2string(enum neta_type t);
+struct neta_node num2float(struct neta_node n);
+struct neta_node num2int(struct neta_node n);
 
 #endif

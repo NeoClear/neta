@@ -2,162 +2,144 @@
 #include "../debug.h"
 #include "../util.h"
 #include "../data.h"
+#include "../err.h"
 
 void builtin_plus()
 {
-    i64 start = eval_top;
-    i64 end;
-    // struct neta_node v = eval_stack[start];
-    boolean has_double = false;
-    while (eval_stack[eval_top - 1].t != RPAREN && !parse_finished()) {
-        if (parse_tree[ptr].t == LPAREN) {
-            eval();
-        }
-        parse_to_eval();
+    i64 ms = milestone();
+    i64 ans = 0;
+    while (!read_rparen()) {
+        eval();
     }
-    end = eval_top - 2;
-    double d = 0;
-    for (i64 i = start; i <= end; i++) {
-        if (eval_stack[i].t == INTEGER)
-            d += (f64)eval_stack[i].v.i;
-        else if (eval_stack[i].t == FLOAT) {
-            has_double = true;
-            d += eval_stack[i].v.f;
-        } else {
-            printf("Unknown Number\n");
-            exit(0);
-        }
+    for (i64 i = ms; i <= offset(-2); i++) {
+        eval_stack[i] = num2int(eval_stack[i]);
+        ans += eval_stack[i].v.i;
     }
-
-    if (has_double) {
-        eval_stack[start - 2].t = FLOAT;
-        eval_stack[start - 2].v.f = d;
-    } else {
-        eval_stack[start - 2].t = INTEGER;
-        eval_stack[start - 2].v.i = (i64)d;
-    }
-    eval_top = start - 1;
+    eval_stack[offset_m(ms, -2)].t = INTEGER;
+    eval_stack[offset_m(ms, -2)].v.i = ans;
+    eval_top = ms - 1;
 }
 
 void builtin_minus()
 {
-    i64 start = eval_top;
-    i64 end;
-    // struct neta_node v = eval_stack[start];
-    boolean has_double;
-    while (eval_stack[eval_top - 1].t != RPAREN && !parse_finished()) {
-        if (parse_tree[ptr].t == LPAREN) {
-            eval();
-        }
-        parse_to_eval();
+    i64 ms = milestone();
+    i64 ans = 0;
+    while (!read_rparen()) {
+        eval();
     }
-    end = eval_top - 2;
-    double d;
-    if (eval_stack[start].t == FLOAT) {
-        has_double = true;
-        d = eval_stack[start].v.f;
-    } else if (eval_stack[start].t == INTEGER) {
-        has_double = false;
-        d = (f64)eval_stack[start].v.i;
+    ans = num2int(eval_stack[ms]).v.i;
+    for (i64 i = ms + 1; i <= offset(-2); i++) {
+        eval_stack[i] = num2int(eval_stack[i]);
+        ans -= eval_stack[i].v.i;
     }
-    for (i64 i = start + 1; i <= end; i++) {
-        if (eval_stack[i].t == INTEGER)
-            d -= (f64)eval_stack[i].v.i;
-        else if (eval_stack[i].t == FLOAT) {
-            has_double = true;
-            d -= eval_stack[i].v.f;
-        } else {
-            printf("Unknown Number\n");
-            exit(0);
-        }
-    }
-    if (has_double) {
-        eval_stack[start - 2].t = FLOAT;
-        eval_stack[start - 2].v.f = d;
-    } else {
-        eval_stack[start - 2].t = INTEGER;
-        eval_stack[start - 2].v.i = (i64)d;
-    }
-    eval_top = start - 1;
+    eval_stack[offset_m(ms, -2)].t = INTEGER;
+    eval_stack[offset_m(ms, -2)].v.i = ans;
+    eval_top = ms - 1;
 }
 
 void builtin_mul()
 {
-    i64 start = eval_top;
-    i64 end;
-    // struct neta_node v = eval_stack[start];
-    boolean has_double = false;
-    while (eval_stack[eval_top - 1].t != RPAREN && !parse_finished()) {
-        if (parse_tree[ptr].t == LPAREN) {
-            eval();
-        }
-        parse_to_eval();
+    i64 ms = milestone();
+    i64 ans = 1;
+    while (!read_rparen()) {
+        eval();
     }
-    end = eval_top - 2;
-    double d = 1;
-    for (i64 i = start; i <= end; i++) {
-        if (d == 0.0)
-            break;
-        if (eval_stack[i].t == INTEGER)
-            d *= (f64)eval_stack[i].v.i;
-        else if (eval_stack[i].t == FLOAT) {
-            has_double = true;
-            d *= eval_stack[i].v.f;
-        } else {
-            printf("Unknown Number\n");
-            exit(0);
-        }
+    for (i64 i = ms; i <= offset(-2); i++) {
+        eval_stack[i] = num2int(eval_stack[i]);
+        ans *= eval_stack[i].v.i;
     }
-
-    if (has_double) {
-        eval_stack[start - 2].t = FLOAT;
-        eval_stack[start - 2].v.f = d;
-    } else {
-        eval_stack[start - 2].t = INTEGER;
-        eval_stack[start - 2].v.i = (i64)d;
-    }
-    eval_top = start - 1;
+    eval_stack[offset_m(ms, -2)].t = INTEGER;
+    eval_stack[offset_m(ms, -2)].v.i = ans;
+    eval_top = ms - 1;
 }
 
 void builtin_div()
 {
-    i64 start = eval_top;
-    i64 end;
-    // struct neta_node v = eval_stack[start];
-    while (eval_stack[eval_top - 1].t != RPAREN && !parse_finished()) {
-        if (parse_tree[ptr].t == LPAREN) {
-            eval();
-        }
-        parse_to_eval();
+    i64 ms = milestone();
+    i64 ans = 0;
+    while (!read_rparen()) {
+        eval();
     }
-    end = eval_top - 2;
-    double d;
-    if (eval_stack[start].t == FLOAT)
-        d = eval_stack[start].v.f;
-    else if (eval_stack[start].t == INTEGER)
-        d = (f64)eval_stack[start].v.i;
-    for (i64 i = start + 1; i <= end; i++) {
-        if (eval_stack[i].t == INTEGER) {
-            if (eval_stack[i].v.i == 0) {
-                printf("Div By Zero\n");
-                exit(0);
-            }
-            d /= (f64)eval_stack[i].v.i;
-            
-        } else if (eval_stack[i].t == FLOAT) {
-            if (eval_stack[i].v.f == 0) {
-                printf("Div By Zero\n");
-                exit(0);
-            }
-            d /= eval_stack[i].v.f;
-        } else {
-            printf("Unknown Number\n");
-            exit(0);
-        }
+    ans = num2int(eval_stack[ms]).v.i;
+    for (i64 i = ms + 1; i <= offset(-2); i++) {
+        eval_stack[i] = num2int(eval_stack[i]);
+        if (eval_stack[i].v.i != 0)
+            ans /= eval_stack[i].v.i;
+        else
+            runtime_err("none zero", "zero");
     }
+    eval_stack[offset_m(ms, -2)].t = INTEGER;
+    eval_stack[offset_m(ms, -2)].v.i = ans;
+    eval_top = ms - 1;
+}
 
-    eval_stack[start - 2].t = FLOAT;
-    eval_stack[start - 2].v.f = d;
+void builtin_dplus()
+{
+    neta_err();
+    i64 ms = milestone();
+    f64 ans = 0;
+    while (!read_rparen()) {
+        eval();
+    }
+    for (i64 i = ms; i <= offset(-2); i++) {
+        neta_err();
+        eval_stack[i] = num2float(eval_stack[i]);
+        ans += eval_stack[i].v.f;
+    }
+    eval_stack[offset_m(ms, -2)].t = FLOAT;
+    eval_stack[offset_m(ms, -2)].v.f = ans;
+    eval_top = ms - 1;
+}
 
-    eval_top = start - 1;
+void builtin_dminus()
+{
+    i64 ms = milestone();
+    f64 ans = 0;
+    while (!read_rparen()) {
+        eval();
+    }
+    ans = num2float(eval_stack[ms]).v.f;
+    for (i64 i = ms + 1; i <= offset(-2); i++) {
+        eval_stack[i] = num2float(eval_stack[i]);
+        ans -= eval_stack[i].v.f;
+    }
+    eval_stack[offset_m(ms, -2)].t = FLOAT;
+    eval_stack[offset_m(ms, -2)].v.f = ans;
+    eval_top = ms - 1;
+}
+
+void builtin_dmul()
+{
+    i64 ms = milestone();
+    f64 ans = 1;
+    while (!read_rparen()) {
+        eval();
+    }
+    for (i64 i = ms; i <= offset(-2); i++) {
+        eval_stack[i] = num2float(eval_stack[i]);
+        ans *= eval_stack[i].v.f;
+    }
+    eval_stack[offset_m(ms, -2)].t = FLOAT;
+    eval_stack[offset_m(ms, -2)].v.f = ans;
+    eval_top = ms - 1;
+}
+
+void builtin_ddiv()
+{
+    i64 ms = milestone();
+    f64 ans = 0;
+    while (!read_rparen()) {
+        eval();
+    }
+    ans = num2float(eval_stack[ms]).v.f;
+    for (i64 i = ms + 1; i <= offset(-2); i++) {
+        eval_stack[i] = num2float(eval_stack[i]);
+        if (eval_stack[i].v.f != 0)
+            ans /= eval_stack[i].v.f;
+        else
+            runtime_err("none zero", "zero");
+    }
+    eval_stack[offset_m(ms, -2)].t = FLOAT;
+    eval_stack[offset_m(ms, -2)].v.f = ans;
+    eval_top = ms - 1;
 }

@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
         eval_top = 0;
     }
     print_global_variable_d(glov);
-    print_global_variable();
+    // print_global_variable();
     
     return 0;
 }

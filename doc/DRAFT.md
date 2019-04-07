@@ -17,3 +17,10 @@ now we could eval a global variable
 
 we must add some offset functions for the backtrace of eval stack
 
+
+
+
+
+improve arithmetic calculation
+finish the update of offset and milestone functions
+modify the symbol function

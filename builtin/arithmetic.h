@@ -6,5 +6,9 @@ void builtin_plus();
 void builtin_minus();
 void builtin_mul();
 void builtin_div();
+void builtin_dplus();
+void builtin_dminus();
+void builtin_dmul();
+void builtin_ddiv();
 
 #endif

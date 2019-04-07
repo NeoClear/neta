@@ -1,4 +1,5 @@
 #include "nlib.h"
+#include "err.h"
 
 boolean is_plus(char *s)
 {
@@ -24,6 +25,31 @@ boolean is_mul(char *s)
 boolean is_div(char *s)
 {
     if (strcmp(s, "/") == 0)
+        return true;
+    return false;
+}
+
+boolean is_dplus(char *s)
+{
+    if (strcmp(s, "d+") == 0)
+        return true;
+    return false;
+}
+boolean is_dminus(char *s)
+{
+    if (strcmp(s, "d-") == 0)
+        return true;
+    return false;
+}
+boolean is_dmul(char *s)
+{
+    if (strcmp(s, "d*") == 0)
+        return true;
+    return false;
+}
+boolean is_ddiv(char *s)
+{
+    if (strcmp(s, "d/") == 0)
         return true;
     return false;
 }
@@ -159,4 +185,87 @@ boolean read_char()
         return true;
     }
     return false;
+}
+
+i64 milestone()
+{
+    return eval_top;
+}
+
+i64 offset(i64 off)
+{
+    return eval_top + off;
+}
+
+i64 offset_m(i64 milestone, i64 off)
+{
+    return milestone + off;
+}
+
+void eval_copy(i64 dest, i64 src)
+{
+    eval_stack[dest] = eval_stack[src];
+}
+
+void copy_reset(i64 dest, i64 src)
+{
+    eval_copy(dest, src);
+    eval_top = dest + 1;
+}
+
+char *neta_type2string(enum neta_type t)
+{
+    switch (t) {
+    case LPAREN:
+        return "LPAREN";
+    case RPAREN:
+        return "RPAREN";
+    case PRESERVED_FUN:
+        return "PRESERVED_FUN";
+    case IDENTIFIER:
+        return "IDENTIFIER";
+    case INTEGER:
+        return "INTEGER";
+    case FLOAT:
+        return "FLOAT";
+    case STRING:
+        return "STRING";
+    case CHAR:
+        return "CHAR";
+    case LIST:
+        return "LIST";
+    default:
+        runtime_err("neta_type", "integer out of range");
+    }
+}
+
+struct neta_node num2float(struct neta_node n)
+{
+    switch (n.t)
+    {
+    case INTEGER:
+        n.t = FLOAT;
+        n.v.f = (f64)n.v.i;
+        return n;
+    case FLOAT:
+        return n;
+    default:
+        runtime_err("Number", neta_type2string(n.t));
+        return n;
+    }
+}
+struct neta_node num2int(struct neta_node n)
+{
+    switch (n.t)
+    {
+    case INTEGER:
+        return n;
+    case FLOAT:
+        n.t = INTEGER;
+        n.v.i = (i64)n.v.f;
+        return n;
+    default:
+        runtime_err("Number", neta_type2string(n.t));
+        return n;
+    }
 }

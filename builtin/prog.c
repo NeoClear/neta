@@ -6,10 +6,11 @@
 
 void builtin_prog()
 {
-    i64 milestone = eval_top;
+    i64 ms = milestone();
     while (!read_rparen()) {
         eval();
     }
-    eval_stack[milestone - 2] = eval_stack[eval_top - 2];
-    eval_top = milestone - 1;
+    copy_reset(offset_m(ms, -2), offset(-2));
+    // eval_stack[ms - 2] = eval_stack[eval_top - 2];
+    // eval_top = ms - 1;
 }

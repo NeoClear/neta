@@ -1,4 +1,5 @@
 #include "util.h"
+#include <string.h>
 
 i64 max(i64 a, i64 b)
 {
@@ -111,4 +112,21 @@ char *clone(char *s)
         n[i] = s[i];
     n[strlen(s)] = '\0';
     return n;
+}
+
+char *int2string(i64 i)
+{
+    char *s = (char *)malloc(sizeof(char) * inf8);
+    sprintf(s, "%lld", i);
+    char *ret = (char *)malloc(sizeof(char) * (strlen(s) + 1));
+    free(s);
+    return ret;
+}
+char *double2string(f64 f)
+{
+    char *s = (char *)malloc(sizeof(char) * inf8);
+    sprintf(s, "%lf", f);
+    char *ret = (char *)malloc(sizeof(char) * (strlen(s) + 1));
+    free(s);
+    return ret;
 }

@@ -23,6 +23,18 @@ void eval()
                 } else if (is_div(get_current_eval().v.s)) {
                     builtin_div();
                     return;
+                } else if (is_dplus(get_current_eval().v.s)) {
+                    builtin_dplus();
+                    return;
+                } else if (is_dminus(get_current_eval().v.s)) {
+                    builtin_dminus();
+                    return;
+                } else if (is_dmul(get_current_eval().v.s)) {
+                    builtin_dmul();
+                    return;
+                } else if (is_ddiv(get_current_eval().v.s)) {
+                    builtin_ddiv();
+                    return;
                 } else if (is_setf(get_current_eval().v.s)) {
                     builtin_setf();
                     return;

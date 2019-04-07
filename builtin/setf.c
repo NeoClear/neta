@@ -41,7 +41,6 @@ void builtin_setf()
     while (!read_rparen()) {
         if (read_lparen()) {
             initialize_variable();
-            // parse_to_eval();
             continue;
         } else if (read_identifier()) {
             // neta_err();
@@ -51,6 +50,5 @@ void builtin_setf()
             pi(get_next_parse().t);
         }
     }
-    // parse_to_eval();
     eval_top = milestone - 1;
 }
