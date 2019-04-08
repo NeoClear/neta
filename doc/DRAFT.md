@@ -29,3 +29,5 @@ add basic compare functions
 add string operation functions
 finished while functionality
 finished assignment functionality
+
+fixed a bug related to the length of string

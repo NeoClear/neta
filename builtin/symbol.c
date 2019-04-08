@@ -21,10 +21,13 @@ boolean find_variable(struct neta_node **node, char *name)
         return true;
     }
     if (find_global_variable(&ret, name)) {
-        // neta_err();
         *node = ret;
         return true;
     }
+    // if (find_global_constant(&ret, name)) {
+    //     *node = ret;
+    //     return true;
+    // }
     return false;
 }
 
@@ -45,4 +48,12 @@ boolean find_local_variable(struct neta_node **node, char *name)
         }
     }
     return false;
+}
+
+boolean find_global_constant(struct neta_node **node, char *name)
+{
+    if (glov == nil || search_gvnode(glov, name) == nil || search_gvnode(glov, name)->gt != CONSTANT)
+        return false;
+    *node = search_gvnode(glov, name)->value;
+    return true;
 }

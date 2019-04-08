@@ -11,6 +11,7 @@
 #include "builtin/while.h"
 #include "builtin/assign.h"
 #include "builtin/setl.h"
+#include "builtin/setc.h"
 
 void eval()
 {
@@ -66,6 +67,9 @@ void eval()
                 } else if (is_setl(get_current_eval().v.s)) {
                     builtin_setl();
                     return;
+                } else if (is_setc(get_current_eval().v.s)) {
+                    builtin_setc();
+                    return;
                 } else if (is_prog(get_current_eval().v.s)) {
                     builtin_prog();
                     return;
@@ -109,6 +113,8 @@ void eval()
             if (find_variable(&local, get_current_eval().v.s)) {
                 eval_stack[eval_top - 1] = *local;
                 return;
+            } else if (find_global_constant(&local, get_current_eval().v.s)) {
+
             } else
                 err("could not find variable");
         } else if (read_preserved_fun()) {

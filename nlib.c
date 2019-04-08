@@ -337,7 +337,7 @@ char *neta_type2string(enum neta_type t)
 
 char *neta_node2string(struct neta_node n)
 {
-    char *s = (char *)malloc(sizeof(char) * inf8);
+    char *s = (char *)malloc(sizeof(char) * inf24);
     switch (n.t)
     {
     case INTEGER:

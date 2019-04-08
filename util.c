@@ -116,7 +116,7 @@ char *clone(char *s)
 
 char *int2string(i64 i)
 {
-    char *s = (char *)malloc(sizeof(char) * inf8);
+    char *s = (char *)malloc(sizeof(char) * inf24);
     sprintf(s, "%lld", i);
     char *ret = (char *)malloc(sizeof(char) * (strlen(s) + 1));
     free(s);
@@ -124,7 +124,7 @@ char *int2string(i64 i)
 }
 char *double2string(f64 f)
 {
-    char *s = (char *)malloc(sizeof(char) * inf8);
+    char *s = (char *)malloc(sizeof(char) * inf24);
     sprintf(s, "%lf", f);
     char *ret = (char *)malloc(sizeof(char) * (strlen(s) + 1));
     free(s);

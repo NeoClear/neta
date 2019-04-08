@@ -39,7 +39,7 @@ void pf(f64 f)
 
 char *print_value(struct neta_node v)
 {
-    char *r = (char *)malloc(sizeof(char) * inf16);
+    char *r = (char *)malloc(sizeof(char) * inf24);
     switch (v.t) {
     case INTEGER:
         sprintf(r, "%lld", v.v.i);
