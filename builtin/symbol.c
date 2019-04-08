@@ -24,10 +24,6 @@ boolean find_variable(struct neta_node **node, char *name)
         *node = ret;
         return true;
     }
-    // if (find_global_constant(&ret, name)) {
-    //     *node = ret;
-    //     return true;
-    // }
     return false;
 }
 

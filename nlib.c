@@ -352,8 +352,20 @@ char *neta_node2string(struct neta_node n)
     case CHAR:
         sprintf(s, "%c", n.v.c);
         break;
+    case LPAREN:
+        sprintf(s, "(");
+        break;
+    case RPAREN:
+        sprintf(s, ")");
+        break;
+    case PRESERVED_FUN:
+        sprintf(s, "%s", n.v.s);
+        break;
+    case IDENTIFIER:
+        sprintf(s, "%s", n.v.s);
+        break;
     default:
-        runtime_err("basic value", neta_type2string(n.t));
+        runtime_err("neta_node", neta_type2string(n.t));
         break;
     }
     char *ret = (char *)malloc(sizeof(char) * (strlen(s) + 1));

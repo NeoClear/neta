@@ -134,12 +134,12 @@ struct global_variable *gvinsert(struct global_variable *tree, char *k)
 }
 
 // delete a node in AVL tree
-struct global_variable *delete_node(struct global_variable *tree, char *node)
+struct global_variable *delete_gvnode(struct global_variable *tree, char *node)
 {
     if (tree == nil || node == nil)
         return nil;
     if (less_s(node, tree->name)) {
-        tree->left = delete_node(tree->left, node);
+        tree->left = delete_gvnode(tree->left, node);
         if (height(tree->right) - height(tree->left) == 2) {
             if (height(tree->right->left) > height(tree->right->right))
                 tree = rl_rotate(tree);
@@ -147,7 +147,7 @@ struct global_variable *delete_node(struct global_variable *tree, char *node)
                 tree = rr_rotate(tree);
         }
     } else if (greater_s(node, tree->name)) {
-        tree->right = delete_node(tree->right, node);
+        tree->right = delete_gvnode(tree->right, node);
         if (height(tree->left) - height(tree->right) == 2) {
             if (height(tree->left->right) > height(tree->left->left))
                 tree = lr_rotate(tree);
@@ -160,11 +160,11 @@ struct global_variable *delete_node(struct global_variable *tree, char *node)
             if (height(tree->left) > height(tree->right)) {
                 struct global_variable *m = max_gvnode(tree->left);
                 tree->name = clone(m->name);
-                tree->left = delete_node(tree->left, m->name);
+                tree->left = delete_gvnode(tree->left, m->name);
             } else {
                 struct global_variable *n = min_gvnode(tree->right);
                 tree->name = clone(n->name);
-                tree->right = delete_node(tree->right, n->name);
+                tree->right = delete_gvnode(tree->right, n->name);
             }
         } else {
             struct global_variable *t = tree;

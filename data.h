@@ -86,7 +86,7 @@ struct global_variable *rr_rotate(struct global_variable *tree);
 struct global_variable *lr_rotate(struct global_variable *tree);
 struct global_variable *rl_rotate(struct global_variable *tree);
 struct global_variable *gvinsert(struct global_variable *tree, char *k);
-struct global_variable *delete_node(struct global_variable *tree, char *node);
+struct global_variable *delete_gvnode(struct global_variable *tree, char *node);
 
 // Debug functions
 void print_gv(struct global_variable *tree);

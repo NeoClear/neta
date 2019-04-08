@@ -33,7 +33,7 @@ void initialize_global_variable()
 // The builtin setf function
 void builtin_setf()
 {
-    i64 milestone = eval_top;
+    i64 ms = milestone();
     while (!read_rparen()) {
         if (read_lparen()) {
             initialize_global_variable();
@@ -45,5 +45,5 @@ void builtin_setf()
             err("At builtin_setf()\n");
         }
     }
-    eval_top = milestone - 1;
+    eval_top = ms - 1;
 }

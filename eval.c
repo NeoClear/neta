@@ -12,6 +12,8 @@
 #include "builtin/assign.h"
 #include "builtin/setl.h"
 #include "builtin/setc.h"
+// #include "builtin/def.h"
+#include "builtin/undef.h"
 
 void eval()
 {
@@ -82,6 +84,12 @@ void eval()
                 } else if (is_assign(get_current_eval().v.s)) {
                     builtin_assign();
                     return;
+                } else if (is_def(get_current_eval().v.s)) {
+                    // builtin_def();
+                    return;
+                } else if (is_undef(get_current_eval().v.s)) {
+                    builtin_undef();
+                    return;
                 } else if (is_print(get_current_eval().v.s)) {
                     builtin_print();
                     return;
@@ -114,7 +122,8 @@ void eval()
                 eval_stack[eval_top - 1] = *local;
                 return;
             } else if (find_global_constant(&local, get_current_eval().v.s)) {
-
+                eval_stack[eval_top - 1] = *local;
+                return;
             } else
                 err("could not find variable");
         } else if (read_preserved_fun()) {
