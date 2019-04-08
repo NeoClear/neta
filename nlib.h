@@ -38,7 +38,7 @@ boolean is_not_equal(char *s);
 boolean is_greater_equal(char *s);
 
 // Keywords???
-boolean is_def(char *s);
+boolean is_fun(char *s);
 boolean is_undef(char *s);
 boolean is_range(char *s);
 boolean is_setf(char *s);

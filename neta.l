@@ -26,7 +26,7 @@ void column_plus(i64 n)
 DIGIT           [0-9]
 PRESERVED_FUN_1 "+"|"-"|"*"|"/"|"d+"|"d-"
 PRESERVED_FUN_2 "d*"|"d/"|"<"|"="|">"|"<="
-PRESERVED_FUN_3 "!="|">="|"def"|"undef"|"var"
+PRESERVED_FUN_3 "!="|">="|"fun"|"undef"|"var"
 PRESERVED_FUN_4 "val"|".."|"setf"|"setc"|"prog"
 PRESERVED_FUN_5 "!"|"if"|"println"|"print"|"strlen"
 PRESERVED_FUN_6 "strcmp"|"while"|"->"|"assign"

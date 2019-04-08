@@ -1,4 +1,5 @@
 #include "debug.h"
+#include "nlib.h"
 
 i64 err_s = 0;
 
@@ -63,6 +64,18 @@ char *print_value(struct neta_node v)
         sprintf(r, "What The Hell? Couldn't Find Known Value");
     }
     return r;
+}
+
+void print_function(char *s)
+{
+    struct neta_node *head = search_gvnode(glov, s)->value;
+    if (head->p == nil)
+        return;
+    struct neta_node *it = head->p;
+    while (it != nil) {
+        printf("%s", neta_node2string(*it));
+        it = it->next;
+    }
 }
 
 void print_global_variable()

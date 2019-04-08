@@ -92,9 +92,9 @@ boolean is_greater_equal(char *s)
     return false;
 }
 
-boolean is_def(char *s)
+boolean is_fun(char *s)
 {
-    if (strcmp(s, "def") == 0)
+    if (strcmp(s, "fun") == 0)
         return true;
     return false;
 }

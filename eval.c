@@ -12,7 +12,7 @@
 #include "builtin/assign.h"
 #include "builtin/setl.h"
 #include "builtin/setc.h"
-// #include "builtin/def.h"
+#include "builtin/fun.h"
 #include "builtin/undef.h"
 
 void eval()
@@ -84,8 +84,8 @@ void eval()
                 } else if (is_assign(get_current_eval().v.s)) {
                     builtin_assign();
                     return;
-                } else if (is_def(get_current_eval().v.s)) {
-                    // builtin_def();
+                } else if (is_fun(get_current_eval().v.s)) {
+                    builtin_fun();
                     return;
                 } else if (is_undef(get_current_eval().v.s)) {
                     builtin_undef();
