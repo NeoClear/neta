@@ -14,6 +14,7 @@
 #include "builtin/setc.h"
 #include "builtin/fun.h"
 #include "builtin/undef.h"
+#include "builtin/funcall.h"
 
 void eval()
 {
@@ -103,9 +104,18 @@ void eval()
                     builtin_strcmp();
                     return;
                 } else {
-                    eval();
-                    read_rparen();
+                    err("You will never reach a undefined preserved function");
+                }
+            } else if (read_identifier()) {
+                if (search_gvnode(glov, get_current_eval().v.s) != 0 && search_gvnode(glov, get_current_eval().v.s)->gt == FUNCTION) {
+                    builtin_funcall(get_current_eval().v.s);
                     return;
+                } else {
+                    ptr--;
+                    eval_top--;
+                    eval();
+                    if (!read_rparen())
+                        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
                 }
             }
         } else if (read_integer()) {

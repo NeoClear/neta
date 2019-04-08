@@ -29,6 +29,6 @@ int main(int argc, char **argv) {
     }
     // print_global_variable_d(glov);
     // print_global_variable();
-    print_function("star");
+    // print_function("fib");
     return 0;
 }

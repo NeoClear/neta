@@ -53,3 +53,10 @@ Notice: The makefile works on Mac. If you uses Linux, you should change **gcc -l
 + Email: neoclear@outlook.com
 
 Feel free to post bugs to me!
+
+## Time Table
+
++ Start time: 2019-3-29
+
++ Main part finished: 2019-4-8
+Including basic arithmetic functions, string functions, if expression, while expression, definition of local variables, global variables, global constants and global functions, call of global functions(support self recursion)

@@ -18,9 +18,11 @@ void builtin_if()
             // eval();
         }
         // eval_copy(ms - 2, ms + 1);
-        copy_reset(offset_m(ms, -2), offset_m(ms, 1));
+        eval_stack[ms - 2] = eval_stack[ms + 1];
+        // copy_reset(offset_m(ms, -2), offset_m(ms, 1));
     } else
         runtime_err(neta_type2string(INTEGER), neta_type2string(get_current_eval().t));
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    reset(ms - 2);
 }
