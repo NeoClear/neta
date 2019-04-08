@@ -58,5 +58,17 @@ Feel free to post bugs to me!
 
 + Start time: 2019-3-29
 
-+ Main part finished: 2019-4-8
-Including basic arithmetic functions, string functions, if expression, while expression, definition of local variables, global variables, global constants and global functions, call of global functions(support self recursion)
++ Main part finished at: 2019-4-8
+**Including:**
+    + basic arithmetic functions
+    + basic string functions
+    + if expression
+    + while expression
+    + assigning expression
+    + print functions
+    + definition of local variables
+    + definition of global variables
+    + definition of global constants
+    + definition of global functions
+    + call of global functions(support self recursion)
+    + access of variables and constants
