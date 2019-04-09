@@ -42,7 +42,7 @@ The definition of variables, constants and functions has a return value, althoug
 ```neta
 (setf x y (z 666))
 
-(setc (p "imba))
+(setc (p "imba"))
 
 (setl (z "imba"))
 
@@ -205,7 +205,7 @@ assign expression takes several parens and in each paren, it takes the left as t
 (-> (inno "terran king"))
 ```
 
-Currently you can only define a global variable, using fun expression
+Currently you can only define a global function, using fun expression
 
 ```neta
 (fun tyty (race team)
