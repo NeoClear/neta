@@ -59,7 +59,8 @@ Feel free to post bugs to me!
 + Start time: 2019-3-29
 
 + Main part finished at: 2019-4-8
-**Including:**
+
++ **Including:**
     + basic arithmetic functions
     + basic string functions
     + if expression
