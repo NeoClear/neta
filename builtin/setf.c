@@ -34,11 +34,14 @@ void initialize_global_variable()
 void builtin_setf()
 {
     i64 ms = milestone();
+    // Read open paren
     while (!read_rparen()) {
         if (read_lparen()) {
+            // Initialize variable with value
             initialize_global_variable();
             continue;
         } else if (read_identifier()) {
+            // Create variable without value
             create_global_variable(get_current_eval().v.s);
             continue;
         } else {

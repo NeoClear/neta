@@ -3,4 +3,4 @@
 
 void builtin_assign();
 
-#endif // !_ASSIGN_H_
+#endif

@@ -7,6 +7,7 @@
 void builtin_prog()
 {
     i64 ms = milestone();
+    // Eval all and place last one as answer
     while (!read_rparen()) {
         eval();
     }

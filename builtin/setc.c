@@ -34,11 +34,14 @@ void initialize_global_constant()
 void builtin_setc()
 {
     i64 milestone = eval_top;
+    // Read open paren
     while (!read_rparen()) {
         if (read_lparen()) {
+            // Initialize constant with value
             initialize_global_constant();
             continue;
         } else if (read_identifier()) {
+            // Create constant without value
             create_global_constant(get_current_eval().v.s);
             continue;
         } else {

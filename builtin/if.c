@@ -7,22 +7,24 @@ void builtin_if()
 {
     i64 ms = milestone();
     eval();
+    // Read condition
     if (get_current_eval().t == INTEGER) {
         if (get_current_eval().v.i == 0) {
+            // True
             ignore_exp();
             eval();
-            // eval();
         } else {
+            // False
             eval();
             ignore_exp();
-            // eval();
         }
-        // eval_copy(ms - 2, ms + 1);
+        // Place answer
         eval_stack[ms - 2] = eval_stack[ms + 1];
-        // copy_reset(offset_m(ms, -2), offset_m(ms, 1));
     } else
         runtime_err(neta_type2string(INTEGER), neta_type2string(get_current_eval().t));
+    // Read close paren
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    // Reset eval stack
     reset(ms - 2);
 }

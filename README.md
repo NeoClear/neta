@@ -34,7 +34,7 @@ Notice: The makefile works on Mac. If you uses Linux, you should change **gcc -l
 
 ## Support
 
-+ This project lasts for about 6 months. Starting from the end of March, the supprt of this project won't last to September. It is the prototype for another awesome compiler project which I haven't come up with the name yet. The enhanced project will be the compiler of a kotlin-like language which supports modern characteristics. The compiler is able to translate the source code to **llvm IR**, which you can translate to executable programs or run it on llvm directly.
++ This project lasts for about 6 months. Starting from the end of March 2019, the supprt of this project won't last to September 2019. It is the prototype for another awesome compiler project which I haven't come up with the name yet(maybe called "King Crimson" or "kincrim"). The enhanced project will be the compiler of a kotlin-like language which supports modern characteristics. The compiler is able to translate the source code to **llvm IR**, which you can translate to executable programs or run it on llvm directly.
 
 + Students can use it as extra-curricular materials about programming on unix-like systems and the use of flex and gcc.
 
