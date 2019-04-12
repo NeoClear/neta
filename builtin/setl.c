@@ -3,8 +3,8 @@
 #include "../err.h"
 #include "../eval.h"
 
-void (char *name, struct neta_node value)
-{add_local_variable
+void add_local_variable(char *name, struct neta_node value)
+{
     eval_stack[eval_top - 2].v.s = name;
     eval_stack[eval_top - 2].t = VALUE;
     eval_stack[eval_top - 2].gt = VARIABLE;

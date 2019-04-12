@@ -35,6 +35,8 @@ PRESERVED_FUN_7 "setl"
 IDENTIFIER      [a-zA-Z][a-zA-Z0-9]*
 LPAREN          "("
 RPAREN          ")"
+LBRACE          "{"
+RBRACE          "}"
 STRING          \"[^\"\']*\"
 CHAR            \'[^\"\']\'
 
@@ -49,6 +51,17 @@ CHAR            \'[^\"\']\'
     word_plus();
     column_plus(strlen(yytext));
     // printf("RParen\n");
+    add_rparen();
+}
+{LBRACE}            {
+    word_plus();
+    column_plus(strlen(yytext));
+    add_lparen();
+    add_preserved_fun("!");
+}
+{RBRACE}            {
+    word_plus();
+    column_plus(strlen(yytext));
     add_rparen();
 }
 {PRESERVED_FUN_1}     {
