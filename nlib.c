@@ -169,6 +169,20 @@ boolean is_import(char *s)
     return false;
 }
 
+boolean is_type(char *s)
+{
+    if (strcmp(s, "type") == 0)
+        return true;
+    return false;
+}
+
+boolean is_istype(char *s)
+{
+    if (strcmp(s, "istype") == 0)
+        return true;
+    return false;
+}
+
 boolean is_print(char *s)
 {
     if (strcmp(s, "print") == 0 || strcmp(s, "!") == 0)

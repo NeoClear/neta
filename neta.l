@@ -30,9 +30,9 @@ PRESERVED_FUN_3 "!="|">="|"fun"|"undef"|"var"
 PRESERVED_FUN_4 "val"|".."|"setf"|"setc"|"prog"
 PRESERVED_FUN_5 "!"|"if"|"println"|"print"|"strlen"
 PRESERVED_FUN_6 "strcmp"|"while"|"->"|"assign"
-PRESERVED_FUN_7 "setl"|"import"
+PRESERVED_FUN_7 "setl"|"import"|"type"|"istype"
 
-IDENTIFIER      [a-zA-Z][a-zA-Z0-9]*
+IDENTIFIER      [a-zA-Z][a-zA-Z0-9-]*
 LPAREN          "("
 RPAREN          ")"
 LBRACE          "{"
@@ -112,14 +112,14 @@ CHAR            \'[^\"\']\'
     // printf("Identifier\n");
     add_identifier(clone(yytext));
 }
-{DIGIT}+            {
+"-"?{DIGIT}+        {
     word_plus();
     column_plus(strlen(yytext));
     // printf("Int: %s\n", yytext);
     set_buffer(yytext);
     add_integer(read_i64());
 }
-{DIGIT}+"."{DIGIT}+   {
+"-"?{DIGIT}+"."{DIGIT}+ {
     word_plus();
     // printf("Double: %s\n", yytext);
     set_buffer(yytext);
@@ -149,6 +149,9 @@ CHAR            \'[^\"\']\'
 "\n"|"\r\n"         {
     new_line();
     // printf("NewLine\n");
+}
+";;".+|";;".+       {
+    new_line();
 }
 .                   {
     printf("Unknown Character At (Row: %lld, Column: %lld, word: %lld)\n", row, column, word);

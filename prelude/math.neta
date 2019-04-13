@@ -1,21 +1,136 @@
-(fun mod (x y)
- (!
-    (- x (* y (/ x y)))))
+;; author: NeoClear/Yolf/Ziheng Zhuang
+;; e-mail: neoclear@outlook.com
+;; date: 2019-4-13
 
+;; constants
+;; FE stands for mis-calculation of float numbers
+(setc (PI 3.1415926) (E 2.718281828) (FE 0.000001))
+
+;; accuracy for math libraries
+(setc (LIMIT 12))
+
+;; mod non-builtin
+(fun mod (x y)
+    (- x (* y (/ x y))))
+
+;; quick power
+;; works for integer and float
 (fun qpower (base time) {
     (setl (ans 1))
     (while (> time 0) {
         (if (= (mod time 2) 1)
-            (-> (ans (* ans base)))
+            (-> (ans (if (istype base "integer")
+                        (* ans base)
+                        (d* ans base))))
             0)
-        (-> (base (* base base)))
+        (-> (base (if (istype base "integer")
+                        (* base base)
+                        (d* base base))))
         (-> (time (/ time 2)))
     })
     ans
 })
 
-(fun gcd (a b) {
+;; calculating gcd
+;; only for integer
+(fun gcd (a b)
     (if (= b 0)
         a
-        (gcd b (mod a b)))
+        (gcd b (mod a b))))
+
+;; absolute number
+;; for integer and float
+(fun abs (n)
+    (if (< n 0)
+        (if (istype n "integer")
+            (- 0 n)
+            (d- 0 n))
+        n))
+
+;; calculating sqrt
+;; using newton mwthod
+(fun sqrt (n) {
+    (setl (k n))
+    (while (> (abs (d- (d* k k) n)) FE) {
+        (-> (k (d/ (d+ k (d/ n k)) 2)))
+    })
+    k
 })
+
+;; factorial
+;; only integer
+(fun fact (n) {
+    (setl (ans 1))
+    (while (> n 0) {
+        (-> (ans (* ans n)))
+        (-> (n (- n 1)))
+    })
+    ans
+})
+
+;; reverse the number
+;; works for integer and float
+(fun rev (n)
+    (if (istype n "integer")
+        (- 0 n)
+        (d- 0 n)))
+
+;; transfer angles since taylor expansion didn't work with large angle
+(fun angle-cut (angle) {
+    (if (> angle 0) {
+        (while (> angle PI)
+            (-> (angle (d- angle (d* PI 2)))))
+        angle
+    } {
+        (while (< angle (d- 0 PI))
+            (-> (angle (d+ angle (d* PI 2)))))
+        angle
+    })
+})
+
+;; cos
+;; using taylor expansion
+(fun cos (angle) {
+    (setl (ans 1.0) (acc 1))
+    (-> (angle (angle-cut angle)))
+    (while (<= acc LIMIT) {
+        (setl (node (d/ (d* (qpower -1 acc) (qpower angle (* acc 2))) (fact (* acc 2)))))
+        (-> (ans (d+ ans node)))
+        (-> (acc (+ acc 1)))
+    })
+    ans
+})
+
+;; sin
+;; using taylor expansion
+(fun sin (angle) {
+    (setl (ans 0.0) (acc 1))
+    (-> (angle (angle-cut angle)))
+    (while (<= acc LIMIT) {
+        (setl (node (d/ (d* (qpower -1 (- acc 1)) (qpower angle (- (* acc 2) 1))) (fact (- (* acc 2) 1)))))
+        (-> (ans (d+ ans node)))
+        (-> (acc (+ acc 1)))
+    })
+    ans
+})
+
+;; tan
+;; based on sin and cos
+(fun tan (angle)
+    (d/ (sin angle) (cos angle)))
+
+;; sec
+;; based on cos
+(fun sec (angle)
+    (d/ 1 (cos angle)))
+
+;; csc
+;; based on sin
+(fun csc (angle)
+    (d/ 1 (sin angle)))
+
+;; cot
+;; based on tan
+(fun cot (angle)
+    (d/ 1 (tan angle)))
+
