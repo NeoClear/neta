@@ -30,7 +30,7 @@ PRESERVED_FUN_3 "!="|">="|"fun"|"undef"|"var"
 PRESERVED_FUN_4 "val"|".."|"setf"|"setc"|"prog"
 PRESERVED_FUN_5 "!"|"if"|"println"|"print"|"strlen"
 PRESERVED_FUN_6 "strcmp"|"while"|"->"|"assign"
-PRESERVED_FUN_7 "setl"
+PRESERVED_FUN_7 "setl"|"import"
 
 IDENTIFIER      [a-zA-Z][a-zA-Z0-9]*
 LPAREN          "("

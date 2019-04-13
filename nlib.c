@@ -162,6 +162,13 @@ boolean is_assign(char *s)
     return false;
 }
 
+boolean is_import(char *s)
+{
+    if (strcmp(s, "import") == 0)
+        return true;
+    return false;
+}
+
 boolean is_print(char *s)
 {
     if (strcmp(s, "print") == 0 || strcmp(s, "!") == 0)

@@ -15,6 +15,7 @@
 #include "builtin/fun.h"
 #include "builtin/undef.h"
 #include "builtin/funcall.h"
+#include "builtin/import.h"
 
 void eval()
 {
@@ -90,6 +91,9 @@ void eval()
                     return;
                 } else if (is_undef(get_current_eval().v.s)) {
                     builtin_undef();
+                    return;
+                } else if (is_import(get_current_eval().v.s)) {
+                    builtin_import();
                     return;
                 } else if (is_print(get_current_eval().v.s)) {
                     builtin_print();

@@ -1,4 +1,5 @@
 lex.yy.c
 neta
-test.neta
+*.neta
+!/prelude/*.neta
 .vscode/

@@ -1,0 +1,21 @@
+(fun mod (x y)
+ (!
+    (- x (* y (/ x y)))))
+
+(fun qpower (base time) {
+    (setl (ans 1))
+    (while (> time 0) {
+        (if (= (mod time 2) 1)
+            (-> (ans (* ans base)))
+            0)
+        (-> (base (* base base)))
+        (-> (time (/ time 2)))
+    })
+    ans
+})
+
+(fun gcd (a b) {
+    (if (= b 0)
+        a
+        (gcd b (mod a b)))
+})

@@ -48,6 +48,7 @@ boolean is_prog(char *s);
 boolean is_if(char *s);
 boolean is_while(char *s);
 boolean is_assign(char *s);
+boolean is_import(char *s);
 
 // Preserved io funcitons???
 boolean is_print(char *s);
