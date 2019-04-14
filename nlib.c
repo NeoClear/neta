@@ -92,6 +92,13 @@ boolean is_greater_equal(char *s)
     return false;
 }
 
+boolean is_rand(char *s)
+{
+    if (strcmp(s, "rand") == 0)
+        return true;
+    return false;
+}
+
 boolean is_fun(char *s)
 {
     if (strcmp(s, "fun") == 0)
@@ -183,16 +190,43 @@ boolean is_istype(char *s)
     return false;
 }
 
+boolean is_equal_val(char *s)
+{
+    if (strcmp(s, "equal") == 0)
+        return true;
+    return false;
+}
+
+boolean is_parse(char *s)
+{
+    if (strcmp(s, "parse") == 0)
+        return true;
+    return false;
+}
+
 boolean is_print(char *s)
 {
-    if (strcmp(s, "print") == 0 || strcmp(s, "!") == 0)
+    if (strcmp(s, "print") == 0)
         return true;
     return false;
 }
 
 boolean is_println(char *s)
 {
-    if (strcmp(s, "println") == 0 || strcmp(s, "!") == 0)
+    if (strcmp(s, "println") == 0)
+        return true;
+    return false;
+}
+
+boolean is_read(char *s)
+{
+    if (strcmp(s, "read") == 0)
+        return true;
+    return false;
+}
+boolean is_readln(char *s)
+{
+    if (strcmp(s, "readln") == 0)
         return true;
     return false;
 }
@@ -301,6 +335,15 @@ boolean read_char()
     return false;
 }
 
+boolean read_symbol()
+{
+    if (get_next_parse().t == SYMBOL) {
+        parse_to_eval();
+        return true;
+    }
+    return false;
+}
+
 i64 milestone()
 {
     return eval_top;
@@ -351,6 +394,8 @@ char *neta_type2string(enum neta_type t)
         return "STRING";
     case CHAR:
         return "CHAR";
+    case SYMBOL:
+        return "CHAR";
     default:
         runtime_err("neta_type", "integer out of range");
     }
@@ -372,6 +417,9 @@ char *neta_node2string(struct neta_node n)
         break;
     case CHAR:
         sprintf(s, "%c", n.v.c);
+        break;
+    case SYMBOL:
+        sprintf(s, "%s", n.v.s);
         break;
     case LPAREN:
         sprintf(s, "(");

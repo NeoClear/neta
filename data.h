@@ -22,6 +22,7 @@ enum neta_type
     FLOAT,
     STRING,
     CHAR,
+    SYMBOL,
     VALUE,
 };
 

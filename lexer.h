@@ -17,5 +17,6 @@ boolean add_string(char *s);
 boolean add_char(char c);
 boolean add_preserved_fun(char *s);
 boolean add_identifier(char *s);
+boolean add_symbol(char *s);
 
 #endif

@@ -8,11 +8,16 @@
 #include "debug.h"
 #include "data.h"
 #include "util.h"
+#include <stdlib.h>
+#include <time.h>
 
 extern FILE *yyin;
 extern int yyleng;
 
-int yylex();
+void init()
+{
+    srand((i64)time(nil));
+}
 
 int main(int argc, char **argv) {
     argc--, argv++;
@@ -21,14 +26,10 @@ int main(int argc, char **argv) {
     else
         yyin = stdin;
     yylex();
-    // print_parse_tree();
+    init();
     while (!parse_finished()) {
         eval();
-        // print_eval_stack();
         eval_top = 0;
     }
-    // print_global_variable_d(glov);
-    // print_global_variable();
-    // print_function("fib");
     return 0;
 }

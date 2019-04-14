@@ -3,6 +3,7 @@
 #include "../util.h"
 #include "../data.h"
 #include "../err.h"
+#include <stdlib.h>
 
 void builtin_plus()
 {
@@ -297,4 +298,14 @@ void builtin_greater_equal()
     else
         eval_stack[ms - 2].v.i = 0;
     eval_top = ms - 1;
+}
+
+void builtin_rand()
+{
+    i64 ms = milestone();
+    if (!read_rparen())
+        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    eval_stack[ms - 2].t = INTEGER;
+    eval_stack[ms - 2].v.i = rand();
+    reset(ms - 2);
 }

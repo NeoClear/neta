@@ -19,4 +19,6 @@ void builtin_less_equal();
 void builtin_not_equal();
 void builtin_greater_equal();
 
+void builtin_rand();
+
 #endif

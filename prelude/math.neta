@@ -19,11 +19,11 @@
     (setl (ans 1))
     (while (> time 0) {
         (if (= (mod time 2) 1)
-            (-> (ans (if (istype base "integer")
+            (-> (ans (if (istype base 'int)
                         (* ans base)
                         (d* ans base))))
             0)
-        (-> (base (if (istype base "integer")
+        (-> (base (if (istype base 'int)
                         (* base base)
                         (d* base base))))
         (-> (time (/ time 2)))
@@ -42,7 +42,7 @@
 ;; for integer and float
 (fun abs (n)
     (if (< n 0)
-        (if (istype n "integer")
+        (if (istype n 'int)
             (- 0 n)
             (d- 0 n))
         n))
@@ -71,7 +71,7 @@
 ;; reverse the number
 ;; works for integer and float
 (fun rev (n)
-    (if (istype n "integer")
+    (if (istype n 'int)
         (- 0 n)
         (d- 0 n)))
 

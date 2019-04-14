@@ -18,6 +18,7 @@ boolean read_integer();
 boolean read_float();
 boolean read_string();
 boolean read_char();
+boolean read_symbol();
 
 // Preserved arithmetical functions???
 boolean is_plus(char *s);
@@ -37,6 +38,9 @@ boolean is_less_equal(char *s);
 boolean is_not_equal(char *s);
 boolean is_greater_equal(char *s);
 
+// Preserved math funcs???
+boolean is_rand(char *s);
+
 // Keywords???
 boolean is_fun(char *s);
 boolean is_undef(char *s);
@@ -51,10 +55,14 @@ boolean is_assign(char *s);
 boolean is_import(char *s);
 boolean is_type(char *s);
 boolean is_istype(char *s);
+boolean is_equal_val(char *s);
+boolean is_parse(char *s);
 
 // Preserved io funcitons???
 boolean is_print(char *s);
 boolean is_println(char *s);
+boolean is_read(char *s);
+boolean is_readln(char *s);
 
 // Preserved string functions???
 boolean is_strlen(char *s);

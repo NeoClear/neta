@@ -31,8 +31,10 @@ PRESERVED_FUN_4 "val"|".."|"setf"|"setc"|"prog"
 PRESERVED_FUN_5 "!"|"if"|"println"|"print"|"strlen"
 PRESERVED_FUN_6 "strcmp"|"while"|"->"|"assign"
 PRESERVED_FUN_7 "setl"|"import"|"type"|"istype"
+PRESERVED_FUN_8 "rand"|"equal"|"parse"|"read"|"readln"
 
 IDENTIFIER      [a-zA-Z][a-zA-Z0-9-]*
+SYMBOL          \'[a-zA-Z][a-zA-Z0-9-]*
 LPAREN          "("
 RPAREN          ")"
 LBRACE          "{"
@@ -63,6 +65,11 @@ CHAR            \'[^\"\']\'
     word_plus();
     column_plus(strlen(yytext));
     add_rparen();
+}
+{SYMBOL}            {
+    word_plus();
+    column_plus(strlen(yytext));
+    add_symbol(clone(yytext));
 }
 {PRESERVED_FUN_1}     {
     word_plus();
@@ -104,6 +111,11 @@ CHAR            \'[^\"\']\'
     word_plus();
     column_plus(strlen(yytext));
     // printf("Preserved Function: %s\n", yytext);
+    add_preserved_fun(clone(yytext));
+}
+{PRESERVED_FUN_8}       {
+    word_plus();
+    column_plus(strlen(yytext));
     add_preserved_fun(clone(yytext));
 }
 {IDENTIFIER}        {

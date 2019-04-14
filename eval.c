@@ -5,7 +5,7 @@
 #include "nlib.h"
 #include "builtin/prog.h"
 #include "builtin/symbol.h"
-#include "builtin/print.h"
+#include "builtin/io.h"
 #include "builtin/if.h"
 #include "builtin/string.h"
 #include "builtin/while.h"
@@ -17,6 +17,8 @@
 #include "builtin/funcall.h"
 #include "builtin/import.h"
 #include "builtin/type.h"
+#include "builtin/standard.h"
+#include "builtin/parse.h"
 
 void eval()
 {
@@ -66,6 +68,9 @@ void eval()
                 } else if (is_greater_equal(get_current_eval().v.s)) {
                     builtin_greater_equal();
                     return;
+                } else if (is_rand(get_current_eval().v.s)) {
+                    builtin_rand();
+                    return;
                 } else if (is_setf(get_current_eval().v.s)) {
                     builtin_setf();
                     return;
@@ -102,11 +107,23 @@ void eval()
                 } else if (is_istype(get_current_eval().v.s)) {
                     builtin_istype();
                     return;
+                } else if (is_equal_val(get_current_eval().v.s)) {
+                    builtin_equal_val();
+                    return;
+                } else if (is_parse(get_current_eval().v.s)) {
+                    builtin_parse();
+                    return;
                 } else if (is_print(get_current_eval().v.s)) {
                     builtin_print();
                     return;
                 } else if (is_println(get_current_eval().v.s)) {
                     builtin_println();
+                    return;
+                } else if (is_read(get_current_eval().v.s)) {
+                    builtin_read();
+                    return;
+                } else if (is_readln(get_current_eval().v.s)) {
+                    builtin_readln();
                     return;
                 } else if (is_strlen(get_current_eval().v.s)) {
                     builtin_strlen();
@@ -122,6 +139,7 @@ void eval()
                     builtin_funcall(get_current_eval().v.s);
                     return;
                 } else {
+                    // useless
                     ptr--;
                     eval_top--;
                     eval();
@@ -149,6 +167,8 @@ void eval()
                 err("could not find variable");
         } else if (read_preserved_fun()) {
             err("You can't give a keyword or built-in function directly");
+        } else if (read_symbol()) {
+            return;
         }
     }
 }

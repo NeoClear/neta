@@ -53,3 +53,10 @@ boolean add_identifier(char *s)
     parse_tree[parse_top++].v.s = s;
     return true;
 }
+
+boolean add_symbol(char *s)
+{
+    parse_tree[parse_top].t = SYMBOL;
+    parse_tree[parse_top++].v.s = s;
+    return true;
+}
