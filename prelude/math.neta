@@ -134,3 +134,27 @@
 (fun cot (angle)
     (d/ 1 (tan angle)))
 
+;; quick mod???
+;; actually not fast
+;; for fermat check
+(fun qmod (base time md) {
+    (setl (ans 1))
+    (while (> time 0) {
+        (-> (ans (mod (* ans base) md)))
+        (-> (time (- time 1)))
+    })
+    ans
+})
+
+;; fermat check
+;; only integer
+(fun fermat-check (num) {
+    (setl (acc 1) (flag true))
+    (while (<= acc 5) {
+        (if (!= (qmod (+ (mod (rand) (- num 1)) 1) (- num 1) num) 1)
+            (-> (flag false))
+            'nil)
+        (-> (acc (+ acc 1)))
+    })
+    flag
+})

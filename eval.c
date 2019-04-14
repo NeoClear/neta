@@ -131,6 +131,12 @@ void eval()
                 } else if (is_strcmp(get_current_eval().v.s)) {
                     builtin_strcmp();
                     return;
+                } else if (is_str2int(get_current_eval().v.s)) {
+                    builtin_str2int();
+                    return;
+                } else if (is_str2float(get_current_eval().v.s)) {
+                    builtin_str2float();
+                    return;
                 } else {
                     err("You will never reach a undefined preserved function");
                 }

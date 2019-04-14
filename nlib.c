@@ -244,6 +244,19 @@ boolean is_strcmp(char *s)
     return false;
 }
 
+boolean is_str2int(char *s)
+{
+    if (strcmp(s, "str2int") == 0)
+        return true;
+    return false;
+}
+boolean is_str2float(char *s)
+{
+    if (strcmp(s, "str2float") == 0)
+        return true;
+    return false;
+}
+
 struct neta_node get_next_parse()
 {
     return parse_tree[ptr];

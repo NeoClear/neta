@@ -68,6 +68,9 @@ boolean is_readln(char *s);
 boolean is_strlen(char *s);
 boolean is_strcmp(char *s);
 
+boolean is_str2int(char *s);
+boolean is_str2float(char *s);
+
 i64 milestone();
 i64 offset(i64 off);
 i64 offset_m(i64 milestone, i64 off);
