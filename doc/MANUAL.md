@@ -257,3 +257,35 @@ Let's have an examle which prints 16 to 1
 ```
 
 Isn't it awesome???
+
+## Advanced Features
+
+If you want to input strings, you can use the following
+
+```neta
+(println (read))
+(println (readln))
+```
+
+read reads a string and readln reads a line
+
+If you want to run code from a string, then
+
+```neta
+(parse "(println 2333)")
+```
+
+Notice that you can't use " directly, since it will confuse the parser
+
+If you want to convert string to integer and float, use the following
+
+```neta
+(str2int "2333")
+(str2float "6.6666")
+```
+
+If you want to import a new module, use it
+
+```neta
+(import "prelude/math.neta")
+```
