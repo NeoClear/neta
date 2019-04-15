@@ -2,6 +2,7 @@
 #include "../nlib.h"
 #include "../err.h"
 #include "../debug.h"
+#include <stdlib.h>
 
 void read_fun_body(struct neta_node *head)
 {

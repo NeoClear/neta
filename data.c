@@ -1,4 +1,6 @@
 #include "data.h"
+#include <stdlib.h>
+#include "util.h"
 
 // Parsing Stack
 // Called parse_tree because of historical issues

@@ -1,5 +1,6 @@
 #include "nlib.h"
 #include "err.h"
+#include <stdlib.h>
 
 boolean is_plus(char *s)
 {

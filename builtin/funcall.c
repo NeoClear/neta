@@ -3,6 +3,7 @@
 #include "../err.h"
 #include "../nlib.h"
 #include "../data.h"
+#include <stdlib.h>
 
 // Copy function content to parse stack
 void copy_fun(struct neta_node *it)

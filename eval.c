@@ -1,5 +1,6 @@
 #include "eval.h"
 #include "err.h"
+#include <stdlib.h>
 #include "builtin/arithmetic.h"
 #include "builtin/setf.h"
 #include "nlib.h"
@@ -7,7 +8,7 @@
 #include "builtin/symbol.h"
 #include "builtin/io.h"
 #include "builtin/if.h"
-#include "builtin/string.h"
+#include "builtin/str.h"
 #include "builtin/while.h"
 #include "builtin/assign.h"
 #include "builtin/setl.h"

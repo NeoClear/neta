@@ -19,6 +19,8 @@ void init()
     srand((i64)time(nil));
 }
 
+int yylex();
+
 int main(int argc, char **argv) {
     argc--, argv++;
     if (argc > 0)

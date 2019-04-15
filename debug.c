@@ -1,5 +1,6 @@
 #include "debug.h"
 #include "nlib.h"
+#include <stdlib.h>
 
 i64 err_s = 0;
 

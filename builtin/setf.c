@@ -1,6 +1,7 @@
 #include "setf.h"
 #include "../debug.h"
 #include "../err.h"
+#include <stdlib.h>
 
 // Create a global variable and initialize it
 void add_global_variable(char *name, struct neta_node value)

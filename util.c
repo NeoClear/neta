@@ -1,5 +1,7 @@
 #include "util.h"
 #include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
 
 i64 max(i64 a, i64 b)
 {

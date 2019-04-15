@@ -2,6 +2,7 @@
 #include "../nlib.h"
 #include "../err.h"
 #include "../eval.h"
+#include <stdlib.h>
 
 void add_local_variable(char *name, struct neta_node value)
 {
