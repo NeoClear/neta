@@ -3,6 +3,7 @@
 #include "../err.h"
 #include "../nlib.h"
 #include "../data.h"
+#include "../util.h"
 #include <stdlib.h>
 
 // Copy function content to parse stack
@@ -16,8 +17,10 @@ void copy_fun(struct neta_node *it)
 
 void builtin_funcall(char *fn)
 {
+
     // Find function
     struct neta_node *tp = search_gvnode(glov, fn)->value->p;
+    push_trace(clone(fn));
     i64 ms = milestone();
     i64 ptr_m = ptr;
     i64 parse_top_m = parse_top;
@@ -55,4 +58,5 @@ void builtin_funcall(char *fn)
     reset(ms - 2);
     ptr = ptr_m;
     parse_top = parse_top_m;
+    pop_trace();
 }

@@ -7,6 +7,7 @@
 
 void builtin_strlen()
 {
+    push_trace("strlen");
     i64 ms = milestone();
     eval();
     if (get_current_eval().t != STRING && get_current_eval().t != CHAR)
@@ -18,11 +19,13 @@ void builtin_strlen()
         eval_stack[ms - 2].v.i = (i64)strlen(get_current_eval().v.s);
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    pop_trace();
     reset(ms - 2);
 }
 
 void builtin_strcmp()
 {
+    push_trace("strcmp");
     i64 ms = milestone();
     eval();
     if (get_current_eval().t != STRING)
@@ -34,11 +37,13 @@ void builtin_strcmp()
     eval_stack[ms - 2].v.i = (i64)strcmp(eval_stack[ms].v.s, eval_stack[ms + 1].v.s);
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    pop_trace();
     reset(ms - 2);
 }
 
 void builtin_str2int()
 {
+    push_trace("str2int");
     i64 ms = milestone();
     eval();
     eval_stack[ms - 2].t = INTEGER;
@@ -48,10 +53,12 @@ void builtin_str2int()
     eval_stack[ms - 2].v.i = read_i64();
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    pop_trace();
     reset(ms - 2);
 }
 void builtin_str2float()
 {
+    push_trace("str2float");
     i64 ms = milestone();
     eval();
     eval_stack[ms - 2].t = FLOAT;
@@ -61,5 +68,6 @@ void builtin_str2float()
     eval_stack[ms - 2].v.f = read_f64();
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    pop_trace();
     reset(ms - 2);
 }

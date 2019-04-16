@@ -9,6 +9,7 @@ int yylex();
 
 void builtin_parse()
 {
+    push_trace("parse");
     i64 ms = milestone();
     eval();
     if (get_current_eval().t != STRING)
@@ -32,5 +33,6 @@ void builtin_parse()
     parse_top = parse_top_m;
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    pop_trace();
     reset(ms - 2);
 }

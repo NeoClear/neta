@@ -8,4 +8,6 @@ void parse_err(char *expect, char *encounter);
 // Runtime errors
 void runtime_err(char *expect, char *encounter);
 
+void code_incomplete_err();
+
 #endif

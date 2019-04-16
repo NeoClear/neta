@@ -285,6 +285,8 @@ boolean parse_finished()
 
 void parse_to_eval()
 {
+    if (parse_finished())
+        code_incomplete_err();
     eval_stack[eval_top++] = parse_tree[ptr++];
 }
 
@@ -295,6 +297,8 @@ struct neta_node get_current_eval()
 
 boolean read_lparen()
 {
+    if (parse_finished())
+        code_incomplete_err();
     if (get_next_parse().t == LPAREN) {
         parse_to_eval();
         return true;
@@ -303,6 +307,8 @@ boolean read_lparen()
 }
 boolean read_rparen()
 {
+    if (parse_finished())
+        code_incomplete_err();
     if (get_next_parse().t == RPAREN) {
         parse_to_eval();
         return true;
@@ -311,6 +317,8 @@ boolean read_rparen()
 }
 boolean read_identifier()
 {
+    if (parse_finished())
+        code_incomplete_err();
     if (get_next_parse().t == IDENTIFIER) {
         parse_to_eval();
         return true;
@@ -319,6 +327,8 @@ boolean read_identifier()
 }
 boolean read_preserved_fun()
 {
+    if (parse_finished())
+        code_incomplete_err();
     if (get_next_parse().t == PRESERVED_FUN) {
         parse_to_eval();
         return true;
@@ -328,6 +338,8 @@ boolean read_preserved_fun()
 
 boolean read_integer()
 {
+    if (parse_finished())
+        code_incomplete_err();
     if (get_next_parse().t == INTEGER) {
         parse_to_eval();
         return true;
@@ -337,6 +349,8 @@ boolean read_integer()
 
 boolean read_float()
 {
+    if (parse_finished())
+        code_incomplete_err();
     if (get_next_parse().t == FLOAT) {
         parse_to_eval();
         return true;
@@ -346,6 +360,8 @@ boolean read_float()
 
 boolean read_string()
 {
+    if (parse_finished())
+        code_incomplete_err();
     if (get_next_parse().t == STRING) {
         parse_to_eval();
         return true;
@@ -355,6 +371,8 @@ boolean read_string()
 
 boolean read_char()
 {
+    if (parse_finished())
+        code_incomplete_err();
     if (get_next_parse().t == CHAR) {
         parse_to_eval();
         return true;
@@ -364,6 +382,8 @@ boolean read_char()
 
 boolean read_symbol()
 {
+    if (parse_finished())
+        code_incomplete_err();
     if (get_next_parse().t == SYMBOL) {
         parse_to_eval();
         return true;

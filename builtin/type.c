@@ -5,6 +5,7 @@
 
 void builtin_type()
 {
+    push_trace("type");
     i64 ms = milestone();
     eval_stack[ms - 2].t = SYMBOL;
     eval();
@@ -30,11 +31,13 @@ void builtin_type()
     }
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    pop_trace();
     reset(ms - 2);
 }
 
 void builtin_istype()
 {
+    push_trace("is_type");
     i64 ms = milestone();
     eval_stack[ms - 2].t = INTEGER;
     eval();
@@ -79,5 +82,6 @@ void builtin_istype()
     }
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    pop_trace();
     reset(ms - 2);
 }

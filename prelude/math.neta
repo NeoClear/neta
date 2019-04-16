@@ -39,6 +39,18 @@
 (fun remain(num)
     (d- num (floor num)))
 
+;; max
+(fun max (a b)
+    (if (> a b)
+        a
+        b))
+
+;; min
+(fun min (a b)
+    (if (< a b)
+        a
+        b))
+
 ;; quick power
 ;; works for integer and float
 ;; @import "lib.neta"

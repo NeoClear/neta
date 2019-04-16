@@ -1,0 +1,11 @@
+;; author: NeoClear/Yolf/Ziheng Zhuang
+;; e-mail: neoclear@outlook.com
+;; date: 2019-4-16
+
+(fun readint () {
+    (str2int (read))
+})
+
+(fun readfloat () {
+    (str2float (read))
+})

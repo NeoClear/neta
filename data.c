@@ -14,6 +14,9 @@ i64 ptr = 0;
 struct neta_node eval_stack[inf];
 i64 eval_top = 0;
 
+char *backtrace[inf];
+i64 trace_top;
+
 // Measures the height of a AVL tree
 int height(struct global_variable *t)
 {
@@ -188,4 +191,20 @@ void print_gv(struct global_variable *tree)
     print_gv(tree->left);
     printf("%s\n", tree->name);
     print_gv(tree->right);
+}
+
+void push_trace(char *s)
+{
+    backtrace[trace_top++] = s;
+}
+void pop_trace()
+{
+    trace_top--;
+}
+
+void print_trace()
+{
+    for (i64 i = 0; i < trace_top; i++) {
+        printf("%s\n", backtrace[i]);
+    }
 }

@@ -5,6 +5,7 @@
 
 void builtin_equal_val()
 {
+    push_trace("equal");
     i64 ms = milestone();
     eval();
     eval();
@@ -56,11 +57,13 @@ void builtin_equal_val()
     }
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    pop_trace();
     reset(ms - 2);
 }
 
 void builtin_int2float()
 {
+    push_trace("int2float");
     i64 ms = milestone();
     eval();
     if (get_current_eval().t != INTEGER)
@@ -69,10 +72,12 @@ void builtin_int2float()
     eval_stack[ms - 2].v.f = (f64)get_current_eval().v.i;
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    pop_trace();
     reset(ms - 2);
 }
 void builtin_float2int()
 {
+    push_trace("float2int");
     i64 ms = milestone();
     eval();
     if (get_current_eval().t != FLOAT)
@@ -81,5 +86,6 @@ void builtin_float2int()
     eval_stack[ms - 2].v.i = (i64)get_current_eval().v.f;
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    pop_trace();
     reset(ms - 2);
 }

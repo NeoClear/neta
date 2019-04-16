@@ -8,6 +8,7 @@
 
 void builtin_plus()
 {
+    push_trace("+");
     i64 ms = milestone();
     i64 ans = 0;
     // Read and eval params
@@ -22,11 +23,13 @@ void builtin_plus()
     // Place the answer and reset eval stack
     eval_stack[offset_m(ms, -2)].t = INTEGER;
     eval_stack[offset_m(ms, -2)].v.i = ans;
-    eval_top = ms - 1;
+    pop_trace();
+    reset(ms - 2);
 }
 
 void builtin_minus()
 {
+    push_trace("-");
     i64 ms = milestone();
     i64 ans = 0;
     // Read and eval params
@@ -42,11 +45,13 @@ void builtin_minus()
     // Place the answer and reset eval stack
     eval_stack[offset_m(ms, -2)].t = INTEGER;
     eval_stack[offset_m(ms, -2)].v.i = ans;
-    eval_top = ms - 1;
+    pop_trace();
+    reset(ms - 2);
 }
 
 void builtin_mul()
 {
+    push_trace("*");
     i64 ms = milestone();
     i64 ans = 1;
     // Read and eval params
@@ -61,11 +66,13 @@ void builtin_mul()
     // Place the answer and reset eval stack
     eval_stack[offset_m(ms, -2)].t = INTEGER;
     eval_stack[offset_m(ms, -2)].v.i = ans;
-    eval_top = ms - 1;
+    pop_trace();
+    reset(ms - 2);
 }
 
 void builtin_div()
 {
+    push_trace("/");
     i64 ms = milestone();
     i64 ans = 0;
     // Read and eval params
@@ -84,11 +91,13 @@ void builtin_div()
     // Place the answer and reset eval stack
     eval_stack[offset_m(ms, -2)].t = INTEGER;
     eval_stack[offset_m(ms, -2)].v.i = ans;
-    eval_top = ms - 1;
+    pop_trace();
+    reset(ms - 2);
 }
 
 void builtin_dplus()
 {
+    push_trace("d+");
     i64 ms = milestone();
     f64 ans = 0;
     // Read and eval params    
@@ -103,11 +112,13 @@ void builtin_dplus()
     // Place the answer and reset eval stack
     eval_stack[offset_m(ms, -2)].t = FLOAT;
     eval_stack[offset_m(ms, -2)].v.f = ans;
-    eval_top = ms - 1;
+    pop_trace();
+    reset(ms - 2);
 }
 
 void builtin_dminus()
 {
+    push_trace("d-");
     i64 ms = milestone();
     f64 ans = 0;
     // Read and eval params
@@ -123,11 +134,13 @@ void builtin_dminus()
     // Place the answer and reset eval stack
     eval_stack[offset_m(ms, -2)].t = FLOAT;
     eval_stack[offset_m(ms, -2)].v.f = ans;
-    eval_top = ms - 1;
+    pop_trace();
+    reset(ms - 2);
 }
 
 void builtin_dmul()
 {
+    push_trace("d*");
     i64 ms = milestone();
     f64 ans = 1;
     // Read and eval params
@@ -142,11 +155,13 @@ void builtin_dmul()
     // Place the answer and reset eval stack
     eval_stack[offset_m(ms, -2)].t = FLOAT;
     eval_stack[offset_m(ms, -2)].v.f = ans;
-    eval_top = ms - 1;
+    pop_trace();
+    reset(ms - 2);
 }
 
 void builtin_ddiv()
 {
+    push_trace("d/");
     i64 ms = milestone();
     f64 ans = 0;
     // Read and eval params
@@ -165,11 +180,13 @@ void builtin_ddiv()
     // Place the answer and reset eval stack
     eval_stack[offset_m(ms, -2)].t = FLOAT;
     eval_stack[offset_m(ms, -2)].v.f = ans;
-    eval_top = ms - 1;
+    pop_trace();
+    reset(ms - 2);
 }
 
 void builtin_less()
 {
+    push_trace("<");
     i64 ms = milestone();
     eval();
     // Read param one
@@ -188,10 +205,12 @@ void builtin_less()
         eval_stack[ms - 2].v.i = 1;
     else
         eval_stack[ms - 2].v.i = 0;
-    eval_top = ms - 1;
+    pop_trace();
+    reset(ms - 2);
 }
 void builtin_equal()
 {
+    push_trace("=");
     i64 ms = milestone();
     eval();
     // Read param one
@@ -210,10 +229,12 @@ void builtin_equal()
         eval_stack[ms - 2].v.i = 1;
     else
         eval_stack[ms - 2].v.i = 0;
-    eval_top = ms - 1;
+    pop_trace();
+    reset(ms - 2);
 }
 void builtin_greater()
 {
+    push_trace(">");
     i64 ms = milestone();
     eval();
     // Read param one
@@ -232,10 +253,12 @@ void builtin_greater()
         eval_stack[ms - 2].v.i = 1;
     else
         eval_stack[ms - 2].v.i = 0;
-    eval_top = ms - 1;
+    pop_trace();
+    reset(ms - 2);
 }
 void builtin_less_equal()
 {
+    push_trace("<=");
     i64 ms = milestone();
     eval();
     // Read param one
@@ -254,10 +277,12 @@ void builtin_less_equal()
         eval_stack[ms - 2].v.i = 1;
     else
         eval_stack[ms - 2].v.i = 0;
-    eval_top = ms - 1;
+    pop_trace();
+    reset(ms - 2);
 }
 void builtin_not_equal()
 {
+    push_trace("!=");
     i64 ms = milestone();
     eval();
     // Read param one
@@ -276,10 +301,12 @@ void builtin_not_equal()
         eval_stack[ms - 2].v.i = 1;
     else
         eval_stack[ms - 2].v.i = 0;
-    eval_top = ms - 1;
+    pop_trace();
+    reset(ms - 2);
 }
 void builtin_greater_equal()
 {
+    push_trace(">=");
     i64 ms = milestone();
     eval();
     // Read param one
@@ -298,15 +325,18 @@ void builtin_greater_equal()
         eval_stack[ms - 2].v.i = 1;
     else
         eval_stack[ms - 2].v.i = 0;
-    eval_top = ms - 1;
+    pop_trace();
+    reset(ms - 2);
 }
 
 void builtin_rand()
 {
+    push_trace("rand");
     i64 ms = milestone();
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
     eval_stack[ms - 2].t = INTEGER;
     eval_stack[ms - 2].v.i = rand();
+    pop_trace();
     reset(ms - 2);
 }

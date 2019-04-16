@@ -14,6 +14,7 @@
 // Basic types for a token
 enum neta_type
 {
+    DEFAULT,
     LPAREN,
     RPAREN,
     PRESERVED_FUN,
@@ -102,5 +103,10 @@ extern i64 eval_top;
 // The pointer to parse stack while evaluating
 extern i64 ptr;
 
+extern i64 trace_top;
 
-#endif // !_DATA_H_
+void push_trace(char *s);
+void pop_trace();
+void print_trace();
+
+#endif

@@ -7,6 +7,7 @@
 
 void builtin_print()
 {
+    push_trace("print");
     i64 ms = milestone();
     // Evaluate params
     while (!read_rparen()) {
@@ -19,6 +20,7 @@ void builtin_print()
     // Reset answer
     eval_stack[offset_m(ms, -2)].t = INTEGER;
     eval_stack[offset_m(ms, -2)].v.i = 0;
+    pop_trace();
     eval_top = ms - 1;
 }
 
@@ -30,6 +32,7 @@ void builtin_println()
 
 void builtin_read()
 {
+    push_trace("read");
     i64 ms = milestone();
     eval_stack[ms - 2].t = STRING;
     char s[inf24];
@@ -37,10 +40,12 @@ void builtin_read()
     eval_stack[ms - 2].v.s = clone(s);
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    pop_trace();
     reset(ms - 2);
 }
 void builtin_readln()
 {
+    push_trace("readln");
     i64 ms = milestone();
     eval_stack[ms - 2].t = STRING;
     char s[inf24];
@@ -48,5 +53,6 @@ void builtin_readln()
     eval_stack[ms - 2].v.s = clone(s);
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    pop_trace();
     reset(ms - 2);
 }
