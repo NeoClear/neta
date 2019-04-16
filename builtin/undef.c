@@ -2,6 +2,7 @@
 #include "../err.h"
 #include "../data.h"
 #include "../debug.h"
+#include "../nlib.h"
 
 void delete_global_value(char *name)
 {

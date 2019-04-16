@@ -3,6 +3,7 @@
 #include "../util.h"
 #include "../data.h"
 #include "../err.h"
+#include "../nlib.h"
 #include <stdlib.h>
 
 void builtin_plus()

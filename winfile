@@ -30,9 +30,9 @@ neta.o: neta.c eval.h debug.h data.h util.h nlib.h
 
 util.o: util.c util.h
 
-builtin/arithmetic.o: builtin/arithmetic.c builtin/arithmetic.h debug.h util.h data.h err.h
+builtin/arithmetic.o: builtin/arithmetic.c builtin/arithmetic.h debug.h util.h data.h err.h nlib.h
 
-builtin/setf.o: builtin/setf.c builtin/setf.h data.h util.h
+builtin/setf.o: builtin/setf.c builtin/setf.h data.h util.h nlib.h
 
 data.o: data.c data.h def.h
 
@@ -58,7 +58,7 @@ builtin/setl.o: builtin/setl.c builtin/setl.h nlib.h err.h eval.h data.h
 
 builtin/setc.o: builtin/setc.c builtin/setc.h nlib.h err.h eval.h data.h
 
-builtin/undef.o: builtin/undef.c err.h data.h debug.h builtin/undef.h
+builtin/undef.o: builtin/undef.c err.h data.h debug.h builtin/undef.h nlib.h
 
 builtin/fun.o: builtin/fun.c builtin/fun.h nlib.h err.h debug.h data.h
 
