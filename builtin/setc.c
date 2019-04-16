@@ -1,6 +1,8 @@
 #include "setf.h"
 #include "../debug.h"
 #include "../err.h"
+#include "../nlib.h"
+#include "../data.h"
 #include <stdlib.h>
 
 // Create a global constant and initialize it

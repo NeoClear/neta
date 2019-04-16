@@ -8,18 +8,21 @@
 #include "debug.h"
 #include "data.h"
 #include "util.h"
+#include "nlib.h"
 #include <stdlib.h>
 #include <time.h>
 
 extern FILE *yyin;
 extern int yyleng;
 
+int yylex();
+
+int shit();
+
 void init()
 {
     srand((i64)time(nil));
 }
-
-int yylex();
 
 int main(int argc, char **argv) {
     argc--, argv++;

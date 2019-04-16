@@ -1,6 +1,11 @@
 #include "eval.h"
 #include "err.h"
 #include <stdlib.h>
+#include <string.h>
+#include "debug.h"
+#include "data.h"
+#include "lexer.h"
+#include "nlib.h"
 #include "builtin/arithmetic.h"
 #include "builtin/setf.h"
 #include "nlib.h"

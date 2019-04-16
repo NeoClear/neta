@@ -4,3 +4,4 @@ neta
 !/prelude/*.neta
 .vscode/
 *.exe
+*.o
