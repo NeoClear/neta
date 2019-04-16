@@ -258,6 +258,19 @@ boolean is_str2float(char *s)
     return false;
 }
 
+boolean is_int2float(char *s)
+{
+    if (strcmp(s, "int2float") == 0)
+        return true;
+    return false;
+}
+boolean is_float2int(char *s)
+{
+    if (strcmp(s, "float2int") == 0)
+        return true;
+    return false;
+}
+
 struct neta_node get_next_parse()
 {
     return parse_tree[ptr];

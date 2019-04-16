@@ -1,7 +1,7 @@
-lex.yy.c
 neta
 *.neta
 !/prelude/*.neta
 .vscode/
 *.exe
 *.o
+neta.c

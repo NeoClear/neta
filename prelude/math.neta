@@ -13,10 +13,41 @@
 (fun mod (x y)
     (- x (* y (/ x y))))
 
+;; floor
+;; integer and float
+(fun floor (num) {
+    (if (istype num 'int)
+        num
+        (if (> num 0)
+            (float2int num)
+            (if (= (float2int num) num)
+                (float2int num)
+                (- (float2int num) 1))))
+})
+
+;; ceil
+;; integer and float
+(fun ceil (num)
+    (if (istype num 'int)
+        num
+        (if (= (float2int num) num)
+            (float2int num)
+            (+ (floor num) 1))))
+
+;; remain
+;; 0 <= return < 1
+(fun remain(num)
+    (d- num (floor num)))
+
 ;; quick power
 ;; works for integer and float
+;; @import "lib.neta"
 (fun qpower (base time) {
-    (setl (ans 1))
+    (setl (ans 1) (neg false))
+    (if (< time 0) {
+        (-> (neg true))
+        (-> (time (rev time)))
+    } 'nil)
     (while (> time 0) {
         (if (= (mod time 2) 1)
             (-> (ans (if (istype base 'int)
@@ -28,7 +59,9 @@
                         (d* base base))))
         (-> (time (/ time 2)))
     })
-    ans
+    (if neg
+        (d/ 1 ans)
+        ans)
 })
 
 ;; calculating gcd
@@ -148,6 +181,7 @@
 
 ;; fermat check
 ;; only integer
+;; @import "lib.neta"
 (fun fermat-check (num) {
     (setl (acc 1) (flag true))
     (while (<= acc 5) {
@@ -157,4 +191,46 @@
         (-> (acc (+ acc 1)))
     })
     flag
+})
+
+;; ln
+;; for float
+(fun ln (base) {
+    (if (<= base 0)
+        (println "S.H.I.T.")
+        0)
+    (setl (ans 0.0) (cc 0.0))
+    (setl (acc 1))
+    (while (>= base E) {
+        (-> (base (d/ base E)) (cc (d+ cc 1)))
+    })
+    (setl (cache (d/ (d- base 1) (d+ base 1))))
+    (while (<= acc LIMIT) {
+        (setl (div (- (* acc 2) 1)))
+        (-> (ans (d+ ans (d/ (qpower cache div) div))))
+        (-> (acc (+ acc 1)))
+    })
+    (d+ (d* ans 2) cc)
+})
+
+;; e-power
+(fun e-power (time) {
+    (setl (acc 1) (ans 1.0))
+    (while (<= acc LIMIT) {
+        (setl (top (qpower (remain time) acc)) (div (fact acc)))
+        (-> (ans (d+ ans (d/ top div))))
+        (-> (acc (+ acc 1)))
+    })
+    (d* ans (qpower E (floor time)))
+})
+
+;; power
+(fun power (base time) {
+    (setl (acc 1) (ans 1.0))
+    (setl (cache (d* (remain time) (ln base))))
+    (while (<= acc LIMIT) {
+        (-> (ans (d+ ans (d/ (qpower cache acc) (fact acc)))))
+        (-> (acc (+ acc 1)))
+    })
+    (d* ans (qpower base (floor time)))
 })

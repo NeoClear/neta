@@ -32,7 +32,8 @@ PRESERVED_FUN_5 "!"|"if"|"println"|"print"|"strlen"
 PRESERVED_FUN_6 "strcmp"|"while"|"->"|"assign"
 PRESERVED_FUN_7 "setl"|"import"|"type"|"istype"
 PRESERVED_FUN_8 "rand"|"equal"|"parse"|"read"|"readln"
-PRESERVED_FUN_9 "str2int"|"str2float"
+PRESERVED_FUN_9 "str2int"|"str2float"|"int2float"
+PRESERVED_FUN_A "float2int"
 
 IDENTIFIER      [a-zA-Z][a-zA-Z0-9-]*
 SYMBOL          \'[a-zA-Z][a-zA-Z0-9-]*
@@ -120,6 +121,12 @@ CHAR            \'[^\"\']\'
     add_preserved_fun(clone(yytext));
 }
 {PRESERVED_FUN_9}       {
+    word_plus();
+    column_plus(strlen(yytext));
+    add_preserved_fun(clone(yytext));
+}
+
+{PRESERVED_FUN_A}       {
     word_plus();
     column_plus(strlen(yytext));
     add_preserved_fun(clone(yytext));

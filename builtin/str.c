@@ -54,11 +54,11 @@ void builtin_str2float()
 {
     i64 ms = milestone();
     eval();
-    eval_stack[ms - 2].t = INTEGER;
+    eval_stack[ms - 2].t = FLOAT;
     if (get_current_eval().t != STRING)
         runtime_err(neta_type2string(STRING), neta_type2string(get_current_eval().t));
     set_buffer(get_current_eval().v.s);
-    eval_stack[ms - 2].v.i = read_f64();
+    eval_stack[ms - 2].v.f = read_f64();
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
     reset(ms - 2);

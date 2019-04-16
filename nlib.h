@@ -71,6 +71,9 @@ boolean is_strcmp(char *s);
 boolean is_str2int(char *s);
 boolean is_str2float(char *s);
 
+boolean is_int2float(char *s);
+boolean is_float2int(char *s);
+
 i64 milestone();
 i64 offset(i64 off);
 i64 offset_m(i64 milestone, i64 off);

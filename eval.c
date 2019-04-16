@@ -143,6 +143,12 @@ void eval()
                 } else if (is_str2float(get_current_eval().v.s)) {
                     builtin_str2float();
                     return;
+                } else if (is_int2float(get_current_eval().v.s)) {
+                    builtin_int2float();
+                    return;
+                } else if (is_float2int(get_current_eval().v.s)) {
+                    builtin_float2int();
+                    return;
                 } else {
                     err("You will never reach a undefined preserved function");
                 }

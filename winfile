@@ -1,4 +1,4 @@
-OBJ = lex.yy.o lexer.o debug.o eval.o neta.o util.o builtin/arithmetic.o \
+OBJ = app.o lexer.o debug.o eval.o neta.o util.o builtin/arithmetic.o \
 builtin/setf.o data.o nlib.o builtin/prog.o err.o \
 builtin/symbol.o builtin/io.o builtin/if.o \
 builtin/str.o builtin/while.o builtin/assign.o \
@@ -7,10 +7,9 @@ builtin/funcall.o builtin/import.o builtin/type.o builtin/standard.o \
 builtin/parse.o
 
 neta: $(OBJ)
-	cc -o neta $(OBJ) -lfl
+	cc -o neta  $(OBJ) -lfl
 
-lex.yy.o: lex.yy.c lexer.h util.h debug.h
-	cc -c lex.yy.c -lfl
+neta.o: neta.c
 
 lexer.o: lexer.h data.h
 
@@ -72,11 +71,11 @@ builtin/standard.o: builtin/standard.c builtin/standard.h eval.h nlib.h err.h da
 
 builtin/parse.o: builtin/parse.c builtin/parse.h eval.h nlib.h err.h data.h
 
-lex.yy.c: neta.l lexer.h util.h debug.h
-	flex neta.l
+neta.c: neta.l
+	flex -t neta.l > neta.c
 
 .PHONY:
 	clean
 
 clean:
-	-rm -rf *.o lex.yy.c neta
+	-rm -rf *.o neta.c neta
