@@ -9,7 +9,7 @@
         (-> (command (readln)))
         (if (equal command ":quit")
             (-> (conti false))
-            (parse command))
+            (println (eval command)))
     })
     'nil
 })

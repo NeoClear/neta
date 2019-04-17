@@ -44,8 +44,7 @@ struct global_variable *new_gvnode(char *name, struct global_variable *l, struct
 // Search AVL node
 struct global_variable *search_gvnode(struct global_variable *tree, char *k)
 {
-    while (!eq_s(tree->name, k) && tree != nil) {
-        // printf("SHIT");
+    while (tree != nil && !eq_s(tree->name, k)) {
         if (less_s(k, tree->name))
             tree = tree->left;
         else

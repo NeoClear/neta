@@ -159,7 +159,7 @@ enum return_type eval()
                     errh("You will never reach a undefined preserved function")
                 }
             } else if (read_identifier()) {
-                if (glov != nil && search_gvnode(glov, get_current_eval().v.s) != 0 && search_gvnode(glov, get_current_eval().v.s)->gt == FUNCTION) {
+                if (glov != nil && search_gvnode(glov, get_current_eval().v.s) != nil && search_gvnode(glov, get_current_eval().v.s)->gt == FUNCTION) {
                     builtin_funcall(get_current_eval().v.s);
                     return NORMAL;
                 } else {

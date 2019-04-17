@@ -3,6 +3,7 @@
 #include "../err.h"
 #include "../nlib.h"
 #include <stdio.h>
+#include "../data.h"
 
 extern FILE *yyin;
 int yylex();
@@ -10,6 +11,7 @@ int yylex();
 enum return_type builtin_parse()
 {
     push_trace("parse");
+    i64 trace_top_m = trace_top;
     enum error_type err_c = error_mode;
     error_mode = PARSE;
     i64 ms = milestone();
@@ -43,6 +45,7 @@ enum return_type builtin_parse()
     if (!read_rparen())
         parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     eval_stack[ms - 2] = default_return;
+    trace_top = trace_top_m;
     pop_trace();
     reset(ms - 2);
     error_mode = err_c;
@@ -52,6 +55,7 @@ enum return_type builtin_parse()
 enum return_type builtin_eval()
 {
     push_trace("eval");
+    i64 trace_top_m = trace_top;
     enum error_type err_c = error_mode;
     error_mode = EVAL;
     i64 ms = milestone();
@@ -85,6 +89,7 @@ enum return_type builtin_eval()
     parse_top = parse_top_m;
     if (!read_rparen())
         parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
+    trace_top = trace_top_m;
     pop_trace();
     reset(ms - 2);
     error_mode = err_c;

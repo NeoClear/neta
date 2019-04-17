@@ -5,3 +5,4 @@ neta
 *.exe
 *.o
 neta.c
+*.stackdump

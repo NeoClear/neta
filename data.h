@@ -110,6 +110,7 @@ extern i64 eval_top;
 // The pointer to parse stack while evaluating
 extern i64 ptr;
 
+extern char *backtrace[inf];
 extern i64 trace_top;
 
 void push_trace(char *s);
