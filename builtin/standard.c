@@ -3,12 +3,12 @@
 #include "../err.h"
 #include "../nlib.h"
 
-void builtin_equal_val()
+enum return_type builtin_equal_val()
 {
     push_trace("equal");
     i64 ms = milestone();
-    eval();
-    eval();
+    eval_errh()
+    eval_errh()
     eval_stack[ms - 2].t = INTEGER;
     switch (eval_stack[ms].t) {
     case INTEGER:
@@ -56,36 +56,39 @@ void builtin_equal_val()
         break;
     }
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
 
-void builtin_int2float()
+enum return_type builtin_int2float()
 {
     push_trace("int2float");
     i64 ms = milestone();
-    eval();
+    eval_errh()
     if (get_current_eval().t != INTEGER)
-        runtime_err(neta_type2string(INTEGER), neta_type2string(get_current_eval().t));
+        runtime_errh(neta_type2string(INTEGER), neta_type2string(get_current_eval().t))
     eval_stack[ms - 2].t = FLOAT;
     eval_stack[ms - 2].v.f = (f64)get_current_eval().v.i;
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
-void builtin_float2int()
+enum return_type builtin_float2int()
 {
     push_trace("float2int");
     i64 ms = milestone();
-    eval();
+    eval_errh()
     if (get_current_eval().t != FLOAT)
-        runtime_err(neta_type2string(FLOAT), neta_type2string(get_current_eval().t));
+        runtime_errh(neta_type2string(FLOAT), neta_type2string(get_current_eval().t))
     eval_stack[ms - 2].t = INTEGER;
     eval_stack[ms - 2].v.i = (i64)get_current_eval().v.f;
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }

@@ -6,14 +6,14 @@
 #include "../nlib.h"
 #include <stdlib.h>
 
-void builtin_plus()
+enum return_type builtin_plus()
 {
     push_trace("+");
     i64 ms = milestone();
     i64 ans = 0;
     // Read and eval params
     while (!read_rparen()) {
-        eval();
+        eval_errh()
     }
     // Add them
     for (i64 i = ms; i <= offset(-2); i++) {
@@ -25,16 +25,17 @@ void builtin_plus()
     eval_stack[ms - 2].v.i = ans;
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
 
-void builtin_minus()
+enum return_type builtin_minus()
 {
     push_trace("-");
     i64 ms = milestone();
     i64 ans = 0;
     // Read and eval params
     while (!read_rparen()) {
-        eval();
+        eval_errh()
     }
     ans = num2int(eval_stack[ms]).v.i;
     // Minus them
@@ -47,16 +48,17 @@ void builtin_minus()
     eval_stack[ms - 2].v.i = ans;
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
 
-void builtin_mul()
+enum return_type builtin_mul()
 {
     push_trace("*");
     i64 ms = milestone();
     i64 ans = 1;
     // Read and eval params
     while (!read_rparen()) {
-        eval();
+        eval_errh()
     }
     // Times them
     for (i64 i = ms; i <= offset(-2); i++) {
@@ -68,16 +70,17 @@ void builtin_mul()
     eval_stack[ms - 2].v.i = ans;
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
 
-void builtin_div()
+enum return_type builtin_div()
 {
     push_trace("/");
     i64 ms = milestone();
     i64 ans = 0;
     // Read and eval params
     while (!read_rparen()) {
-        eval();
+        eval_errh()
     }
     ans = num2int(eval_stack[ms]).v.i;
     // Divide them
@@ -86,23 +89,24 @@ void builtin_div()
         if (eval_stack[i].v.i != 0)
             ans /= eval_stack[i].v.i;
         else
-            runtime_err("none zero", "zero");
+            runtime_errh("none zero", "zero")
     }
     // Place the answer and reset eval stack
     eval_stack[ms - 2].t = INTEGER;
     eval_stack[ms - 2].v.i = ans;
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
 
-void builtin_dplus()
+enum return_type builtin_dplus()
 {
     push_trace("d+");
     i64 ms = milestone();
     f64 ans = 0;
     // Read and eval params    
     while (!read_rparen()) {
-        eval();
+        eval_errh()
     }
     // Add them
     for (i64 i = ms; i <= offset(-2); i++) {
@@ -114,16 +118,17 @@ void builtin_dplus()
     eval_stack[ms - 2].v.f = ans;
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
 
-void builtin_dminus()
+enum return_type builtin_dminus()
 {
     push_trace("d-");
     i64 ms = milestone();
     f64 ans = 0;
     // Read and eval params
     while (!read_rparen()) {
-        eval();
+        eval_errh()
     }
     ans = num2float(eval_stack[ms]).v.f;
     // Minus them
@@ -136,16 +141,17 @@ void builtin_dminus()
     eval_stack[ms - 2].v.f = ans;
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
 
-void builtin_dmul()
+enum return_type builtin_dmul()
 {
     push_trace("d*");
     i64 ms = milestone();
     f64 ans = 1;
     // Read and eval params
     while (!read_rparen()) {
-        eval();
+        eval_errh()
     }
     // Times them
     for (i64 i = ms; i <= offset(-2); i++) {
@@ -157,16 +163,17 @@ void builtin_dmul()
     eval_stack[ms - 2].v.f = ans;
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
 
-void builtin_ddiv()
+enum return_type builtin_ddiv()
 {
     push_trace("d/");
     i64 ms = milestone();
     f64 ans = 0;
     // Read and eval params
     while (!read_rparen()) {
-        eval();
+        eval_errh()
     }
     // Divide them
     ans = num2float(eval_stack[ms]).v.f;
@@ -175,30 +182,31 @@ void builtin_ddiv()
         if (eval_stack[i].v.f != 0)
             ans /= eval_stack[i].v.f;
         else
-            runtime_err("none zero", "zero");
+            runtime_errh("none zero", "zero")
     }
     // Place the answer and reset eval stack
     eval_stack[ms - 2].t = FLOAT;
     eval_stack[ms - 2].v.f = ans;
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
 
-void builtin_less()
+enum return_type builtin_less()
 {
     push_trace("<");
     i64 ms = milestone();
-    eval();
+    eval_errh()
     // Read param one
     if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
-        runtime_err("number", neta_type2string(get_current_eval().t));
-    eval();
+        runtime_errh("number", neta_type2string(get_current_eval().t))
+    eval_errh()
     // Read param two
     if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
-        runtime_err("number", neta_type2string(get_current_eval().t));
+        runtime_errh("number", neta_type2string(get_current_eval().t))
     // Read close paren
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     // Place the answer and reset eval stack
     eval_stack[ms - 2].t = INTEGER;
     if (num2float(eval_stack[ms]).v.f < num2float(eval_stack[ms + 1]).v.f)
@@ -207,22 +215,23 @@ void builtin_less()
         eval_stack[ms - 2].v.i = 0;
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
-void builtin_equal()
+enum return_type builtin_equal()
 {
     push_trace("=");
     i64 ms = milestone();
-    eval();
+    eval_errh()
     // Read param one
     if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
-        runtime_err("number", neta_type2string(get_current_eval().t));
-    eval();
+        runtime_errh("number", neta_type2string(get_current_eval().t))
+    eval_errh()
     // Read param two
     if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
-        runtime_err("number", neta_type2string(get_current_eval().t));
+        runtime_errh("number", neta_type2string(get_current_eval().t))
     // Read close paren
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     // Place the answer and reset eval stack
     eval_stack[ms - 2].t = INTEGER;
     if (num2float(eval_stack[ms]).v.f == num2float(eval_stack[ms + 1]).v.f)
@@ -231,22 +240,23 @@ void builtin_equal()
         eval_stack[ms - 2].v.i = 0;
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
-void builtin_greater()
+enum return_type builtin_greater()
 {
     push_trace(">");
     i64 ms = milestone();
-    eval();
+    eval_errh()
     // Read param one
     if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
-        runtime_err("number", neta_type2string(get_current_eval().t));
-    eval();
+        runtime_errh("number", neta_type2string(get_current_eval().t))
+    eval_errh()
     // Read param two
     if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
-        runtime_err("number", neta_type2string(get_current_eval().t));
+        runtime_errh("number", neta_type2string(get_current_eval().t))
     // Read close paren
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     // Place the answer and reset eval stack
     eval_stack[ms - 2].t = INTEGER;
     if (num2float(eval_stack[ms]).v.f > num2float(eval_stack[ms + 1]).v.f)
@@ -255,22 +265,23 @@ void builtin_greater()
         eval_stack[ms - 2].v.i = 0;
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
-void builtin_less_equal()
+enum return_type builtin_less_equal()
 {
     push_trace("<=");
     i64 ms = milestone();
-    eval();
+    eval_errh()
     // Read param one
     if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
-        runtime_err("number", neta_type2string(get_current_eval().t));
-    eval();
+        runtime_errh("number", neta_type2string(get_current_eval().t))
+    eval_errh()
     // Read param two
     if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
-        runtime_err("number", neta_type2string(get_current_eval().t));
+        runtime_errh("number", neta_type2string(get_current_eval().t))
     // Read close paren
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     // Place the answer and reset eval stack
     eval_stack[ms - 2].t = INTEGER;
     if (num2float(eval_stack[ms]).v.f <= num2float(eval_stack[ms + 1]).v.f)
@@ -279,22 +290,23 @@ void builtin_less_equal()
         eval_stack[ms - 2].v.i = 0;
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
-void builtin_not_equal()
+enum return_type builtin_not_equal()
 {
     push_trace("!=");
     i64 ms = milestone();
-    eval();
+    eval_errh()
     // Read param one
     if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
-        runtime_err("number", neta_type2string(get_current_eval().t));
-    eval();
+        runtime_errh("number", neta_type2string(get_current_eval().t))
+    eval_errh()
     // Read param two
     if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
-        runtime_err("number", neta_type2string(get_current_eval().t));
+        runtime_errh("number", neta_type2string(get_current_eval().t))
     // Read close paren
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     // Place the answer and reset eval stack
     eval_stack[ms - 2].t = INTEGER;
     if (num2float(eval_stack[ms]).v.f != num2float(eval_stack[ms + 1]).v.f)
@@ -303,22 +315,23 @@ void builtin_not_equal()
         eval_stack[ms - 2].v.i = 0;
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
-void builtin_greater_equal()
+enum return_type builtin_greater_equal()
 {
     push_trace(">=");
     i64 ms = milestone();
-    eval();
+    eval_errh()
     // Read param one
     if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
-        runtime_err("number", neta_type2string(get_current_eval().t));
-    eval();
+        runtime_errh("number", neta_type2string(get_current_eval().t))
+    eval_errh()
     // Read param two
     if (get_current_eval().t != INTEGER && get_current_eval().t != FLOAT)
-        runtime_err("number", neta_type2string(get_current_eval().t));
+        runtime_errh("number", neta_type2string(get_current_eval().t))
     // Read close paren
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     // Place the answer and reset eval stack
     eval_stack[ms - 2].t = INTEGER;
     if (num2float(eval_stack[ms]).v.f >= num2float(eval_stack[ms + 1]).v.f)
@@ -327,16 +340,18 @@ void builtin_greater_equal()
         eval_stack[ms - 2].v.i = 0;
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
 
-void builtin_rand()
+enum return_type builtin_rand()
 {
     push_trace("rand");
     i64 ms = milestone();
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     eval_stack[ms - 2].t = INTEGER;
     eval_stack[ms - 2].v.i = rand();
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }

@@ -8,30 +8,35 @@ void sub_assign()
 {
     // Read open paren
     if (!read_lparen())
-        parse_err(neta_type2string(LPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(LPAREN), neta_type2string(get_next_parse().t))
     // Read identifier
     if (!read_identifier())
-        parse_err(neta_type2string(IDENTIFIER), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(IDENTIFIER), neta_type2string(get_next_parse().t))
     struct neta_node *ret = nil;
     // Try to find variable
     if (find_variable(&ret, get_current_eval().v.s)) {
         if (ret == nil)
-            err("null variables");
+            errh("null variables")
         eval();
+        if (is_err)
+            return;
         *ret = get_current_eval();
     } else
-        err("could not find variable");
+        errh("could not find variable")
     // Read close paren
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
 }
 
-void builtin_assign()
+enum return_type builtin_assign()
 {
     i64 ms = milestone();
     // Deal with groups of assignment until meets a close paren
     while (!read_rparen())
         sub_assign();
+    if (is_err)
+        return NORMAL;
     eval_stack[ms - 2] = default_return;
     reset(ms - 2);
+    return NORMAL;
 }

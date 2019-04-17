@@ -31,12 +31,13 @@ enum return_type builtin_prog()
     return NORMAL;
 }
 
-void builtin_returnp()
+enum return_type builtin_returnp()
 {
     i64 ms = milestone();
-    eval();
+    eval_errh()
     eval_stack[ms - 2] = get_current_eval();
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     reset(ms - 2);
+    return NORMAL;
 }

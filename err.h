@@ -5,6 +5,31 @@
 
 // #define error_handle if (is_err) return
 
+#define eval_errh() \
+    eval(); \
+    if (is_err) \
+        return NORMAL;
+
+#define errh(s) \
+    err(s); \
+    if (is_err) \
+        return NORMAL;
+
+#define parse_errh(a, b) \
+    parse_err(a, b); \
+    if (is_err) \
+        return NORMAL;
+
+#define runtime_errh(a, b) \
+    runtime_err(a, b); \
+    if (is_err) \
+        return NORMAL;
+
+#define code_incomplete_errh() \
+    code_incomplete_err(); \
+    if (is_err) \
+        return;
+
 enum error_type
 {
     STRICT,

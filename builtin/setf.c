@@ -27,13 +27,15 @@ void initialize_global_variable()
     i64 ms = milestone();
     read_identifier();
     eval();
+    if (is_err)
+        return;
     add_global_variable(eval_stack[ms].v.s, eval_stack[ms + 1]);
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
 }
 
 // The builtin setf function
-void builtin_setf()
+enum return_type builtin_setf()
 {
     i64 ms = milestone();
     // Read open paren
@@ -41,15 +43,18 @@ void builtin_setf()
         if (read_lparen()) {
             // Initialize variable with value
             initialize_global_variable();
+            if (is_err)
+                return;
             continue;
         } else if (read_identifier()) {
             // Create variable without value
             create_global_variable(get_current_eval().v.s);
             continue;
         } else {
-            err("At builtin_setf()\n");
+            errh("At builtin_setf()\n")
         }
     }
     eval_stack[ms - 2] = default_return;
     reset(ms - 2);
+    return NORMAL;
 }

@@ -16,7 +16,7 @@ void copy_fun(struct neta_node *it)
     }
 }
 
-void builtin_funcall(char *fn)
+enum return_type builtin_funcall(char *fn)
 {
 
     // Find function
@@ -27,13 +27,13 @@ void builtin_funcall(char *fn)
     i64 parse_top_m = parse_top;
     // Eval parameters
     while (get_next_parse().t != RPAREN) {
-        eval();
+        eval_errh()
     }
     // Set recall point
     ptr_m = ptr + 1;
     // Read open paren
     if (tp->t != LPAREN)
-        err("SHIT");
+        errh("SHIT")
     tp = tp->next;
     // Create local variables
     for (i64 it = ms; it < eval_top; it++) {
@@ -47,28 +47,30 @@ void builtin_funcall(char *fn)
     }
     // Read close paren
     if (tp->t != RPAREN)
-        err("FUCK");
+        errh("FUCK")
     tp = tp->next;
     // Set recall point 
     ptr = parse_top;
     // Copy function body
     copy_fun(tp);
-    eval();
+    eval_errh()
     // Place answer and reset eval stack
     eval_stack[ms - 2] = get_current_eval();
     reset(ms - 2);
     ptr = ptr_m;
     parse_top = parse_top_m;
     pop_trace();
+    return NORMAL;
 }
 
-void builtin_returnf()
+enum return_type builtin_returnf()
 {
     i64 ms = milestone();
-    eval();
+    eval_errh()
     // ps(neta_node2string(get_current_eval()));
     eval_stack[ms - 2] = get_current_eval();
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     reset(ms - 2);
+    return NORMAL;
 }

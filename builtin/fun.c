@@ -9,7 +9,7 @@ void read_fun_body(struct neta_node *head)
     struct neta_node *p, *q;
     // Read open paren of param list
     if (!read_lparen())
-        parse_err(neta_type2string(LPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(LPAREN), neta_type2string(get_next_parse().t))
     head->p = (struct neta_node *)malloc(sizeof(struct neta_node));
     p = head->p;
     *p = get_current_eval();
@@ -18,7 +18,7 @@ void read_fun_body(struct neta_node *head)
     // Read content of param list
     while (!read_rparen()) {
         if (!read_identifier())
-            parse_err(neta_type2string(IDENTIFIER), neta_type2string(get_next_parse().t));
+            parse_errh(neta_type2string(IDENTIFIER), neta_type2string(get_next_parse().t))
         p = (struct neta_node *)malloc(sizeof(struct neta_node));
         *p = get_current_eval();
         p->next = nil;
@@ -47,16 +47,16 @@ void read_fun_body(struct neta_node *head)
             level--;
     } while (level);
     if (level < 0)
-        parse_err("expression", neta_type2string(RPAREN));
+        parse_errh("expression", neta_type2string(RPAREN))
 
 }
 
-void builtin_fun()
+enum return_type builtin_fun()
 {
     i64 ms = milestone();
     // Read function name
     if (!read_identifier())
-        parse_err(neta_type2string(IDENTIFIER), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(IDENTIFIER), neta_type2string(get_next_parse().t))
     char *name = get_current_eval().v.s;
     // Create a global node for function
     glov = gvinsert(glov, name);
@@ -68,7 +68,8 @@ void builtin_fun()
     read_fun_body(search_gvnode(glov, name)->value);
     // Read close paren
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     eval_stack[ms - 2] = default_return;
     reset(ms - 2);
+    return NORMAL;
 }

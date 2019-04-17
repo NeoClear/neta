@@ -24,26 +24,31 @@ void create_local_variable(char *name)
 void initialize_local_variable()
 {
     if (!read_lparen())
-        parse_err(neta_type2string(LPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(LPAREN), neta_type2string(get_next_parse().t))
     eval_top--;
     if (!read_identifier())
-        parse_err(neta_type2string(IDENTIFIER), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(IDENTIFIER), neta_type2string(get_next_parse().t))
     eval();
+    if (is_err)
+        return;
     add_local_variable(eval_stack[eval_top - 2].v.s, get_current_eval());
     eval_top--;
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     eval_top--;
 }
 
-void builtin_setl()
+enum return_type builtin_setl()
 {
     eval_top -= 2;
     while (!read_rparen()) {
         if (read_identifier())
             create_local_variable(get_current_eval().v.s);
-        else
+        else {
             initialize_local_variable();
+            if (is_err)
+                return NORMAL;
+        }
     }
     eval_top--;
 }

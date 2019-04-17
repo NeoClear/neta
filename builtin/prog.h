@@ -5,6 +5,6 @@
 
 enum return_type builtin_prog();
 
-void builtin_returnp();
+enum return_type builtin_returnp();
 
 #endif

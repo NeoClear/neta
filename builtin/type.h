@@ -1,7 +1,7 @@
 #ifndef _TYPE_H_
 #define _TYPE_H_
 
-void builtin_type();
-void builtin_istype();
+enum return_type builtin_type();
+enum return_type builtin_istype();
 
 #endif // 

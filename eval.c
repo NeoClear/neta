@@ -156,19 +156,21 @@ enum return_type eval()
                     builtin_float2int();
                     return NORMAL;
                 } else {
-                    err("You will never reach a undefined preserved function");
+                    errh("You will never reach a undefined preserved function")
                 }
             } else if (read_identifier()) {
-                if (search_gvnode(glov, get_current_eval().v.s) != 0 && search_gvnode(glov, get_current_eval().v.s)->gt == FUNCTION) {
+                if (glov != nil && search_gvnode(glov, get_current_eval().v.s) != 0 && search_gvnode(glov, get_current_eval().v.s)->gt == FUNCTION) {
                     builtin_funcall(get_current_eval().v.s);
                     return NORMAL;
                 } else {
+                     errh("could not find function")
+                    //  neta_err();
                     // useless
-                    ptr--;
-                    eval_top--;
-                    eval();
-                    if (!read_rparen())
-                        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+                    // ptr--;
+                    // eval_top--;
+                    // eval();
+                    // if (!read_rparen())
+                    //     parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
                 }
             }
         } else if (read_integer()) {
@@ -187,10 +189,13 @@ enum return_type eval()
             } else if (find_global_constant(&local, get_current_eval().v.s)) {
                 eval_stack[eval_top - 1] = *local;
                 return NORMAL;
-            } else
-                err("could not find variable");
+            } else {
+                errh("could not find variable")
+                return NORMAL;
+            }
         } else if (read_preserved_fun()) {
-            err("You can't give a keyword or built-in function directly");
+            errh("You can't give a keyword or built-in function directly")
+            return NORMAL;
         } else if (read_symbol()) {
             return NORMAL;
         }

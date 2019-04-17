@@ -305,8 +305,12 @@ boolean parse_finished()
 
 void parse_to_eval()
 {
-    if (parse_finished())
+    if (parse_finished()) {
         code_incomplete_err();
+        if (is_err)
+            return;
+    }
+        
     eval_stack[eval_top++] = parse_tree[ptr++];
 }
 
@@ -317,8 +321,11 @@ struct neta_node get_current_eval()
 
 boolean read_lparen()
 {
-    if (parse_finished())
+    if (parse_finished()) {
         code_incomplete_err();
+        if (is_err)
+            return false;
+    }
     if (get_next_parse().t == LPAREN) {
         parse_to_eval();
         return true;
@@ -327,8 +334,11 @@ boolean read_lparen()
 }
 boolean read_rparen()
 {
-    if (parse_finished())
+    if (parse_finished()) {
         code_incomplete_err();
+        if (is_err)
+            return false;
+    }
     if (get_next_parse().t == RPAREN) {
         parse_to_eval();
         return true;
@@ -337,8 +347,11 @@ boolean read_rparen()
 }
 boolean read_identifier()
 {
-    if (parse_finished())
+    if (parse_finished()) {
         code_incomplete_err();
+        if (is_err)
+            return false;
+    }
     if (get_next_parse().t == IDENTIFIER) {
         parse_to_eval();
         return true;
@@ -347,8 +360,11 @@ boolean read_identifier()
 }
 boolean read_preserved_fun()
 {
-    if (parse_finished())
+    if (parse_finished()) {
         code_incomplete_err();
+        if (is_err)
+            return false;
+    }
     if (get_next_parse().t == PRESERVED_FUN) {
         parse_to_eval();
         return true;
@@ -358,8 +374,11 @@ boolean read_preserved_fun()
 
 boolean read_integer()
 {
-    if (parse_finished())
+    if (parse_finished()) {
         code_incomplete_err();
+        if (is_err)
+            return false;
+    }
     if (get_next_parse().t == INTEGER) {
         parse_to_eval();
         return true;
@@ -369,8 +388,11 @@ boolean read_integer()
 
 boolean read_float()
 {
-    if (parse_finished())
+    if (parse_finished()) {
         code_incomplete_err();
+        if (is_err)
+            return false;
+    }
     if (get_next_parse().t == FLOAT) {
         parse_to_eval();
         return true;
@@ -380,8 +402,11 @@ boolean read_float()
 
 boolean read_string()
 {
-    if (parse_finished())
+    if (parse_finished()) {
         code_incomplete_err();
+        if (is_err)
+            return false;
+    }
     if (get_next_parse().t == STRING) {
         parse_to_eval();
         return true;
@@ -391,8 +416,11 @@ boolean read_string()
 
 boolean read_char()
 {
-    if (parse_finished())
+    if (parse_finished()) {
         code_incomplete_err();
+        if (is_err)
+            return false;
+    }
     if (get_next_parse().t == CHAR) {
         parse_to_eval();
         return true;
@@ -402,8 +430,11 @@ boolean read_char()
 
 boolean read_symbol()
 {
-    if (parse_finished())
+    if (parse_finished()) {
         code_incomplete_err();
+        if (is_err)
+            return false;
+    }
     if (get_next_parse().t == SYMBOL) {
         parse_to_eval();
         return true;
@@ -464,7 +495,7 @@ char *neta_type2string(enum neta_type t)
     case SYMBOL:
         return "CHAR";
     default:
-        runtime_err("neta_type", "integer out of range");
+        runtime_errh("neta_type", "integer out of range")
     }
 }
 
@@ -545,8 +576,11 @@ void ignore_exp()
 {
     i64 level = 0;
     do {
-        if (parse_finished())
+        if (parse_finished()) {
             code_incomplete_err();
+            if (is_err)
+                return;
+        }
         enum neta_type t = parse_tree[ptr++].t;
         if (t == LPAREN)
             level++;
@@ -554,7 +588,7 @@ void ignore_exp()
             level--;
     } while (level);
     if (level < 0)
-        parse_err("expression", neta_type2string(RPAREN));
+        parse_errh("expression", neta_type2string(RPAREN))
 }
 
 i64 look_ahead()
@@ -562,8 +596,11 @@ i64 look_ahead()
     i64 level = 0;
     i64 ptr_c = ptr;
     do {
-        if (ptr_c >= parse_top)
+        if (ptr_c >= parse_top) {
             code_incomplete_err();
+            if (is_err)
+                return ptr_c;
+        }
         enum neta_type t = parse_tree[ptr_c++].t;
         if (t == LPAREN)
             level++;

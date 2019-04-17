@@ -5,31 +5,32 @@
 #include "../err.h"
 #include "../util.h"
 
-void builtin_print()
+enum return_type builtin_print()
 {
     push_trace("print");
+    // Reset answer
     i64 ms = milestone();
+    eval_stack[ms - 2] = default_return;
     // Evaluate params
     while (!read_rparen()) {
-        eval();
+        eval_errh()
     }
     // Print them
     for (i64 i = ms; i <= offset(-2); i++) {
         printf("%s", neta_node2string(eval_stack[i]));
     }
-    // Reset answer
-    eval_stack[ms - 2] = default_return;
+
     pop_trace();
     eval_top = ms - 1;
 }
 
-void builtin_println()
+enum return_type builtin_println()
 {
     builtin_print();
     printf("\n");
 }
 
-void builtin_read()
+enum return_type builtin_read()
 {
     push_trace("read");
     i64 ms = milestone();
@@ -38,11 +39,12 @@ void builtin_read()
     scanf("%s", s);
     eval_stack[ms - 2].v.s = clone(s);
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
-void builtin_readln()
+enum return_type builtin_readln()
 {
     push_trace("readln");
     i64 ms = milestone();
@@ -51,7 +53,8 @@ void builtin_readln()
     gets(s);
     eval_stack[ms - 2].v.s = clone(s);
     if (!read_rparen())
-        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     pop_trace();
     reset(ms - 2);
+    return NORMAL;
 }
