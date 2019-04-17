@@ -69,5 +69,6 @@ void builtin_fun()
     // Read close paren
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    eval_stack[ms - 2] = default_return;
     reset(ms - 2);
 }

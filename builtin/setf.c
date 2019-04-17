@@ -24,10 +24,10 @@ void create_global_variable(char *name)
 // The integrated function which handles the creation and initialization of a global variable
 void initialize_global_variable()
 {
-    i64 milestone = eval_top;
+    i64 ms = milestone();
     read_identifier();
     eval();
-    add_global_variable(eval_stack[milestone].v.s, eval_stack[milestone + 1]);
+    add_global_variable(eval_stack[ms].v.s, eval_stack[ms + 1]);
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
 }
@@ -50,5 +50,6 @@ void builtin_setf()
             err("At builtin_setf()\n");
         }
     }
-    eval_top = ms - 1;
+    eval_stack[ms - 2] = default_return;
+    reset(ms - 2);
 }

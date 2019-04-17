@@ -21,8 +21,8 @@ void builtin_plus()
         ans += eval_stack[i].v.i;
     }
     // Place the answer and reset eval stack
-    eval_stack[offset_m(ms, -2)].t = INTEGER;
-    eval_stack[offset_m(ms, -2)].v.i = ans;
+    eval_stack[ms - 2].t = INTEGER;
+    eval_stack[ms - 2].v.i = ans;
     pop_trace();
     reset(ms - 2);
 }
@@ -43,8 +43,8 @@ void builtin_minus()
         ans -= eval_stack[i].v.i;
     }
     // Place the answer and reset eval stack
-    eval_stack[offset_m(ms, -2)].t = INTEGER;
-    eval_stack[offset_m(ms, -2)].v.i = ans;
+    eval_stack[ms - 2].t = INTEGER;
+    eval_stack[ms - 2].v.i = ans;
     pop_trace();
     reset(ms - 2);
 }
@@ -64,8 +64,8 @@ void builtin_mul()
         ans *= eval_stack[i].v.i;
     }
     // Place the answer and reset eval stack
-    eval_stack[offset_m(ms, -2)].t = INTEGER;
-    eval_stack[offset_m(ms, -2)].v.i = ans;
+    eval_stack[ms - 2].t = INTEGER;
+    eval_stack[ms - 2].v.i = ans;
     pop_trace();
     reset(ms - 2);
 }
@@ -89,8 +89,8 @@ void builtin_div()
             runtime_err("none zero", "zero");
     }
     // Place the answer and reset eval stack
-    eval_stack[offset_m(ms, -2)].t = INTEGER;
-    eval_stack[offset_m(ms, -2)].v.i = ans;
+    eval_stack[ms - 2].t = INTEGER;
+    eval_stack[ms - 2].v.i = ans;
     pop_trace();
     reset(ms - 2);
 }
@@ -110,8 +110,8 @@ void builtin_dplus()
         ans += eval_stack[i].v.f;
     }
     // Place the answer and reset eval stack
-    eval_stack[offset_m(ms, -2)].t = FLOAT;
-    eval_stack[offset_m(ms, -2)].v.f = ans;
+    eval_stack[ms - 2].t = FLOAT;
+    eval_stack[ms - 2].v.f = ans;
     pop_trace();
     reset(ms - 2);
 }
@@ -132,8 +132,8 @@ void builtin_dminus()
         ans -= eval_stack[i].v.f;
     }
     // Place the answer and reset eval stack
-    eval_stack[offset_m(ms, -2)].t = FLOAT;
-    eval_stack[offset_m(ms, -2)].v.f = ans;
+    eval_stack[ms - 2].t = FLOAT;
+    eval_stack[ms - 2].v.f = ans;
     pop_trace();
     reset(ms - 2);
 }
@@ -153,8 +153,8 @@ void builtin_dmul()
         ans *= eval_stack[i].v.f;
     }
     // Place the answer and reset eval stack
-    eval_stack[offset_m(ms, -2)].t = FLOAT;
-    eval_stack[offset_m(ms, -2)].v.f = ans;
+    eval_stack[ms - 2].t = FLOAT;
+    eval_stack[ms - 2].v.f = ans;
     pop_trace();
     reset(ms - 2);
 }
@@ -178,8 +178,8 @@ void builtin_ddiv()
             runtime_err("none zero", "zero");
     }
     // Place the answer and reset eval stack
-    eval_stack[offset_m(ms, -2)].t = FLOAT;
-    eval_stack[offset_m(ms, -2)].v.f = ans;
+    eval_stack[ms - 2].t = FLOAT;
+    eval_stack[ms - 2].v.f = ans;
     pop_trace();
     reset(ms - 2);
 }

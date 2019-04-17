@@ -116,6 +116,9 @@ enum return_type eval()
                 } else if (is_parse(get_current_eval().v.s)) {
                     builtin_parse();
                     return NORMAL;
+                } else if (is_eval(get_current_eval().v.s)) {
+                    builtin_eval();
+                    return NORMAL;
                 } else if (is_returnf(get_current_eval().v.s)) {
                     builtin_returnf();
                     return FUNC;

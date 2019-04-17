@@ -32,5 +32,6 @@ void builtin_assign()
     // Deal with groups of assignment until meets a close paren
     while (!read_rparen())
         sub_assign();
+    eval_stack[ms - 2] = default_return;
     reset(ms - 2);
 }

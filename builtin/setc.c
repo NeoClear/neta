@@ -25,10 +25,10 @@ void create_global_constant(char *name)
 // The integrated function which handles the creation and initialization of a global constant
 void initialize_global_constant()
 {
-    i64 milestone = eval_top;
+    i64 ms = milestone();;
     read_identifier();
     eval();
-    add_global_constant(eval_stack[milestone].v.s, eval_stack[milestone + 1]);
+    add_global_constant(eval_stack[ms].v.s, eval_stack[ms + 1]);
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
 }
@@ -36,7 +36,7 @@ void initialize_global_constant()
 // The builtin setc function
 void builtin_setc()
 {
-    i64 milestone = eval_top;
+    i64 ms = milestone();
     // Read open paren
     while (!read_rparen()) {
         if (read_lparen()) {
@@ -51,5 +51,6 @@ void builtin_setc()
             err("At builtin_setc()\n");
         }
     }
-    eval_top = milestone - 1;
+    eval_stack[ms - 2] = default_return;
+    reset(ms - 2);
 }

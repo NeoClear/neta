@@ -57,6 +57,7 @@ boolean is_type(char *s);
 boolean is_istype(char *s);
 boolean is_equal_val(char *s);
 boolean is_parse(char *s);
+boolean is_eval(char *s);
 boolean is_returnf(char *s);
 boolean is_returnp(char *s);
 

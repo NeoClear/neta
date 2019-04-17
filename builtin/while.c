@@ -10,8 +10,7 @@ enum return_type builtin_while()
     i64 ms = milestone();
     i64 ptr_j = look_ahead();
     // Reset the starting point
-    eval_stack[ms - 2].t = INTEGER;
-    eval_stack[ms - 2].v.i = 0;
+    eval_stack[ms - 2] = default_return;
 
     boolean once = false;
 
@@ -26,6 +25,12 @@ enum return_type builtin_while()
         else {
             t = eval();
             eval_stack[ms - 2] = get_current_eval();
+            if (t != NORMAL) {
+                ptr = ptr_j;
+                reset(ms - 2);
+                return t;
+            }
+            // eval_stack[ms - 2] = get_current_eval();
             ptr = trace;
             eval_top -= 2;
         }

@@ -205,6 +205,13 @@ boolean is_parse(char *s)
     return false;
 }
 
+boolean is_eval(char *s)
+{
+    if (strcmp(s, "eval") == 0)
+        return true;
+    return false;
+}
+
 boolean is_returnf(char *s)
 {
     if (strcmp(s, "return-f") == 0)

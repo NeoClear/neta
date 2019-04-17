@@ -18,8 +18,7 @@ void builtin_print()
         printf("%s", neta_node2string(eval_stack[i]));
     }
     // Reset answer
-    eval_stack[offset_m(ms, -2)].t = INTEGER;
-    eval_stack[offset_m(ms, -2)].v.i = 0;
+    eval_stack[ms - 2] = default_return;
     pop_trace();
     eval_top = ms - 1;
 }

@@ -17,6 +17,11 @@ i64 eval_top = 0;
 char *backtrace[inf];
 i64 trace_top;
 
+struct neta_node default_return = {
+    .t = SYMBOL,
+    .v.s = "'nil",
+};
+
 // Measures the height of a AVL tree
 int height(struct global_variable *t)
 {

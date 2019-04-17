@@ -28,5 +28,6 @@ void builtin_import()
     parse_top = parse_top_m;
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    eval_stack[ms - 2] = default_return;
     reset(ms - 2);
 }

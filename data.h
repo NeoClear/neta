@@ -116,4 +116,6 @@ void push_trace(char *s);
 void pop_trace();
 void print_trace();
 
+extern struct neta_node default_return;
+
 #endif
