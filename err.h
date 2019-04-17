@@ -40,6 +40,16 @@ enum error_type
 extern enum error_type error_mode;
 extern boolean is_err;
 
+extern char *err_msg;
+
+enum uerr_type
+{
+    RUNTIME_ERR,
+    PARSING_ERR,
+};
+
+extern enum uerr_type err_tp;
+
 // Standard errors
 void err(char *s);
 // Parsing errors

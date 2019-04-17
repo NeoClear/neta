@@ -11,6 +11,7 @@
 #include "nlib.h"
 #include <stdlib.h>
 #include <time.h>
+#include "err.h"
 
 extern FILE *yyin;
 extern int yyleng;
@@ -32,8 +33,11 @@ int main(int argc, char **argv) {
         yyin = stdin;
     yylex();
     init();
+    // print_parse_tree();
     while (!parse_finished()) {
         eval();
+        if (is_err)
+            exit(0);
         eval_top = 0;
     }
     return 0;

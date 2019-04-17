@@ -60,6 +60,9 @@ boolean is_parse(char *s);
 boolean is_eval(char *s);
 boolean is_returnf(char *s);
 boolean is_returnp(char *s);
+boolean is_catch(char *s);
+boolean is_throw(char *s);
+boolean is_errmsg(char *s);
 
 // Preserved io funcitons???
 boolean is_print(char *s);

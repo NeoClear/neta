@@ -18,7 +18,6 @@ void copy_fun(struct neta_node *it)
 
 enum return_type builtin_funcall(char *fn)
 {
-
     // Find function
     struct neta_node *tp = search_gvnode(glov, fn)->value->p;
     push_trace(clone(fn));
@@ -53,7 +52,7 @@ enum return_type builtin_funcall(char *fn)
     ptr = parse_top;
     // Copy function body
     copy_fun(tp);
-    eval_errh()
+    eval();
     // Place answer and reset eval stack
     eval_stack[ms - 2] = get_current_eval();
     reset(ms - 2);

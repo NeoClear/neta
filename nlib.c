@@ -225,6 +225,27 @@ boolean is_returnp(char *s)
     return false;
 }
 
+boolean is_catch(char *s)
+{
+    if (strcmp(s, "catch") == 0)
+        return true;
+    return false;
+}
+
+boolean is_throw(char *s)
+{
+    if (strcmp(s, "throw") == 0)
+        return true;
+    return false;
+}
+
+boolean is_errmsg(char *s)
+{
+    if (strcmp(s, "errmsg") == 0)
+        return true;
+    return false;
+}
+
 boolean is_print(char *s)
 {
     if (strcmp(s, "print") == 0)
@@ -493,7 +514,7 @@ char *neta_type2string(enum neta_type t)
     case CHAR:
         return "CHAR";
     case SYMBOL:
-        return "CHAR";
+        return "SYMBOL";
     default:
         runtime_errh("neta_type", "integer out of range")
     }

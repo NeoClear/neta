@@ -92,3 +92,39 @@ enum return_type builtin_float2int()
     reset(ms - 2);
     return NORMAL;
 }
+
+enum return_type builtin_catch()
+{
+    i64 ms = milestone();
+    i64 ptr_j = look_ahead();
+    eval();
+    if (is_err) {
+        if (err_tp == PARSING_ERR)
+            return NORMAL;
+        is_err = false;
+    }
+    reset(ms - 2);
+    ptr = ptr_j;
+    return NORMAL;
+}
+enum return_type builtin_throw()
+{
+    i64 ms = milestone();
+    eval_errh()
+    if (get_current_eval().t != SYMBOL)
+        runtime_errh(neta_type2string(SYMBOL), neta_type2string(get_current_eval().t))
+    is_err = true;
+    err_tp = RUNTIME_ERR;
+    err_msg = get_current_eval().v.s;
+    return NORMAL;
+}
+enum return_type builtin_errmsg()
+{
+    i64 ms = milestone();
+    eval_stack[ms - 2].t = STRING;
+    eval_stack[ms - 2].v.s = err_msg;
+    if (!read_rparen())
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
+    reset(ms - 2);
+    return NORMAL;
+}

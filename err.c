@@ -6,31 +6,34 @@
 enum error_type error_mode = STRICT;
 boolean is_err = false;
 
+char *err_msg = "";
+
+enum uerr_type err_tp;
+
 // Print standard error
 void err(char *s)
 {
     fprintf(stderr, "stderr: %s\n", s);
-    if (error_mode == STRICT)
-        exit(0);
     is_err = true;
+    err_tp = RUNTIME_ERR;
 }
 
 // Print parse error
 void parse_err(char *expect, char *encounter)
 {
     fprintf(stderr, "parsing error: expected %s, encountered %s\n", expect, encounter);
-    if (error_mode == STRICT)
+    if (error_mode = STRICT)
         exit(0);
     is_err = true;
+    err_tp = PARSING_ERR;
 }
 
 // Print runtime error
 void runtime_err(char *expect, char *encounter)
 {
     fprintf(stderr, "runtime error: expected %s, encountered %s\n", expect, encounter);
-    if (error_mode == STRICT)
-        exit(0);
     is_err = true;
+    err_tp = RUNTIME_ERR;
 }
 
 void code_incomplete_err()
@@ -39,4 +42,5 @@ void code_incomplete_err()
     if (error_mode == STRICT)
         exit(0);
     is_err = true;
+    err_tp = PARSING_ERR;
 }
