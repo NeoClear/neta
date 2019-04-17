@@ -33,7 +33,7 @@ PRESERVED_FUN_6 "strcmp"|"while"|"->"|"assign"
 PRESERVED_FUN_7 "setl"|"import"|"type"|"istype"
 PRESERVED_FUN_8 "rand"|"equal"|"parse"|"read"|"readln"
 PRESERVED_FUN_9 "str2int"|"str2float"|"int2float"
-PRESERVED_FUN_A "float2int"
+PRESERVED_FUN_A "float2int"|"return-f"|"return-p"
 
 IDENTIFIER      [a-zA-Z][a-zA-Z0-9-]*
 SYMBOL          \'[a-zA-Z][a-zA-Z0-9-]*

@@ -6,7 +6,9 @@
 #ifndef _EVAL_H_
 #define _EVAL_H_
 
+#include "data.h"
+
 // Main evaluation function
-void eval();
+enum return_type eval();
 
 #endif

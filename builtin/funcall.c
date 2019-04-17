@@ -5,6 +5,7 @@
 #include "../data.h"
 #include "../util.h"
 #include <stdlib.h>
+#include "../debug.h"
 
 // Copy function content to parse stack
 void copy_fun(struct neta_node *it)
@@ -59,4 +60,15 @@ void builtin_funcall(char *fn)
     ptr = ptr_m;
     parse_top = parse_top_m;
     pop_trace();
+}
+
+void builtin_returnf()
+{
+    i64 ms = milestone();
+    eval();
+    // ps(neta_node2string(get_current_eval()));
+    eval_stack[ms - 2] = get_current_eval();
+    if (!read_rparen())
+        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    reset(ms - 2);
 }

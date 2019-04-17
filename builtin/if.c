@@ -3,19 +3,21 @@
 #include "../eval.h"
 #include "../err.h"
 
-void builtin_if()
+enum return_type builtin_if()
 {
     i64 ms = milestone();
+    i64 ptr_j = look_ahead();
+    enum return_type t;
     eval();
     // Read condition
     if (get_current_eval().t == INTEGER) {
         if (get_current_eval().v.i == 0) {
             // True
             ignore_exp();
-            eval();
+            t = eval();
         } else {
             // False
-            eval();
+            t = eval();
             ignore_exp();
         }
         // Place answer
@@ -27,4 +29,5 @@ void builtin_if()
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
     // Reset eval stack
     reset(ms - 2);
+    return t;
 }

@@ -4,16 +4,19 @@
 #include "../data.h"
 #include "../nlib.h"
 
-void builtin_while()
+enum return_type builtin_while()
 {
-    i64 backtrace = ptr;
+    i64 trace = ptr;
     i64 ms = milestone();
-    
+    i64 ptr_j = look_ahead();
     // Reset the starting point
     eval_stack[ms - 2].t = INTEGER;
     eval_stack[ms - 2].v.i = 0;
 
     boolean once = false;
+
+    enum return_type t = NORMAL;
+
     while (true) {
         eval();
         if (get_current_eval().t != INTEGER)
@@ -21,9 +24,9 @@ void builtin_while()
         if (get_current_eval().v.i == 0)
             break;
         else {
-            eval();
+            t = eval();
             eval_stack[ms - 2] = get_current_eval();
-            ptr = backtrace;
+            ptr = trace;
             eval_top -= 2;
         }
     }
@@ -31,4 +34,5 @@ void builtin_while()
     if (!read_rparen())
         parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
     reset(ms - 2);
+    return t;
 }

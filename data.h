@@ -27,6 +27,13 @@ enum neta_type
     VALUE,
 };
 
+enum return_type
+{
+    NORMAL,
+    PROG,
+    FUNC,
+};
+
 // Basic types for a value
 enum global_type
 {

@@ -205,6 +205,19 @@ boolean is_parse(char *s)
     return false;
 }
 
+boolean is_returnf(char *s)
+{
+    if (strcmp(s, "return-f") == 0)
+        return true;
+    return false;
+}
+boolean is_returnp(char *s)
+{
+    if (strcmp(s, "return-p") == 0)
+        return true;
+    return false;
+}
+
 boolean is_print(char *s)
 {
     if (strcmp(s, "print") == 0)
@@ -525,6 +538,8 @@ void ignore_exp()
 {
     i64 level = 0;
     do {
+        if (parse_finished())
+            code_incomplete_err();
         enum neta_type t = parse_tree[ptr++].t;
         if (t == LPAREN)
             level++;
@@ -533,4 +548,20 @@ void ignore_exp()
     } while (level);
     if (level < 0)
         parse_err("expression", neta_type2string(RPAREN));
+}
+
+i64 look_ahead()
+{
+    i64 level = 0;
+    i64 ptr_c = ptr;
+    do {
+        if (ptr_c >= parse_top)
+            code_incomplete_err();
+        enum neta_type t = parse_tree[ptr_c++].t;
+        if (t == LPAREN)
+            level++;
+        else if (t == RPAREN)
+            level--;
+    } while (level > -1);
+    return ptr_c;
 }

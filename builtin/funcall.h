@@ -3,4 +3,6 @@
 
 void builtin_funcall(char *fn);
 
-#endif // !_FUNCALL_H_
+void builtin_returnf();
+
+#endif

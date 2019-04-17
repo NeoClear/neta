@@ -57,6 +57,8 @@ boolean is_type(char *s);
 boolean is_istype(char *s);
 boolean is_equal_val(char *s);
 boolean is_parse(char *s);
+boolean is_returnf(char *s);
+boolean is_returnp(char *s);
 
 // Preserved io funcitons???
 boolean is_print(char *s);
@@ -87,5 +89,7 @@ struct neta_node num2float(struct neta_node n);
 struct neta_node num2int(struct neta_node n);
 
 void ignore_exp();
+
+i64 look_ahead();
 
 #endif

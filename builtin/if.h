@@ -1,6 +1,8 @@
 #ifndef _IF_H_
 #define _IF_H_
 
-void builtin_if();
+#include "../data.h"
+
+enum return_type builtin_if();
 
 #endif // !_IF_H_
