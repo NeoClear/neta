@@ -2,14 +2,18 @@
 ;; e-mail: neoclear@outlook.com
 ;; date: 2019-4-16
 
+(fun repl-help () {
+    (println "SHIT")
+})
+
 (fun repl () {
     (setl command (conti true))
-    (while conti {
+    (while true {
         (print "neta -> ")
         (-> (command (readln)))
-        (if (equal command ":quit")
-            (-> (conti false))
-            (println (eval command)))
+        (match command
+            ":help" (repl-help)
+            ":quit" (return-f @nil)
+            @default (println (eval command)))
     })
-    @nil
 })

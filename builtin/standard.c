@@ -131,14 +131,15 @@ enum return_type builtin_errmsg()
     return NORMAL;
 }
 
+enum return_type t = NORMAL;
+
 boolean sub_match(i64 ms)
 {
     eval();
     if (is_err)
         return false;
-    // printf("%s - %s\n", neta_node2string(eval_stack[ms]), neta_node2string(get_current_eval()));
     if (equal(eval_stack[ms], get_current_eval())) {
-        eval();
+        t = eval();
         if (is_err)
             return false;
         return true;
@@ -159,6 +160,13 @@ enum return_type builtin_match()
         if (sub_match(ms)) {
             ptr = ptr_j;
             eval_stack[ms - 2] = get_current_eval();
+            if (t != NORMAL) {
+                enum return_type cac = t;
+                t = NORMAL;
+                ptr = ptr_j;
+                reset(ms - 2);
+                return cac;
+            }
             reset(ms - 2);
             return NORMAL;
         } else if (is_err)
@@ -177,7 +185,7 @@ boolean sub_when(i64 ms)
     if (get_current_eval().t != INTEGER)
         runtime_errh(neta_type2string(INTEGER), neta_type2string(get_current_eval().t))
     if (get_current_eval().v.i != 0) {
-        eval();
+        t = eval();
         if (is_err)
             return false;
         return true;
@@ -198,6 +206,14 @@ enum return_type builtin_when()
         if (sub_when(ms)) {
             ptr = ptr_j;
             eval_stack[ms - 2] = get_current_eval();
+            if (t != NORMAL) {
+                enum return_type cac = t;
+                t = NORMAL;
+                ptr = ptr_j;
+                reset(ms - 2);
+                // printf("%d\n", cac);
+                return cac;
+            }
             reset(ms - 2);
             return NORMAL;
         } else if (is_err)

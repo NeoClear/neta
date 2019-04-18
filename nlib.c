@@ -663,6 +663,8 @@ i64 look_ahead()
 
 boolean equal(struct neta_node a, struct neta_node b)
 {
+    if (b.t == SYMBOL && strcmp(b.v.s, "@default") == 0)
+        return true;
     switch (a.t) {
     case INTEGER:
         if (b.t == INTEGER) {

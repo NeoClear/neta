@@ -13,6 +13,7 @@ enum return_type builtin_prog()
     // Eval all and place last one as answer
     while (!read_rparen()) {
         enum return_type t = eval();
+        // printf("%d\n", t);
         if (t == PROG) {
             eval_stack[ms - 2] = get_current_eval();
             ptr = ptr_j;

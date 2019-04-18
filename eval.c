@@ -129,23 +129,18 @@ enum return_type eval()
                     builtin_catch();
                     return NORMAL;
                 } else if (is_throw(get_current_eval().v.s)) {
-                    builtin_throw();
-                    return NORMAL;
+                    return builtin_throw();
                 } else if (is_errmsg(get_current_eval().v.s)) {
-                    builtin_errmsg();
-                    return NORMAL;
+                    return builtin_errmsg();
                 } else if (is_def_yet(get_current_eval().v.s)) {
                     builtin_def_yet();
                     return NORMAL;
                 } else if (is_match(get_current_eval().v.s)) {
-                    builtin_match();
-                    return NORMAL;
+                    return builtin_match();
                 } else if (is_when(get_current_eval().v.s)) {
-                    builtin_when();
-                    return NORMAL;
+                    return builtin_when();
                 } else if (is_iff(get_current_eval().v.s)) {
-                    builtin_iff();
-                    return NORMAL;
+                    return builtin_iff();
                 } else if (is_print(get_current_eval().v.s)) {
                     builtin_print();
                     return NORMAL;
