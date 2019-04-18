@@ -246,6 +246,13 @@ boolean is_errmsg(char *s)
     return false;
 }
 
+boolean is_def_yet(char *s)
+{
+    if (strcmp(s, "def?") == 0)
+        return true;
+    return false;
+}
+
 boolean is_print(char *s)
 {
     if (strcmp(s, "print") == 0)
@@ -550,6 +557,9 @@ char *neta_node2string(struct neta_node n)
         sprintf(s, "%s", n.v.s);
         break;
     case IDENTIFIER:
+        sprintf(s, "%s", n.v.s);
+        break;
+    case VALUE:
         sprintf(s, "%s", n.v.s);
         break;
     default:

@@ -134,6 +134,9 @@ enum return_type eval()
                 } else if (is_errmsg(get_current_eval().v.s)) {
                     builtin_errmsg();
                     return NORMAL;
+                } else if (is_def_yet(get_current_eval().v.s)) {
+                    builtin_def_yet();
+                    return NORMAL;
                 } else if (is_print(get_current_eval().v.s)) {
                     builtin_print();
                     return NORMAL;

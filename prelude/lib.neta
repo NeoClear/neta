@@ -4,8 +4,3 @@
 
 ;; bool type
 (setc (true 1) (false 0) (yes 1) (no 0))
-
-(fun throw (id msg) {
-    (catch id)
-    (println msg)
-})

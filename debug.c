@@ -13,7 +13,7 @@ void print_parse_tree()
 void print_eval_stack()
 {
     for (i64 i = 0; i < eval_top; i++)
-        printf("%s\n", neta_node2string(parse_tree[i]));
+        printf("%s\n", neta_node2string(eval_stack[i]));
 }
 
 void neta_err()

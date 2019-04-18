@@ -3,6 +3,7 @@
 #include "../err.h"
 #include "../data.h"
 #include "../nlib.h"
+#include "../debug.h"
 
 enum return_type builtin_while()
 {

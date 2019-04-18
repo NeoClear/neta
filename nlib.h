@@ -63,6 +63,7 @@ boolean is_returnp(char *s);
 boolean is_catch(char *s);
 boolean is_throw(char *s);
 boolean is_errmsg(char *s);
+boolean is_def_yet(char *s);
 
 // Preserved io funcitons???
 boolean is_print(char *s);

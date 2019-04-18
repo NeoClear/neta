@@ -11,6 +11,7 @@ int yylex();
 enum return_type builtin_import()
 {
     i64 ms = milestone();
+    i64 eval_top_m = eval_top;
     if (!read_string())
         runtime_errh(neta_type2string(STRING), neta_type2string(get_next_parse().t))
     i64 ptr_m = ptr;
@@ -22,7 +23,7 @@ enum return_type builtin_import()
     yylex();
     while (!parse_finished()) {
         eval_errh()
-        eval_top = 0;
+        eval_top = eval_top_m;
     }
     ptr = ptr_m;
     parse_top = parse_top_m;

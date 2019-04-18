@@ -123,6 +123,7 @@ enum return_type builtin_errmsg()
     i64 ms = milestone();
     eval_stack[ms - 2].t = STRING;
     eval_stack[ms - 2].v.s = err_msg;
+    err_msg = "";
     if (!read_rparen())
         parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     reset(ms - 2);

@@ -11,5 +11,5 @@
             (-> (conti false))
             (println (eval command)))
     })
-    'nil
+    @nil
 })

@@ -73,3 +73,21 @@ enum return_type builtin_fun()
     reset(ms - 2);
     return NORMAL;
 }
+
+enum return_type builtin_def_yet()
+{
+    i64 ms = milestone();
+    if (!read_identifier())
+        runtime_errh(neta_type2string(IDENTIFIER), neta_type2string(get_next_parse().t));
+
+    eval_stack[ms - 2].t = INTEGER;
+    if (glov != nil && search_gvnode(glov, get_current_eval().v.s) != nil) {
+        eval_stack[ms - 2].v.i = 1;
+    } else
+        eval_stack[ms - 2].v.i = 0;
+
+    if (!read_rparen())
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    reset(ms - 2);
+    return NORMAL;
+}

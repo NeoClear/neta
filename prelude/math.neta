@@ -16,7 +16,7 @@
 ;; floor
 ;; integer and float
 (fun floor (num) {
-    (if (istype num 'int)
+    (if (istype num @int)
         num
         (if (> num 0)
             (float2int num)
@@ -28,7 +28,7 @@
 ;; ceil
 ;; integer and float
 (fun ceil (num)
-    (if (istype num 'int)
+    (if (istype num @int)
         num
         (if (= (float2int num) num)
             (float2int num)
@@ -59,14 +59,14 @@
     (if (< time 0) {
         (-> (neg true))
         (-> (time (rev time)))
-    } 'nil)
+    } @nil)
     (while (> time 0) {
         (if (= (mod time 2) 1)
-            (-> (ans (if (istype base 'int)
+            (-> (ans (if (istype base @int)
                         (* ans base)
                         (d* ans base))))
             0)
-        (-> (base (if (istype base 'int)
+        (-> (base (if (istype base @int)
                         (* base base)
                         (d* base base))))
         (-> (time (/ time 2)))
@@ -87,7 +87,7 @@
 ;; for integer and float
 (fun abs (n)
     (if (< n 0)
-        (if (istype n 'int)
+        (if (istype n @int)
             (- 0 n)
             (d- 0 n))
         n))
@@ -116,7 +116,7 @@
 ;; reverse the number
 ;; works for integer and float
 (fun rev (n)
-    (if (istype n 'int)
+    (if (istype n @int)
         (- 0 n)
         (d- 0 n)))
 
@@ -199,7 +199,7 @@
     (while (<= acc 5) {
         (if (!= (qmod (+ (mod (rand) (- num 1)) 1) (- num 1) num) 1)
             (-> (flag false))
-            'nil)
+            @nil)
         (-> (acc (+ acc 1)))
     })
     flag

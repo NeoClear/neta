@@ -19,7 +19,7 @@ i64 trace_top;
 
 struct neta_node default_return = {
     .t = SYMBOL,
-    .v.s = "'nil",
+    .v.s = "@nil",
 };
 
 // Measures the height of a AVL tree
