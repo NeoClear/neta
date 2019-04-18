@@ -32,6 +32,8 @@ enum return_type
     NORMAL,
     PROG,
     FUNC,
+    BREAK,
+    CONTINUE,
 };
 
 // Basic types for a value

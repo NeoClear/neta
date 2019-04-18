@@ -26,7 +26,17 @@ enum return_type builtin_while()
             if (is_err)
                 return NORMAL;
             eval_stack[ms - 2] = get_current_eval();
-            if (t != NORMAL) {
+            if (t == BREAK) {
+                ptr = ptr_j;
+                eval_stack[ms - 2] = get_current_eval();
+                reset(ms - 2);
+                return NORMAL;
+            } else if (t == CONTINUE) {
+                ptr = trace;
+                eval_stack[ms - 2] = get_current_eval();
+                eval_top = ms;
+                continue;
+            } else if (t != NORMAL) {
                 ptr = ptr_j;
                 reset(ms - 2);
                 return t;
@@ -41,4 +51,25 @@ enum return_type builtin_while()
         parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     reset(ms - 2);
     return t;
+}
+
+enum return_type builtin_break()
+{
+    i64 ms = milestone();
+    eval_errh()
+    eval_stack[ms - 2] = get_current_eval();
+    if (!read_rparen())
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
+    reset(ms - 2);
+    return BREAK;
+}
+enum return_type builtin_continue()
+{
+    i64 ms = milestone();
+    eval_errh()
+    eval_stack[ms - 2] = get_current_eval();
+    if (!read_rparen())
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
+    reset(ms - 2);
+    return CONTINUE;
 }

@@ -67,6 +67,8 @@ boolean is_def_yet(char *s);
 boolean is_match(char *s);
 boolean is_when(char *s);
 boolean is_iff(char *s);
+boolean is_break(char *s);
+boolean is_continue(char *s);
 
 // Preserved io funcitons???
 boolean is_print(char *s);

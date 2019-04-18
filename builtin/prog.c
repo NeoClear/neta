@@ -24,6 +24,11 @@ enum return_type builtin_prog()
             ptr = ptr_j;
             reset(ms - 2);
             return FUNC;
+        } else if (t != NORMAL) {
+            eval_stack[ms - 2] = get_current_eval();
+            ptr = ptr_j;
+            reset(ms - 2);
+            return t;
         }
     }
     copy_reset(offset_m(ms, -2), offset(-2));

@@ -273,6 +273,19 @@ boolean is_iff(char *s)
     return false;
 }
 
+boolean is_break(char *s)
+{
+    if (strcmp(s, "break") == 0)
+        return true;
+    return false;
+}
+boolean is_continue(char *s)
+{
+    if (strcmp(s, "continue") == 0)
+        return true;
+    return false;
+}
+
 boolean is_print(char *s)
 {
     if (strcmp(s, "print") == 0)

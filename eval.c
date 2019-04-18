@@ -141,6 +141,10 @@ enum return_type eval()
                     return builtin_when();
                 } else if (is_iff(get_current_eval().v.s)) {
                     return builtin_iff();
+                } else if (is_break(get_current_eval().v.s)) {
+                    return builtin_break();
+                } else if (is_continue(get_current_eval().v.s)) {
+                    return builtin_continue();
                 } else if (is_print(get_current_eval().v.s)) {
                     builtin_print();
                     return NORMAL;
