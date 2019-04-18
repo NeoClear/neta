@@ -9,4 +9,6 @@ enum return_type builtin_catch();
 enum return_type builtin_throw();
 enum return_type builtin_errmsg();
 
+enum return_type builtin_match();
+
 #endif // !

@@ -4,6 +4,7 @@
 
 ;; constants
 ;; FE stands for mis-calculation of float numbers
+
 (setc (PI 3.1415926) (E 2.718281828) (FE 0.000001))
 
 ;; accuracy for math libraries

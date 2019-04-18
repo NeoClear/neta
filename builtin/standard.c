@@ -2,6 +2,7 @@
 #include "../eval.h"
 #include "../err.h"
 #include "../nlib.h"
+#include "../debug.h"
 
 enum return_type builtin_equal_val()
 {
@@ -128,4 +129,42 @@ enum return_type builtin_errmsg()
         parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
     reset(ms - 2);
     return NORMAL;
+}
+
+boolean sub_match(i64 ms)
+{
+    eval();
+    if (is_err)
+        return false;
+    // printf("%s - %s\n", neta_node2string(eval_stack[ms]), neta_node2string(get_current_eval()));
+    if (equal(eval_stack[ms], get_current_eval())) {
+        eval();
+        if (is_err)
+            return false;
+        return true;
+    } else {
+        ignore_exp();
+        return false;
+    }
+    return false;
+}
+
+enum return_type builtin_match()
+{
+    i64 ms = milestone();
+    i64 ptr_j = look_ahead();
+    eval_stack[ms - 2] = default_return;
+    eval_errh()
+    while (!read_rparen()) {
+        if (sub_match(ms)) {
+            ptr = ptr_j;
+            eval_stack[ms - 2] = get_current_eval();
+            reset(ms - 2);
+            return NORMAL;
+        } else if (is_err)
+            return NORMAL;
+        else
+            eval_top = ms + 1;
+    }
+    reset(ms - 2);
 }

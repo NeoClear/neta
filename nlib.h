@@ -64,6 +64,7 @@ boolean is_catch(char *s);
 boolean is_throw(char *s);
 boolean is_errmsg(char *s);
 boolean is_def_yet(char *s);
+boolean is_match(char *s);
 
 // Preserved io funcitons???
 boolean is_print(char *s);
@@ -96,5 +97,7 @@ struct neta_node num2int(struct neta_node n);
 void ignore_exp();
 
 i64 look_ahead();
+
+boolean equal(struct neta_node a, struct neta_node b);
 
 #endif

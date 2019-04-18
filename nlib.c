@@ -253,6 +253,13 @@ boolean is_def_yet(char *s)
     return false;
 }
 
+boolean is_match(char *s)
+{
+    if (strcmp(s, "match") == 0)
+        return true;
+    return false;
+}
+
 boolean is_print(char *s)
 {
     if (strcmp(s, "print") == 0)
@@ -639,4 +646,54 @@ i64 look_ahead()
             level--;
     } while (level > -1);
     return ptr_c;
+}
+
+boolean equal(struct neta_node a, struct neta_node b)
+{
+    switch (a.t) {
+    case INTEGER:
+        if (b.t == INTEGER) {
+            if (a.v.i == b.v.i)
+                return true;
+            else
+                return false;
+        }
+        break;
+    case FLOAT:
+        if (b.t == FLOAT) {
+            if (((a.v.f - b.v.f) < 0.00001) && ((b.v.f - a.v.f) < 0.00001))
+                return true;
+            else
+                return false;
+        }
+        break;
+    case STRING:
+        if (b.t == STRING) {
+            if (strcmp(a.v.s, b.v.s) == 0)
+                return true;
+            else
+                return false;
+        }
+        break;
+    case CHAR:
+        if (b.t == CHAR) {
+            if (a.v.c == b.v.c)
+                return true;
+            else
+                return false;
+        }
+        break;
+    case SYMBOL:
+        if (b.t == SYMBOL) {
+            if (strcmp(a.v.s, b.v.s) == 0)
+                return true;
+            else
+                return false;
+        }
+        break;
+    default:
+        return false;
+        break;
+    }
+    return false;
 }
