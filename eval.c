@@ -140,6 +140,12 @@ enum return_type eval()
                 } else if (is_match(get_current_eval().v.s)) {
                     builtin_match();
                     return NORMAL;
+                } else if (is_when(get_current_eval().v.s)) {
+                    builtin_when();
+                    return NORMAL;
+                } else if (is_iff(get_current_eval().v.s)) {
+                    builtin_iff();
+                    return NORMAL;
                 } else if (is_print(get_current_eval().v.s)) {
                     builtin_print();
                     return NORMAL;

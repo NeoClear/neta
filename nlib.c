@@ -260,6 +260,19 @@ boolean is_match(char *s)
     return false;
 }
 
+boolean is_when(char *s)
+{
+    if (strcmp(s, "when") == 0)
+        return true;
+    return false;
+}
+boolean is_iff(char *s)
+{
+    if (strcmp(s, "iff") == 0)
+        return true;
+    return false;
+}
+
 boolean is_print(char *s)
 {
     if (strcmp(s, "print") == 0)

@@ -11,4 +11,6 @@ enum return_type builtin_errmsg();
 
 enum return_type builtin_match();
 
+enum return_type builtin_when();
+
 #endif // !

@@ -5,4 +5,6 @@
 
 enum return_type builtin_if();
 
+enum return_type builtin_iff();
+
 #endif // !_IF_H_

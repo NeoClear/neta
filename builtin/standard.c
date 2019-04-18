@@ -168,3 +168,42 @@ enum return_type builtin_match()
     }
     reset(ms - 2);
 }
+
+boolean sub_when(i64 ms)
+{
+    eval();
+    if (is_err)
+        return false;
+    if (get_current_eval().t != INTEGER)
+        runtime_errh(neta_type2string(INTEGER), neta_type2string(get_current_eval().t))
+    if (get_current_eval().v.i != 0) {
+        eval();
+        if (is_err)
+            return false;
+        return true;
+    } else {
+        ignore_exp();
+        return false;
+    }
+    return false;
+}
+
+enum return_type builtin_when()
+{
+    i64 ms = milestone();
+    i64 ptr_j = look_ahead();
+    eval_stack[ms - 2] = default_return;
+    // eval_errh()
+    while (!read_rparen()) {
+        if (sub_when(ms)) {
+            ptr = ptr_j;
+            eval_stack[ms - 2] = get_current_eval();
+            reset(ms - 2);
+            return NORMAL;
+        } else if (is_err)
+            return NORMAL;
+        else
+            eval_top = ms + 1;
+    }
+    reset(ms - 2);
+}
