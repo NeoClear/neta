@@ -289,3 +289,156 @@ If you want to import a new module, use it
 ```neta
 (import "prelude/math.neta")
 ```
+
+There is a very flexible neta funcitonality for users. If you want to evaluate user defined code directly, you can simply use a builtin function to do that. while in python and c, you can only do it through a compiler and interpreter. See it
+
+```neta
+(eval "(println 666)")
+```
+
+And it prints 666. The program won't crash if you give an illegal sentence. It just gives warning errors and abort to the beginning.
+
+```neta
+(eval (readln))
+(parse (readln))
+```
+
+eval parses a single expression and parse deals with numerous.
+
+What can you do if you want to return the answer once you have it in a function or prog expression? You can use the following
+
+```neta
+(fun star () {
+    (println "You can see it")
+    (return-f @ret)
+    (println "You will never see it")
+})
+(!
+    (println "You will see it")
+    (return-p @pro)
+    (println "You will never see it"))
+```
+
+return-f returns the value from a function and return-p returns the value from a prog expression
+
+What if you want to handle errors in neta? Just like what you do in python using "try .. catch" sentences in python? See below
+
+```neta
+(throw @IOError)
+```
+
+It throws an IOError. If no catch expression is used to handle it, then it causes an real error. It is suggested that for most common errors you uses a catch expression to handle it. For user-defined errors, catch is a must.
+
+```neta
+(!
+    (catch {
+        (println "You can see this")
+        (throw @RuntimeAbort)
+        (println "You will never see this")
+    })
+    (println (errmsg)))
+```
+
+It prints "You can see this" and "@RuntimeAbort" in separated lines
+
+catch handles the user-defined error "@RuntimeAbort" and you can get the type of error using errmsg expression.
+
+And it can deal with errors inside a function
+
+```neta
+(fun qpower (base time) {
+    (iff (istype time @float)
+        (throw @TypeError))
+    ...
+})
+
+(!
+    (catch {
+        (qpower (readfloat) (readfloat))
+    })
+    (println (errmsg)))
+```
+
+And it can work either.
+
+Be alert that (errmsg) can be called once one time. The second time you call it will result in a empty string.
+
+If you are not sure whether you have defined a function or variable, you can use def? expression to check it. For instance
+
+```neta
+(fun star () {
+    (println 6666)
+})
+(println (if (def? star)
+                2333
+                6666))
+```
+
+And it prints 2333
+
+```neta
+(fun star () {
+    (println 6666)
+})
+(undef star)
+(println (if (def? star)
+                2333
+                6666))
+```
+
+And it prints 6666
+
+You must be fanscinated about match expression in many languages like kotlin and rust. neta have one either.
+
+```neta
+(println (match @STAR
+            @TTT 2333
+            @STAR 6666))
+```
+
+And it prints 6666
+
+If no expression is matched, then match expression represents for @nil
+
+Like if expression, you can use it in C style
+
+```neta
+(match 2333
+    4444 (println 6666)
+    5555 (println 7777)
+    2333 (println "YES YES YES!!!"))
+```
+
+If you encountered some situation which is not about matching but logic dispatch, you can use a similar one called when
+
+```neta
+(setf (timba "impossible"))
+(when
+    (equal timba "impossible") (println 2333)
+    (> (strcmp timba "pimba") 0) (println 6666))
+```
+
+And default value is @nil either
+
+You must complain that you only need if for one possibility but you are forced to write two. Now you can use a simpler one called iff
+
+```neta
+(iff (> 2 3)
+    (println 2 " bigger than " 3))
+```
+
+False value is @nil
+
+In some situations you have to jump out of a loop or begin next round. In most languages we have break and continue, and neta has it
+
+```neta
+(while yes {
+    (iff (> (readint) 0)
+        (break @pdd))
+})
+
+(while yes {
+    (iff (> (readfloat) 23.3)
+        (continue 6666))
+})
+```

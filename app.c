@@ -36,8 +36,10 @@ int main(int argc, char **argv) {
     // print_parse_tree();
     while (!parse_finished()) {
         eval();
-        if (is_err)
+        if (is_err) {
+            fprintf(stderr, "Unhandled Error: %s\n", err_msg);
             exit(0);
+        }
         eval_top = 0;
     }
     return 0;
