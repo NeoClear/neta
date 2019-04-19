@@ -116,6 +116,25 @@ char *clone(char *s)
     return n;
 }
 
+char *drop_at(char *s)
+{
+    char *n = (char *)malloc(strlen(s) * sizeof(char));
+    for (int i = 0; i < strlen(s) - 1; i++)
+        n[i] = s[i + 1];
+    n[strlen(s) - 1] = '\0';
+    return n;
+}
+
+char *add_at(char *s)
+{
+    char *n = (char *)malloc((strlen(s) + 2) * sizeof (char));
+    n[0] = '@';
+    for (int i = 0; i < strlen(s); i++)
+        n[i + 1] = s[i];
+    n[strlen(s) + 1] = '\0';
+    return n;
+}
+
 char *int2string(i64 i)
 {
     char *s = (char *)malloc(sizeof(char) * inf24);

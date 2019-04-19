@@ -69,6 +69,9 @@ boolean is_when(char *s);
 boolean is_iff(char *s);
 boolean is_break(char *s);
 boolean is_continue(char *s);
+boolean is_sym2id(char *s);
+boolean is_str2sym(char *s);
+boolean is_apply(char *s);
 
 // Preserved io funcitons???
 boolean is_print(char *s);

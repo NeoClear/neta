@@ -286,6 +286,27 @@ boolean is_continue(char *s)
     return false;
 }
 
+boolean is_sym2id(char *s)
+{
+    if (strcmp(s, "sym2id") == 0)
+        return true;
+    return false;
+}
+
+boolean is_str2sym(char *s)
+{
+    if (strcmp(s, "str2sym") == 0)
+        return true;
+    return false;
+}
+
+boolean is_apply(char *s)
+{
+    if (strcmp(s, "apply") == 0)
+        return true;
+    return false;
+}
+
 boolean is_print(char *s)
 {
     if (strcmp(s, "print") == 0)

@@ -13,4 +13,9 @@ enum return_type builtin_match();
 
 enum return_type builtin_when();
 
+enum return_type builtin_sym2id();
+enum return_type builtin_str2sym();
+
+enum return_type builtin_apply();
+
 #endif // !

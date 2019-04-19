@@ -25,6 +25,8 @@ f64 read_f64();
 
 char *drop_shell(char *s);
 char *clone(char *s);
+char *drop_at(char *s);
+char *add_at(char *s);
 
 char *int2string(i64 i);
 char *double2string(f64 f);

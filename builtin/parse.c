@@ -35,6 +35,10 @@ enum return_type builtin_parse()
         eval();
         eval_top = ms + 1;
         if (is_err) {
+            if (strcmp(err_msg, "") != 0) {
+                fprintf(stderr, "Unhandled Error: %s\n", err_msg);
+                err_msg = "";
+            }
             is_err = false;
             error_mode = err_c;
             break;
@@ -78,6 +82,10 @@ enum return_type builtin_eval()
         
     eval();
     if (is_err) {
+        if (strcmp(err_msg, "") != 0) {
+            fprintf(stderr, "Unhandled Error: %s\n", err_msg);
+            err_msg = "";
+        }
         is_err = false;
         error_mode = err_c;
         eval_stack[ms - 2] = default_return;

@@ -28,7 +28,7 @@
 
 enum return_type eval()
 {
-    while (ptr < parse_top) {
+    while (!parse_finished()) {
         if (read_lparen()) {
             // parse_to_eval();
             if (read_preserved_fun()/* get_current_eval().t == PRESERVED_FUN */) {
@@ -145,6 +145,12 @@ enum return_type eval()
                     return builtin_break();
                 } else if (is_continue(get_current_eval().v.s)) {
                     return builtin_continue();
+                } else if (is_sym2id(get_current_eval().v.s)) {
+                    return builtin_sym2id();
+                } else if (is_str2sym(get_current_eval().v.s)) {
+                    return builtin_str2sym();
+                } else if (is_apply(get_current_eval().v.s)) {
+                    return builtin_apply();
                 } else if (is_print(get_current_eval().v.s)) {
                     builtin_print();
                     return NORMAL;
@@ -184,13 +190,6 @@ enum return_type eval()
                     return NORMAL;
                 } else {
                      errh("could not find function")
-                    //  neta_err();
-                    // useless
-                    // ptr--;
-                    // eval_top--;
-                    // eval();
-                    // if (!read_rparen())
-                    //     parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
                 }
             }
         } else if (read_integer()) {

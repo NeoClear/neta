@@ -3,6 +3,7 @@
 #include "../err.h"
 #include "../nlib.h"
 #include "../debug.h"
+#include "../util.h"
 
 enum return_type builtin_equal_val()
 {
@@ -122,7 +123,7 @@ enum return_type builtin_throw()
 enum return_type builtin_errmsg()
 {
     i64 ms = milestone();
-    eval_stack[ms - 2].t = STRING;
+    eval_stack[ms - 2].t = SYMBOL;
     eval_stack[ms - 2].v.s = err_msg;
     err_msg = "";
     if (!read_rparen())
@@ -222,4 +223,60 @@ enum return_type builtin_when()
             eval_top = ms + 1;
     }
     reset(ms - 2);
+}
+
+
+enum return_type builtin_sym2id()
+{
+    i64 ms = milestone();
+    eval_errh()
+    if (get_current_eval().t != SYMBOL)
+        runtime_errh(neta_type2string(SYMBOL), neta_type2string(get_current_eval().t));
+    eval_stack[ms - 2].t = IDENTIFIER;
+    eval_stack[ms - 2].v.s = drop_at(get_current_eval().v.s);
+    if (!read_rparen())
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    reset(ms - 2);
+    return NORMAL;
+}
+
+enum return_type builtin_str2sym()
+{
+    i64 ms = milestone();
+    eval_errh()
+    if (get_current_eval().t != STRING)
+        runtime_errh(neta_type2string(STRING), neta_type2string(get_current_eval().t));
+    eval_stack[ms - 2].t = SYMBOL;
+    eval_stack[ms - 2].v.s = add_at(get_current_eval().v.s);
+    if (!read_rparen())
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    reset(ms - 2);
+    return NORMAL;
+}
+
+enum return_type builtin_apply()
+{
+    i64 ms = milestone();
+    eval_errh()
+    if (get_current_eval().t != IDENTIFIER)
+        runtime_errh(neta_type2string(IDENTIFIER), neta_type2string(get_current_eval().t));
+
+    struct neta_node *local = nil;
+    if (glov != nil && search_gvnode(glov, get_current_eval().v.s) != nil && search_gvnode(glov, get_current_eval().v.s)->gt == FUNCTION) {
+        builtin_funcall(get_current_eval().v.s);
+        eval_stack[ms - 2] = eval_stack[ms - 1];
+        reset(ms - 2);
+        return NORMAL;
+    } else if (find_variable(&local, get_current_eval().v.s)) {
+        eval_stack[eval_top - 1] = *local;
+    } else if (find_global_constant(&local, get_current_eval().v.s)) {
+        eval_stack[eval_top - 1] = *local;
+    } else {
+        errh("could not find variable")
+    }
+    eval_stack[ms - 2] = get_current_eval();
+    if (!read_rparen())
+        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+    reset(ms - 2);
+    return NORMAL;
 }

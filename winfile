@@ -67,7 +67,7 @@ builtin/import.o: builtin/import.c builtin/import.h eval.h nlib.h err.h data.h
 
 builtin/type.o: builtin/type.c builtin/type.h eval.h nlib.h err.h data.h
 
-builtin/standard.o: builtin/standard.c builtin/standard.h eval.h nlib.h err.h data.h
+builtin/standard.o: builtin/standard.c builtin/standard.h eval.h nlib.h err.h data.h util.h
 
 builtin/parse.o: builtin/parse.c builtin/parse.h eval.h nlib.h err.h data.h
 
