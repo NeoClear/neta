@@ -76,6 +76,7 @@ boolean is_apply(char *s);
 // Preserved io funcitons???
 boolean is_print(char *s);
 boolean is_println(char *s);
+boolean is_format(char *s);
 boolean is_read(char *s);
 boolean is_readln(char *s);
 

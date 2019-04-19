@@ -36,7 +36,7 @@ PRESERVED_FUN_9 "str2int"|"str2float"|"int2float"
 PRESERVED_FUN_A "float2int"|"return-f"|"return-p"
 PRESERVED_FUN_B "eval"|"catch"|"throw"|"errmsg"|"def?"
 PRESERVED_FUN_C "match"|"when"|"iff"|"break"|"continue"
-PRESERVED_FUN_D "sym2id"|"apply"|"str2sym"
+PRESERVED_FUN_D "sym2id"|"apply"|"str2sym"|"format"
 
 IDENTIFIER      [a-zA-Z][?a-zA-Z0-9-]*
 SYMBOL          @[a-zA-Z][?a-zA-Z0-9-]*

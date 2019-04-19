@@ -3,6 +3,7 @@
 
 enum return_type builtin_print();
 enum return_type builtin_println();
+enum return_type builtin_format();
 
 enum return_type builtin_read();
 enum return_type builtin_readln();

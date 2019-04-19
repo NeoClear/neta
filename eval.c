@@ -133,8 +133,7 @@ enum return_type eval()
                 } else if (is_errmsg(get_current_eval().v.s)) {
                     return builtin_errmsg();
                 } else if (is_def_yet(get_current_eval().v.s)) {
-                    builtin_def_yet();
-                    return NORMAL;
+                    return builtin_def_yet();
                 } else if (is_match(get_current_eval().v.s)) {
                     return builtin_match();
                 } else if (is_when(get_current_eval().v.s)) {
@@ -152,35 +151,27 @@ enum return_type eval()
                 } else if (is_apply(get_current_eval().v.s)) {
                     return builtin_apply();
                 } else if (is_print(get_current_eval().v.s)) {
-                    builtin_print();
-                    return NORMAL;
+                    return builtin_print();
                 } else if (is_println(get_current_eval().v.s)) {
-                    builtin_println();
-                    return NORMAL;
+                    return builtin_println();
+                } else if (is_format(get_current_eval().v.s)) {
+                    return builtin_format();
                 } else if (is_read(get_current_eval().v.s)) {
-                    builtin_read();
-                    return NORMAL;
+                    return builtin_read();
                 } else if (is_readln(get_current_eval().v.s)) {
-                    builtin_readln();
-                    return NORMAL;
+                    return builtin_readln();
                 } else if (is_strlen(get_current_eval().v.s)) {
-                    builtin_strlen();
-                    return NORMAL;
+                    return builtin_strlen();
                 } else if (is_strcmp(get_current_eval().v.s)) {
-                    builtin_strcmp();
-                    return NORMAL;
+                    return builtin_strcmp();
                 } else if (is_str2int(get_current_eval().v.s)) {
-                    builtin_str2int();
-                    return NORMAL;
+                    return builtin_str2int();
                 } else if (is_str2float(get_current_eval().v.s)) {
-                    builtin_str2float();
-                    return NORMAL;
+                    return builtin_str2float();
                 } else if (is_int2float(get_current_eval().v.s)) {
-                    builtin_int2float();
-                    return NORMAL;
+                    return builtin_int2float();
                 } else if (is_float2int(get_current_eval().v.s)) {
-                    builtin_float2int();
-                    return NORMAL;
+                    return builtin_float2int();
                 } else {
                     errh("You will never reach a undefined preserved function")
                 }

@@ -321,6 +321,13 @@ boolean is_println(char *s)
     return false;
 }
 
+boolean is_format(char *s)
+{
+    if (strcmp(s, "format") == 0)
+        return true;
+    return false;
+}
+
 boolean is_read(char *s)
 {
     if (strcmp(s, "read") == 0)

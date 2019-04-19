@@ -4,6 +4,7 @@
 #include "../debug.h"
 #include "../err.h"
 #include "../util.h"
+#include <string.h>
 
 enum return_type builtin_print()
 {
@@ -28,6 +29,26 @@ enum return_type builtin_println()
 {
     builtin_print();
     printf("\n");
+}
+
+enum return_type builtin_format()
+{
+    push_trace("print");
+    i64 ms = milestone();
+    while (!read_rparen()) {
+        eval_errh()
+    }
+
+    char *s = (char *)malloc(inf32 * sizeof(char));
+    s[0] = '\0';
+    eval_stack[ms - 2].t = STRING;
+    for (i64 i = ms; i <= offset(-2); i++) {
+        s = strcat(s, neta_node2string(eval_stack[i]));
+    }
+    eval_stack[ms - 2].v.s = s;
+    pop_trace();
+    reset(ms - 2);
+    return NORMAL;
 }
 
 enum return_type builtin_read()
