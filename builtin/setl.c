@@ -23,18 +23,27 @@ void create_local_variable(char *name)
 
 void initialize_local_variable()
 {
-    if (!read_lparen())
-        parse_errh(neta_type2string(LPAREN), neta_type2string(get_next_parse().t))
+    if (!read_lparen()) {
+        parse_err(neta_type2string(LPAREN), neta_type2string(get_next_parse().t));
+        if (is_err)
+            return;
+    }
     eval_top--;
-    if (!read_identifier())
-        parse_errh(neta_type2string(IDENTIFIER), neta_type2string(get_next_parse().t))
+    if (!read_identifier()) {
+        parse_err(neta_type2string(IDENTIFIER), neta_type2string(get_next_parse().t));
+        if (is_err)
+            return;
+    }
     eval();
     if (is_err)
         return;
     add_local_variable(eval_stack[eval_top - 2].v.s, get_current_eval());
     eval_top--;
-    if (!read_rparen())
-        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
+    if (!read_rparen()) {
+        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        if (is_err)
+            return;
+    }
     eval_top--;
 }
 

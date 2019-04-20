@@ -4,7 +4,7 @@
 #include "../debug.h"
 #include <stdlib.h>
 
-void read_fun_body(struct neta_node *head)
+enum return_type read_fun_body(struct neta_node *head)
 {
     struct neta_node *p, *q;
     // Read open paren of param list
@@ -66,6 +66,8 @@ enum return_type builtin_fun()
     search_gvnode(glov, name)->value->gt = LIST;
     // Read function param list and function body
     read_fun_body(search_gvnode(glov, name)->value);
+    if (is_err)
+        return NORMAL;
     // Read close paren
     if (!read_rparen())
         parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))

@@ -679,8 +679,12 @@ void ignore_exp()
         else if (t == RPAREN)
             level--;
     } while (level);
-    if (level < 0)
-        parse_errh("expression", neta_type2string(RPAREN))
+    if (level < 0) {
+        parse_err("expression", neta_type2string(RPAREN));
+        if (is_err)
+            return;
+    }
+        
 }
 
 i64 look_ahead()

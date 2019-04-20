@@ -31,8 +31,11 @@ void initialize_global_constant()
     if (is_err)
         return;
     add_global_constant(eval_stack[ms].v.s, eval_stack[ms + 1]);
-    if (!read_rparen())
-        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
+    if (!read_rparen()) {
+        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        if (is_err)
+            return;
+    }
 }
 
 // The builtin setc function

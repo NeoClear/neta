@@ -6,3 +6,4 @@ neta
 *.o
 neta.c
 *.stackdump
+.DS_Store

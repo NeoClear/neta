@@ -43,7 +43,9 @@ enum return_type builtin_iff()
         if (get_current_eval().v.i == 0) {
             // False
             eval_stack[ms - 2] = default_return;
-            ignore_exp();
+            ptr = ptr_j;
+            reset(ms - 2);
+            return NORMAL;
         } else {
             // True
             t = eval();

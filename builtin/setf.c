@@ -30,8 +30,11 @@ void initialize_global_variable()
     if (is_err)
         return;
     add_global_variable(eval_stack[ms].v.s, eval_stack[ms + 1]);
-    if (!read_rparen())
-        parse_errh(neta_type2string(RPAREN), neta_type2string(get_next_parse().t))
+    if (!read_rparen()) {
+        parse_err(neta_type2string(RPAREN), neta_type2string(get_next_parse().t));
+        if (is_err)
+            return;
+    }
 }
 
 // The builtin setf function
@@ -44,7 +47,7 @@ enum return_type builtin_setf()
             // Initialize variable with value
             initialize_global_variable();
             if (is_err)
-                return;
+                return NORMAL;
             continue;
         } else if (read_identifier()) {
             // Create variable without value

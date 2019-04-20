@@ -22,13 +22,28 @@ enum return_type builtin_print()
     }
 
     pop_trace();
-    eval_top = ms - 1;
+    reset(ms - 2);
+    return NORMAL;
 }
 
 enum return_type builtin_println()
 {
-    builtin_print();
+    push_trace("println");
+    // Reset answer
+    i64 ms = milestone();
+    eval_stack[ms - 2] = default_return;
+    // Evaluate params
+    while (!read_rparen()) {
+        eval_errh()
+    }
+    // Print them
+    for (i64 i = ms; i <= offset(-2); i++) {
+        printf("%s", neta_node2string(eval_stack[i]));
+    }
     printf("\n");
+    pop_trace();
+    reset(ms - 2);
+    return NORMAL;
 }
 
 enum return_type builtin_format()

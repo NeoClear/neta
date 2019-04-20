@@ -34,6 +34,7 @@ enum return_type builtin_while()
             } else if (t == CONTINUE) {
                 ptr = trace;
                 eval_stack[ms - 2] = get_current_eval();
+                ptr = trace;
                 eval_top = ms;
                 continue;
             } else if (t != NORMAL) {

@@ -2,5 +2,7 @@
 ;; e-mail: neoclear@outlook.com
 ;; date: 2019-4-14
 
+(setf LIB-NETA)
+
 ;; bool type
 (setc (true 1) (false 0) (yes 1) (no 0))

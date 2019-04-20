@@ -94,7 +94,7 @@
         n))
 
 ;; calculating sqrt
-;; using newton mwthod
+;; using newton method
 (fun sqrt (n) {
     (setl (k n))
     (while (> (abs (d- (d* k k) n)) FE) {
