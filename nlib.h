@@ -72,6 +72,7 @@ boolean is_continue(char *s);
 boolean is_sym2id(char *s);
 boolean is_str2sym(char *s);
 boolean is_apply(char *s);
+boolean is_listof(char *s);
 
 // Preserved io funcitons???
 boolean is_print(char *s);
@@ -99,6 +100,7 @@ void reset(i64 start);
 
 char *neta_type2string(enum neta_type t);
 char *neta_node2string(struct neta_node n);
+char *neta_node2string_f(struct neta_node n);
 struct neta_node num2float(struct neta_node n);
 struct neta_node num2int(struct neta_node n);
 
@@ -107,5 +109,7 @@ void ignore_exp();
 i64 look_ahead();
 
 boolean equal(struct neta_node a, struct neta_node b);
+
+struct neta_node *new_neta_node();
 
 #endif

@@ -24,6 +24,7 @@ enum neta_type
     STRING,
     CHAR,
     SYMBOL,
+    LIST,
     VALUE,
 };
 
@@ -41,7 +42,6 @@ enum global_type
 {
     FUNCTION,
     VARIABLE,
-    LIST,
     CONSTANT,
 };
 

@@ -25,6 +25,7 @@
 #include "builtin/type.h"
 #include "builtin/standard.h"
 #include "builtin/parse.h"
+#include "builtin/list.h"
 
 enum return_type eval()
 {
@@ -150,6 +151,8 @@ enum return_type eval()
                     return builtin_str2sym();
                 } else if (is_apply(get_current_eval().v.s)) {
                     return builtin_apply();
+                } else if (is_listof(get_current_eval().v.s)) {
+                    return builtin_listof();
                 } else if (is_print(get_current_eval().v.s)) {
                     return builtin_print();
                 } else if (is_println(get_current_eval().v.s)) {

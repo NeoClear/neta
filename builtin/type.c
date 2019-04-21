@@ -25,6 +25,8 @@ enum return_type builtin_type()
     case SYMBOL:
         eval_stack[ms - 2].v.s = "@symbol";
         break;
+    case LIST:
+        eval_stack[ms - 2].v.s = "@list";
     default:
         runtime_errh("basic type", neta_type2string(get_current_eval().t))
         break;
@@ -73,6 +75,12 @@ enum return_type builtin_istype()
         break;
     case SYMBOL:
         if (strcmp(eval_stack[ms + 1].v.s, "@symbol") == 0)
+            eval_stack[ms - 2].v.i = 1;
+        else
+            eval_stack[ms - 2].v.i = 0;
+        break;
+    case LIST:
+        if (strcmp(eval_stack[ms + 1].v.s, "@list") == 0)
             eval_stack[ms - 2].v.i = 1;
         else
             eval_stack[ms - 2].v.i = 0;

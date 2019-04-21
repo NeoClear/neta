@@ -37,6 +37,7 @@ PRESERVED_FUN_A "float2int"|"return-f"|"return-p"
 PRESERVED_FUN_B "eval"|"catch"|"throw"|"errmsg"|"def?"
 PRESERVED_FUN_C "match"|"when"|"iff"|"break"|"continue"
 PRESERVED_FUN_D "sym2id"|"apply"|"str2sym"|"format"
+PRESERVED_FUN_E "listof"
 
 IDENTIFIER      [a-zA-Z][?a-zA-Z0-9-]*
 SYMBOL          @[a-zA-Z][?a-zA-Z0-9-]*
@@ -145,6 +146,11 @@ CHAR            \'[^\"\']\'
     add_preserved_fun(clone(yytext));
 }
 {PRESERVED_FUN_D}       {
+    word_plus();
+    column_plus(strlen(yytext));
+    add_preserved_fun(clone(yytext));
+}
+{PRESERVED_FUN_E}       {
     word_plus();
     column_plus(strlen(yytext));
     add_preserved_fun(clone(yytext));

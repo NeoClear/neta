@@ -4,7 +4,7 @@ builtin/symbol.o builtin/io.o builtin/if.o \
 builtin/str.o builtin/while.o builtin/assign.o \
 builtin/setl.o builtin/setc.o builtin/undef.o builtin/fun.o \
 builtin/funcall.o builtin/import.o builtin/type.o builtin/standard.o \
-builtin/parse.o
+builtin/parse.o builtin/list.o
 
 neta: $(OBJ)
 	cc -o neta  $(OBJ) -ll
@@ -22,7 +22,7 @@ eval.o: eval.h lexer.h debug.h data.h nlib.h err.h \
 	builtin/assign.h builtin/setl.h builtin/setc.h \
 	builtin/fun.h builtin/undef.h builtin/funcall.h \
 	builtin/import.h builtin/type.h builtin/standard.h \
-	builtin/parse.h
+	builtin/parse.h builtin/list.h
 
 neta.o: neta.c eval.h debug.h data.h util.h nlib.h
 	cc -c neta.c -ll
@@ -70,6 +70,8 @@ builtin/type.o: builtin/type.c builtin/type.h eval.h nlib.h err.h data.h
 builtin/standard.o: builtin/standard.c builtin/standard.h eval.h nlib.h err.h data.h util.h
 
 builtin/parse.o: builtin/parse.c builtin/parse.h eval.h nlib.h err.h data.h
+
+builtin/list.o: builtin/list.c builtin/list.h eval.h nlib.h err.h data.h
 
 neta.c: neta.l
 	flex -t neta.l > neta.c

@@ -307,6 +307,13 @@ boolean is_apply(char *s)
     return false;
 }
 
+boolean is_listof(char *s)
+{
+    if (strcmp(s, "listof") == 0)
+        return true;
+    return false;
+}
+
 boolean is_print(char *s)
 {
     if (strcmp(s, "print") == 0)
@@ -583,14 +590,37 @@ char *neta_type2string(enum neta_type t)
         return "CHAR";
     case SYMBOL:
         return "SYMBOL";
+    case LIST:
+        return "LIST";
     default:
-        runtime_errh("neta_type", "integer out of range")
+        runtime_err("neta_type", "integer out of range");
     }
+}
+
+char *list2string(struct neta_node n)
+{
+    char *s = (char *)malloc(sizeof(char) * inf24);
+    s[0] = '\0';
+    strcat(s, "[");
+    if (n.p == nil) {
+        strcat(s, "]");
+    } else {
+        struct neta_node *p = n.p->next;
+        strcat(s, neta_node2string_f(*n.p));
+        while (p != nil) {
+            strcat(s, " ");
+            strcat(s, neta_node2string_f(*p));
+            p = p->next;
+        }
+        strcat(s, "]");
+    }
+    return s;
 }
 
 char *neta_node2string(struct neta_node n)
 {
     char *s = (char *)malloc(sizeof(char) * inf24);
+    s[0] = '\0';
     switch (n.t)
     {
     case INTEGER:
@@ -619,6 +649,62 @@ char *neta_node2string(struct neta_node n)
         break;
     case IDENTIFIER:
         sprintf(s, "%s", n.v.s);
+        break;
+    case LIST:
+        sprintf(s, "%s", list2string(n));
+        break;
+    case VALUE:
+        sprintf(s, "%s", n.v.s);
+        break;
+    default:
+        runtime_err("neta_node", neta_type2string(n.t));
+        break;
+    }
+    char *ret = (char *)malloc(sizeof(char) * (strlen(s) + 1));
+    strcpy(ret, s);
+    free(s);
+    return ret;
+}
+
+char *neta_node2string_f(struct neta_node n)
+{
+        char *s = (char *)malloc(sizeof(char) * inf24);
+    s[0] = '\0';
+    switch (n.t)
+    {
+    case INTEGER:
+        sprintf(s, "%lld", n.v.i);
+        break;
+    case FLOAT:
+        sprintf(s, "%lf", n.v.f);
+        break;
+    case STRING:
+        strcat(s, "\"");
+        strcat(s, n.v.s);
+        strcat(s, "\"");
+        break;
+    case CHAR:
+        sprintf(s, "\'");
+        sprintf(s, "%s%c", s, n.v.c);
+        sprintf(s, "%s\'", s);
+        break;
+    case SYMBOL:
+        sprintf(s, "%s", n.v.s);
+        break;
+    case LPAREN:
+        sprintf(s, "(");
+        break;
+    case RPAREN:
+        sprintf(s, ")");
+        break;
+    case PRESERVED_FUN:
+        sprintf(s, "%s", n.v.s);
+        break;
+    case IDENTIFIER:
+        sprintf(s, "%s", n.v.s);
+        break;
+    case LIST:
+        sprintf(s, "%s", list2string(n));
         break;
     case VALUE:
         sprintf(s, "%s", n.v.s);
@@ -756,4 +842,9 @@ boolean equal(struct neta_node a, struct neta_node b)
         break;
     }
     return false;
+}
+
+struct neta_node *new_neta_node()
+{
+    return (struct neta_node *)malloc(sizeof(struct neta_node));
 }
