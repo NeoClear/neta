@@ -7,7 +7,7 @@ builtin/funcall.o builtin/import.o builtin/type.o builtin/standard.o \
 builtin/parse.o builtin/list.o
 
 neta: $(OBJ)
-	cc -o neta  $(OBJ) -ll
+	cc -o neta  $(OBJ) -lfl
 
 neta.o: neta.c
 
@@ -78,6 +78,15 @@ neta.c: neta.l
 
 .PHONY:
 	clean
+	install
+	uninstall
 
 clean:
 	-rm -rf *.o builtin/*.o neta.c neta
+
+
+install:
+	-mv neta /usr/bin
+
+uninstall:
+	-rm /usr/bin/neta
